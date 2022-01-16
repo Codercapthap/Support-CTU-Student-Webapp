@@ -31,14 +31,16 @@ class userController {
       const newUser = new User({ fullName, gender, birthday, email, password, phone, role, address })
       newUser.userID = (await newUser.save()).insertId
 
-      return res.status(201).json({user: newUser})
+      return res.status(200).json({user: newUser})
     } catch(error) { next(error) }
   }
 
   async signin(req, res, next) {
-    const token = encodedToken(req.user.userID)
-    res.setHeader('Authorization', token)
-    return res.status(200).json({ success: true })
+    try {
+      const token = encodedToken(req.user.userID)
+      res.setHeader('Authorization', token)
+      return res.status(200).json(req.user)
+    } catch(error) { next(error) }
   }
 
   async signup(req, res, next) {
@@ -55,7 +57,7 @@ class userController {
       //encode token
       const token = encodedToken(newUser.userID)
       res.setHeader('Authorization', token)
-      return res.status(200).json({sucess: true})
+      return res.status(200).json(newUser)
     } catch(err) { next(err) }
   }
 
@@ -89,13 +91,13 @@ class userController {
       const { userID } = req.params
       const newUser = req.body
       const result = await User.findOneAndUpdate(userID, newUser)
-      return res.status(200).json({ success: true })
+      return res.status(200).json( result )
     } catch(err) { next(err) }
   }
 
   async secret(req, res, next) {
     try{
-      return res.status(200).json("something secret here")
+      return res.status(200).json(req.user)
     }
     catch (err) { next(err) }
   }

@@ -24,8 +24,9 @@ passport.use(new LocalStrategy({
   passwordField: 'password'
 }, async (email, password, done) => {
   try {
-    var user = (await User.findOne('email', email))[0]
+    var user = await User.findOne('email', email)
     if (!user) return done(null, false)
+    user = user[0]
     user = new User(user)
     const isCorrectPassword = user.isValidPassword(password)
     if (!isCorrectPassword) return done(null, false)
@@ -35,3 +36,16 @@ passport.use(new LocalStrategy({
     done(error, false)
   }
 }))
+
+// passport.use('authorization', new AuthorizeStrategy({
+//   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken('Authorization'),
+//   secretOrKey: authConfig.secret
+// }, async (payload, done) => {
+//   try{
+//     const user = await User.findOne('userID', payload.sub)
+//     if(!user) return done(null, false)
+//     done(null, user)
+//   } catch(error){
+//     done(error, false)
+//   }
+// }))

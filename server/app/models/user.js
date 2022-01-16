@@ -103,7 +103,6 @@ class User {
   }
 
   static findOneAndUpdate(value, newUser){
-    console.log(newUser);
     var sql = "UPDATE user set fullName = ?, gender = ?, birthday = ?, email = ?, password = ?, phone = ?, role = ?, address = ?, isDeleted = ?, deletedAt = ? where userID = ?";
     var values = [newUser.fullName, newUser.gender, newUser.birthday, newUser.email, newUser.password, newUser.phone, newUser.role, newUser.address, newUser.isDeleted, newUser.deletedAt, value]
     return new Promise(function (resolve, reject) {

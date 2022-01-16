@@ -54,6 +54,16 @@ const schemas = {
     phone: Joi.string().min(10).max(10).required(),
     address: Joi.string().min(10).required()
   }),
+
+  userOptionalSchema: Joi.object().keys({
+    fullName: Joi.string().min(2),
+    email: Joi.string().email(),
+    birthday: Joi.string().min(10).max(10),
+    role: Joi.any().valid('user', 'moderator', 'admin'),
+    password: Joi.string().min(6),
+    phone: Joi.string().min(10).max(10),
+    address: Joi.string().min(10)
+  }),
 }
 
 module.exports = {
