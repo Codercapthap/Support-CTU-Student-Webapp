@@ -1,11 +1,11 @@
-const connection = require("../database");
+const connection = require("../../config/db.config");
 const bcrypt = require('bcryptjs')
-const { getTime } = require('../helper/support')
+const { getTime } = require('../helpers/support')
 
 class User {
   constructor(user) {
-    (this.userID = user.userID || null),
-    (this.fullName = user.fullName),
+    (this.id = user.id || null),
+    (this.username = user.username),
     (this.gender = user.gender),
     (this.birthday = user.birthday),
     (this.email = user.email),
@@ -40,6 +40,17 @@ class User {
     });
   }
 
+  static findUsersByDepartmentId(id){
+    var sql = "select * from user where id in (select user_id from user_department where department_id = ?)"
+    return new Promise(function (resolve, reject) {
+      connection.query(sql, id, function (err, result, fields) {
+        if (err) throw err;
+        if (result.length !== 0) resolve(result)
+        else resolve(null)
+      })
+    })
+  }
+
   async save() {
     try {
       // generate a salt
@@ -51,9 +62,9 @@ class User {
     } catch (error) {
       throw new Error(error.message)
     }
-    var sql = "INSERT INTO user (fullName, gender, birthday, email, password, phone, role, address, isDeleted) VALUES ?";
+    var sql = "INSERT INTO user (username, gender, birthday, email, password, phone, role, address) VALUES ?";
     var values = [
-      [this.fullName, this.gender, this.birthday, this.email, this.password, this.phone, this.role, this.address, this.isDeleted]
+      [this.username, this.gender, this.birthday, this.email, this.password, this.phone, this.role, this.address]
     ]
     return new Promise(function (resolve, reject) {
       connection.query(sql, [values],
@@ -65,11 +76,11 @@ class User {
     });
   }
 
-  static deleteOneById(userID) {
+  static deleteOneById(id) {
     const deletedAt = getTime()
-    var sql = "UPDATE user set isDeleted = 1, deletedAt = ? WHERE userID = ?";
+    var sql = "UPDATE user set is_deleted = 1, deleted_at = ? WHERE id = ?";
     return new Promise(function (resolve, reject) {
-      connection.query(sql, [deletedAt, userID],
+      connection.query(sql, [deletedAt, id],
         function (err, result, fields) {
           if (err) throw err;
           resolve(result);
@@ -78,10 +89,10 @@ class User {
     });
   }
 
-  static restoreOneById(userID){
-    const sql = "UPDATE user set isDeleted = 0, deletedAt = null WHERE userID = ?";
+  static restoreOneById(id){
+    const sql = "UPDATE user set is_deleted = 0, deleted_at = null WHERE id = ?";
     return new Promise(function (resolve, reject) {
-      connection.query(sql, userID,
+      connection.query(sql, id,
         function (err, result, fields) {
           if (err) throw err;
           resolve(result);
@@ -90,10 +101,10 @@ class User {
     });
   }
 
-  static destroyOneById(userID) {
-    var sql = "DELETE FROM user WHERE userID = ?";
+  static destroyOneById(id) {
+    var sql = "DELETE FROM user WHERE id = ?";
     return new Promise(function (resolve, reject) {
-      connection.query(sql, userID,
+      connection.query(sql, id,
         function (err, result, fields) {
           if (err) throw err;
           resolve(result);
@@ -101,10 +112,10 @@ class User {
       );
     });
   }
-
-  static findOneAndUpdate(value, newUser){
-    var sql = "UPDATE user set fullName = ?, gender = ?, birthday = ?, email = ?, password = ?, phone = ?, role = ?, address = ?, isDeleted = ?, deletedAt = ? where userID = ?";
-    var values = [newUser.fullName, newUser.gender, newUser.birthday, newUser.email, newUser.password, newUser.phone, newUser.role, newUser.address, newUser.isDeleted, newUser.deletedAt, value]
+  // check xem isDeleted, deletedAt nhu nay co dung k
+  static findOneAndUpdate(id, newUser){
+    var sql = "UPDATE user set username = ?, gender = ?, birthday = ?, email = ?, password = ?, phone = ?, role = ?, address = ? where id = ?";
+    var values = [newUser.username, newUser.gender, newUser.birthday, newUser.email, newUser.password, newUser.phone, newUser.role, newUser.address, id]
     return new Promise(function (resolve, reject) {
       connection.query(sql, values,
         function (err, result, fields) {

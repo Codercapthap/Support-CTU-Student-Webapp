@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const cors = require('cors');
-const route = require('./app/routes')
+const route = require('./api/routes/index.route')
 const morgan = require('morgan')
 
 app.use(express.json());
@@ -15,17 +15,12 @@ app.use(morgan("dev"));
 route(app)
 
 //todo config variable
-const appConfig = require('./app/config/app.config');
+const appConfig = require('./config/app.config');
 
 app.use(cors());
 
 //todo set public folder
 app.use(express.static(path.join(__dirname, 'public')));
-
-//todo routing
-app.get('/', )
-// auth_route(app);
-// user_route(app);
 
 //Catch Error
 app.use((req, res, next) => {
