@@ -65,28 +65,11 @@ class commentController {
     } catch(err) { next(err) }
   }
 
-  deleteComments(req, res, next) {
+  restoreCommentById(req, res, next) {
     try {
-      console.log(req.key, req.value);
-      // Comment.deleteComments()
-    } catch (err) {
-      next(err);
-    }
-  }
-
-  destroyComments(req, res, next) {
-    try {
-      console.log(req.key, req.value);
-      //
-    } catch (err) {
-      next(err);
-    }
-  }
-
-  restoreComments(req, res, next) {
-    try {
-      console.log(req.key, req.value);
-      //
+      const id = req.params.id
+      Comment.restoreOneById(id)
+      return res.status(200).json({success: true})
     } catch(err) { next(err) }
   }
 }

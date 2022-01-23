@@ -73,6 +73,30 @@ const schemas = {
   departmentSchema: Joi.object().keys({
     departmentCode: Joi.string().min(2).max(2).required(),
     departmentName: Joi.string().min(2).required()
+  }),
+
+  documentSchema: Joi.object().keys({
+    departmentId: Joi.number().required(),
+    documentName: Joi.string().min(2).required(),
+    documentUrl: Joi.string().min(10).required()
+  }),
+
+  subjectSchema: Joi.object().keys({
+    departmentId: Joi.number().required(),
+    subjectName: Joi.string().min(2).required(),
+    subjectCode: Joi.string().min(5).max(5).required()
+  }),
+
+  postSchema: Joi.object().keys({
+    topicId: Joi.number().required(),
+    postTitle: Joi.string().min(2).required(),
+    postContent: Joi.string().min(10).required()
+  }),
+
+  topicSchema: Joi.object().keys({
+    departmentId: Joi.number().required(),
+    topicName: Joi.string().min(2).required(),
+    topicDescription: Joi.string().min(10).required(),
   })
 };
 

@@ -4,7 +4,7 @@ const { getTime } = require('../helpers/support')
 class Comment {
   constructor(comment) {
     (this.id = comment.id || null),
-    (this.userId = comment.userId || null),
+    (this.userId = comment.userId),
     (this.postId = comment.postId || null),
     (this.subjectId = comment.subjectId || null),
     (this.commentContent = comment.commentContent),
@@ -21,21 +21,7 @@ class Comment {
     });
   }
 
-  static findOne(key, value) {
-    var sql = "SELECT * FROM user where " + key + " = ? limit 1";
-    return new Promise(function (resolve, reject) {
-      connection.query(sql, value,
-        function (err, result, fields) {
-          if (err) throw err;
-          if (result.length !== 0)
-            resolve(result);
-          else resolve(null)
-        }
-      );
-    });
-  }
-
-  async save() {
+  save() {
     var sql = "INSERT INTO comment (user_id, post_id, subject_id, comment_content) VALUES ?";
     var values = [
       [this.userId, this.postId, this.subjectId, this.commentContent]
@@ -81,6 +67,18 @@ class Comment {
     var sql = "UPDATE comment set is_deleted = 1, deleted_at = ? WHERE " + key + " = ?";
     return new Promise(function (resolve, reject) {
       connection.query(sql, [deletedAt, value],
+        function (err, result, fields) {
+          if (err) throw err;
+          resolve(result);
+        }
+      );
+    });
+  }
+
+  static restoreOneById(id){
+    const sql = "UPDATE comment set is_deleted = 0, deleted_at = null WHERE id = ?";
+    return new Promise(function (resolve, reject) {
+      connection.query(sql, id,
         function (err, result, fields) {
           if (err) throw err;
           resolve(result);

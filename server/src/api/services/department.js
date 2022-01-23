@@ -10,7 +10,7 @@ class Department {
     (this.deletedAt = department.deletedAt || null)
   }
   
-  static findDepartments() {
+  static all() {
     return new Promise(function (resolve, reject) {
       connection.query("SELECT * FROM department", function (err, result, fields) {
         if (err) throw err;
@@ -19,8 +19,8 @@ class Department {
     });
   }
 
-  async save() {
-    var sql = "INSERT INTO department(department_code, department_name) VALUES ?";
+  save() {
+    var sql = "INSERT INTO document(department_code, department_name) VALUES ?";
     var values = [
       [this.departmentCode, this.departmentName]
     ]
@@ -63,7 +63,7 @@ class Department {
   static restoreOneById(id){
     const sql = "UPDATE department set is_deleted = 0, deleted_at = null WHERE " + key + " = ?";
     return new Promise(function (resolve, reject) {
-      connection.query(sql, value,
+      connection.query(sql, id,
         function (err, result, fields) {
           if (err) throw err;
           resolve(result);

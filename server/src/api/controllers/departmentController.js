@@ -3,7 +3,7 @@ const Department = require("../services/department");
 class departmentController {
   async getAllDepartments(req, res, next) {
     try {
-      const departments = await Department.findDepartments();
+      const departments = await Department.all();
       return res.status(200).json({ departments });
     } catch (error) {
       next(error);
