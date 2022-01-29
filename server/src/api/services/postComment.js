@@ -13,7 +13,7 @@ class PostComment extends Comment {
     return new Promise(function (resolve, reject) {
       connection.query(sql, [values], function (err, result, fields) {
         if (err) resolve(err);
-        resolve(comment);
+        else resolve(comment);
       });
     });
   }
