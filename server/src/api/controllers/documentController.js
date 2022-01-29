@@ -3,7 +3,10 @@ const Document = require("../services/document");
 class documentController {
   async getAllDocumentsOfDepartmentId(req, res, next) {
     try {
-      const documents = await Document.findDocuments("department_id", req.params.id);
+      const documents = await Document.findDocuments(
+        "department_id",
+        req.params.id
+      );
       return res.status(200).json({ documents });
     } catch (error) {
       next(error);
@@ -21,7 +24,7 @@ class documentController {
     try {
       const { id } = req.params;
       const newDocument = req.body;
-      const result = await Document.findOneAndUpdate(id, newDocument);
+      const result = await Document.findOneAndUpdate(newDocument, id);
       return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
@@ -30,26 +33,32 @@ class documentController {
 
   async deleteDocumentById(req, res, next) {
     try {
-      const id = req.params.id
-      Document.deleteOneById(id)
-      return res.status(200).json({success: true})
-    } catch(err) { next(err) }
+      const id = req.params.id;
+      Document.deleteOneById(id);
+      return res.status(200).json({ success: true });
+    } catch (err) {
+      next(err);
+    }
   }
 
   async destroyDocumentById(req, res, next) {
     try {
-      const id = req.params.id
-      Document.destroyOneById(id)
-      return res.status(200).json({success: true})
-    } catch(err) { next(err) }
+      const id = req.params.id;
+      Document.destroyOneById(id);
+      return res.status(200).json({ success: true });
+    } catch (err) {
+      next(err);
+    }
   }
 
   async restoreDocumentById(req, res, next) {
     try {
-      const id = req.params.id
-      Document.restoreOneById(id)
-      return res.status(200).json({success: true})
-    } catch(err) { next(err) }
+      const id = req.params.id;
+      Document.restoreOneById(id);
+      return res.status(200).json({ success: true });
+    } catch (err) {
+      next(err);
+    }
   }
 
   async createDocument(req, res, next) {
@@ -57,13 +66,11 @@ class documentController {
       const { departmentId, documentName, documentUrl } = req.body;
       const userId = req.user.id;
       //save document
-      const newDocument = new Document({
-        userId,
-        departmentId,
+      var newDocument = new Document({
         documentName,
         documentUrl,
       });
-      newDocument.id = (await newDocument.save()).insertId;
+      newDocument = await newDocument.save(userId, departmentId);
 
       return res.status(200).json({ document: newDocument });
     } catch (error) {

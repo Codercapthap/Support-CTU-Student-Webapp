@@ -16,16 +16,46 @@ router.get(
   userController.getAllUsersOfDepartmentId
 );
 
-// router.put(
-//   "/restore/:id",
-//   validateParam(schemas.idSchema, "id"),
-//   passport.authenticate("jwt", { session: false }),
-//   // authAccount(["moderator", "admin"]),
-//   authRole(["moderator", "admin"]),
-//   userController.restoreAccount
-// );
+router.patch(
+  "/reset_password",
+  validateBody(schemas.resetPasswordSchema),
+  passport.authenticate("jwt", { session: false }),
+  userController.resetPassword
+);
 
-// router.post('/reset_password', auth, userController.resetPassword)
+router.patch(
+  "/:id/role",
+  validateParam(schemas.idSchema, "id"),
+  validateBody(schemas.updateRoleSchema),
+  passport.authenticate("jwt", { session: false }),
+  authRole(["admin"]),
+  userController.updateRole
+);
+
+router.patch(
+  "/:id/restore",
+  validateParam(schemas.idSchema, "id"),
+  passport.authenticate("jwt", { session: false }),
+  authRole(["moderator", "admin"]),
+  userController.restoreAccount
+);
+
+router.delete(
+  "/:id/destroy",
+  validateParam(schemas.idSchema, "id"),
+  passport.authenticate("jwt", { session: false }),
+  authAccount(["admin"]),
+  userController.destroyAccount
+);
+
+router.patch(
+  "/:id/update_avatar",
+  validateParam(schemas.idSchema, "id"),
+  validateBody(schemas.updateAvatarUrl),
+  passport.authenticate("jwt", { session: false }),
+  authAccount(["admin"]),
+  userController.updateAvatar
+);
 
 router
   .route("/:id")
@@ -36,51 +66,30 @@ router
   )
   .put(
     validateParam(schemas.idSchema, "id"),
-    validateBody(schemas.userSchema),
+    validateBody(schemas.userUpdateSchema),
     passport.authenticate("jwt", { session: false }),
     authAccount([]),
     userController.updateUser
+  )
+  .delete(
+    validateParam(schemas.idSchema, "id"),
+    passport.authenticate("jwt", { session: false }),
+    authAccount(["moderator", "admin"]),
+    userController.deleteUser
   );
-// delete post, comment
-// .delete(
-//   validateParam(schemas.idSchema, "userID"),
-//   passport.authenticate("jwt", { session: false }),
-//   authAccount(["moderator", "admin"]),
-//   userController.deleteUser
-// );
+
+router.post(
+  "/create",
+  validateBody(schemas.userSchema),
+  passport.authenticate("jwt", { session: false }),
+  authRole(["admin"]),
+  userController.createUser
+);
 
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   userController.getAllUsers
-);
-
-// router
-// .route("/:userID")
-// .put(
-//   validateParam(schemas.idSchema, "userID"),
-//   validateBody(schemas.userOptionalSchema),
-//   passport.authenticate("jwt", { session: false }),
-//   authAccount([]),
-//   userController.updateUser
-// )
-// .patch(
-//   validateParam(schemas.idSchema, "userID"),
-//   passport.authenticate("jwt", { session: false }),
-//   authAccount(["moderator", "admin"]),
-//   userController.deleteAccount
-// )
-// .delete(
-//   validateParam(schemas.idSchema, "userID"),
-//   passport.authenticate("jwt", { session: false }),
-//   authAccount(["moderator", "admin"]),
-//   userController.destroyAccount
-// );
-
-router.post(
-  "/create",
-  validateBody(schemas.userSchema),
-  userController.createUser
 );
 
 module.exports = router;

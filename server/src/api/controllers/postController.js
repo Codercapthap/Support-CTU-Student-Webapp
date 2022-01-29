@@ -3,7 +3,7 @@ const Post = require("../services/post");
 class postController {
   async getAllPosts(req, res, next) {
     try {
-      const posts = await Post.all()
+      const posts = await Post.all();
       return res.status(200).json({ posts });
     } catch (error) {
       next(error);
@@ -15,13 +15,11 @@ class postController {
       const { topicId, postTitle, postContent } = req.body;
       const userId = req.user.id;
       //save post
-      const newPost = new Post({
-        userId,
-        topicId,
+      var newPost = new Post({
         postTitle,
-        postContent
+        postContent,
       });
-      newPost.id = (await newPost.save()).insertId;
+      newPost = await newPost.save(userId, topicId);
 
       return res.status(200).json({ post: newPost });
     } catch (error) {
@@ -31,8 +29,9 @@ class postController {
 
   async getPostById(req, res, next) {
     try {
-      const posts = await Post.findOne("id", req.params.id);
       // + view for post
+      await Post.upPostViewById(req.params.id)
+      const posts = await Post.findPostById(req.params.id);
       return res.status(200).json({ posts });
     } catch (error) {
       next(error);
@@ -52,19 +51,17 @@ class postController {
 
   async deletePostById(req, res, next) {
     try {
-      const id = req.params.id
-      Post.deleteOneById(id)
-      // delete comment of post
-      return res.status(200).json({success: true})
-    } catch(err) { next(err) }
+      const id = req.params.id;
+      await Post.deleteOneById(id);
+      return res.status(200).json({ success: true });
+    } catch (err) {
+      next(err);
+    }
   }
 
   async getAllPostsOfUserId(req, res, next) {
     try {
-      const posts = await Post.findPosts(
-        "user_id",
-        req.params.id
-      );
+      const posts = await Post.findPosts("user_id", req.params.id);
       return res.status(200).json({ posts });
     } catch (error) {
       next(error);
@@ -73,10 +70,7 @@ class postController {
 
   async getAllPostsOfTopicId(req, res, next) {
     try {
-      const posts = await Post.findPosts(
-        "topic_id",
-        req.params.id
-      );
+      const posts = await Post.findPosts("topic_id", req.params.id);
       return res.status(200).json({ posts });
     } catch (error) {
       next(error);
@@ -85,10 +79,7 @@ class postController {
 
   async getAllPostsOfDepartmentId(req, res, next) {
     try {
-      const posts = await Post.findPosts(
-        "department_id",
-        req.params.id
-      );
+      const posts = await Post.findPostsByDepartmentId(req.params.id);
       return res.status(200).json({ posts });
     } catch (error) {
       next(error);
@@ -97,28 +88,50 @@ class postController {
 
   async destroyPostById(req, res, next) {
     try {
-      const id = req.params.id
-      Post.destroyOneById(id)
-      // delete comment of post
-      return res.status(200).json({success: true})
-    } catch(err) { next(err) }
+      const id = req.params.id;
+      await Post.destroyOneById(id);
+      return res.status(200).json({ success: true });
+    } catch (err) {
+      next(err);
+    }
   }
 
   async restorePostById(req, res, next) {
     try {
-      const id = req.params.id
-      Post.restoreOneById(id)
-      // restore comment of post
-      return res.status(200).json({success: true})
-    } catch(err) { next(err) }
+      const id = req.params.id;
+      await Post.restoreOneById(id);
+      return res.status(200).json({ success: true });
+    } catch (err) {
+      next(err);
+    }
   }
 
-  async acceptPostById (req, res, next) {
+  async acceptPostById(req, res, next) {
     try {
-      const id = req.params.id
-      Post.acceptPostById(id)
-      return res.status(200).json({ success: true })
-    } catch(err) { next(err) }
+      const id = req.params.id;
+      await Post.acceptPostById(id);
+      return res.status(200).json({ success: true });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async getAllAcceptedPosts (req, res, next) {
+    try {
+      const posts = await Post.getAcceptedPosts();
+      return res.status(200).json({ posts });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getAllUnAcceptedPosts (req, res, next) {
+    try {
+      const posts = await Post.getUnAcceptedPosts();
+      return res.status(200).json({ posts });
+    } catch (error) {
+      next(error);
+    }
   }
 }
 

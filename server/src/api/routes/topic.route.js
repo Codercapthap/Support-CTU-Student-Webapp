@@ -3,7 +3,7 @@ const router = express.Router();
 const topicController = require("../controllers/topicController");
 const passport = require("passport");
 const passportConfig = require("../middlewares/passport");
-const { authRole } = require("../middlewares/authorization");
+const { authPost, authRole } = require("../middlewares/authorization");
 const {
   validateBody,
   schemas,
@@ -12,17 +12,33 @@ const {
 
 router.get("/department/:id", topicController.getAllTopicsOfDepartmentId);
 
+router.delete(
+  "/:id/destroy",
+  validateParam(schemas.idSchema, 'id'),
+  passport.authenticate("jwt", { session: false }),
+  authRole(["moderator", "admin"]),
+  topicController.destroyTopicById
+);
+
+router.patch(
+  "/:id/restore",
+  validateParam(schemas.idSchema, 'id'),
+  passport.authenticate("jwt", { session: false }),
+  authRole(["moderator", "admin"]),
+  topicController.restoreTopicById
+);
+
 router
   .route("/:id")
   .put(
-    validateParam("id", schemas.idSchema),
-    validateBody(schemas.topicSchema),
+    validateParam(schemas.idSchema, 'id'),
+    validateBody(schemas.topicUpdateSchema),
     passport.authenticate("jwt", { session: false }),
     authRole(["moderator", "admin"]),
     topicController.updateTopicById
   )
   .delete(
-    validateParam("id", schemas.idSchema),
+    validateParam(schemas.idSchema, 'id'),
     passport.authenticate("jwt", { session: false }),
     authRole(["moderator", "admin"]),
     topicController.deleteTopicById
@@ -30,27 +46,10 @@ router
 
 router.post(
   "/",
-  validateParam("id", schemas.idSchema),
   validateBody(schemas.topicSchema),
   passport.authenticate("jwt", { session: false }),
   authRole(["moderator", "admin"]),
   topicController.createTopic
-);
-
-router.delete(
-  "/:id/destroy",
-  validateParam("id", schemas.idSchema),
-  passport.authenticate("jwt", { session: false }),
-  authPost(["moderator", "admin"]),
-  topicController.destroyTopicById
-);
-
-router.put(
-  "/:id/restore",
-  validateParam("id", schemas.idSchema),
-  passport.authenticate("jwt", { session: false }),
-  authPost(["moderator", "admin"]),
-  topicController.restoreTopicById
 );
 
 module.exports = router;

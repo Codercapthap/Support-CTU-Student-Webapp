@@ -1,9 +1,10 @@
 const Comment = require('../services/comment')
 const Post = require('../services/post')
+const UserSubject = require('../services/userSubject')
 
 const authRole = (permissions) => {
   return (req, res, next) => {
-    if (!req.user) throw new Error("No user found");
+    if (!req.user) return next(new Error("No user found"));
     const userRole = req.user.role;
     if (permissions.includes(userRole)) {
       next();
@@ -16,10 +17,10 @@ const authRole = (permissions) => {
 const authAccount = (permissions) => {
   return (req, res, next) => {
     const id = parseInt(req.params.id);
-    if (!req.user) throw new Error("No user found");
-    const currentUserID = req.user.id;
+    if (!req.user) return next(new Error("No user found"));
+    const currentUserId = req.user.id;
     const userRole = req.user.role;
-    if (id == currentUserID) {
+    if (id == currentUserId) {
       next();
     } else if (permissions.includes(userRole)) {
       next();
@@ -30,13 +31,14 @@ const authAccount = (permissions) => {
 };
 
 const authComment = (permissions) => {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     const commentId = parseInt(req.params.id);
-    if (!req.user) throw new Error("No user found");
-    const currentUserID = req.user.id;
+    if (!req.user) return next(new Error("No user found"));
+    const currentUserId = req.user.id;
     const userRole = req.user.role;
-    const comment = Comment.findOne("id", commentId);
-    if (comment.userId == currentUserID) {
+    const comment = await Comment.findCommentById(commentId);
+    if (!comment) return next(new Error ("No comment found"))
+    if (comment.user_id == currentUserId) {
       next();
     } else if (permissions.includes(userRole)) {
       next();
@@ -50,10 +52,10 @@ const authPost = (permissions) => {
   return (req, res, next) => {
     const postId = parseInt(req.params.id);
     if (!req.user) throw new Error("No user found");
-    const currentUserID = req.user.id;
+    const currentUserId = req.user.id;
     const userRole = req.user.role;
-    const post = Post.findOne("id", postId);
-    if (post.userId == currentUserID) {
+    const post = Post.findPostById(postId);
+    if (post.userId == currentUserId) {
       next();
     } else if (permissions.includes(userRole)) {
       next();

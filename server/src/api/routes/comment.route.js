@@ -22,12 +22,42 @@ router.get(
   commentController.getAllCommentsOfSubjectId
 );
 
+router.post(
+  "/post",
+  validateBody(schemas.postCommentSchema),
+  passport.authenticate("jwt", { session: false }),
+  commentController.createPostComment
+);
+
+router.post(
+  "/subject",
+  validateBody(schemas.subjectCommentSchema),
+  passport.authenticate("jwt", { session: false }),
+  commentController.createSubjectComment
+);
+
 router.delete(
-  "/:id/destroy",
+  "/:id/post/destroy",
   validateParam(schemas.idSchema, "id"),
   passport.authenticate("jwt", { session: false }),
   authComment(["moderator", "admin"]),
-  commentController.destroyCommentById
+  commentController.destroyPostCommentById
+);
+
+router.delete(
+  "/:id/subject/destroy",
+  validateParam(schemas.idSchema, "id"),
+  passport.authenticate("jwt", { session: false }),
+  authComment(["moderator", "admin"]),
+  commentController.destroySubjectCommentById
+);
+
+router.patch(
+  "/:id/restore",
+  validateParam(schemas.idSchema, "id"),
+  passport.authenticate("jwt", { session: false }),
+  authComment(["moderator", "admin"]),
+  commentController.restoreCommentById
 );
 
 router
@@ -36,7 +66,7 @@ router
     validateParam(schemas.idSchema, "id"),
     validateBody(schemas.commentUpdateSchema),
     passport.authenticate("jwt", { session: false }),
-    authComment(["moderator", "admin"]),
+    authComment([]),
     commentController.updateCommentById
   )
   .delete(
@@ -45,13 +75,5 @@ router
     authComment(["moderator", "admin"]),
     commentController.deleteCommentById
   );
-
-//? check commment
-router.post(
-  "/",
-  validateBody(schemas.commentSchema),
-  passport.authenticate("jwt", { session: false }),
-  commentController.createComment
-);
-
+  
 module.exports = router;

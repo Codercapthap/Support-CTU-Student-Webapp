@@ -10,21 +10,21 @@ const {
   validateParam,
 } = require("../validations/validate");
 
-router('/department/:id', subjectController.getAllSubjectsOfDepartmentId)
+router.get('/department/:id', subjectController.getAllSubjectsOfDepartmentId)
 
 router
   .route("/:id")
   .put(
-    validateParam("id", schemas.idSchema),
-    validateBody(schemas.subjectSchema),
+    validateParam(schemas.idSchema, 'id'),
+    validateBody(schemas.subjectUpdateSchema),
     passport.authenticate("jwt", { session: false }),
-    authRole(["moderator", "admin"]),
+    authRole(["admin"]),
     subjectController.updateSubjectById
   )
   .delete(
-    validateParam("id", schemas.idSchema),
+    validateParam(schemas.idSchema, 'id'),
     passport.authenticate("jwt", { session: false }),
-    authRole(["moderator", "admin"]),
+    authRole(["admin"]),
     subjectController.deleteSubjectById
   );
 
@@ -34,7 +34,7 @@ router
   .post(
     validateBody(schemas.subjectSchema),
     passport.authenticate("jwt", { session: false }),
-    authRole(["moderator", "admin"]),
+    authRole(["admin"]),
     subjectController.createSubject
   );
 

@@ -22,14 +22,6 @@ router.get(
   documentController.getAllDocumentsOfUserId
 );
 
-router.delete(
-  "/:id/destroy",
-  validateParam(schemas.idSchema, "id"),
-  passport.authenticate("jwt", { session: false }),
-  authRole(["moderator", "admin"]),
-  documentController.destroyDocumentById
-);
-
 router
   .route("/:id")
   .put(
@@ -43,7 +35,7 @@ router
     validateParam(schemas.idSchema, "id"),
     passport.authenticate("jwt", { session: false }),
     authRole(["moderator", "admin"]),
-    documentController.deleteDocumentById
+    documentController.destroyDocumentById
   );
 
 router.post(

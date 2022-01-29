@@ -17,21 +17,21 @@ class userController {
     try {
       const token = encodedToken(req.user.id)
       res.setHeader('Authorization', token)
-      // return res.status(200).json(req.user)
-      return res.status(200).json({ authenticated: req.isAuthenticated() })
+      return res.status(200).json(req.user)
+      // return res.status(200).json({ authenticated: req.isAuthenticated() })
     } catch(error) { next(error) }
   }
 
   async register(req, res, next) {
     try {
-      const { username, gender, birthday, email, password, phone, address } = req.body
+      const { username, departmentId, gender, birthday, email, password, phone, avatarUrl, address } = req.body
       // check email
       const foundUser = await User.findOne('email', email)
       if (foundUser) return res.status(403).json({ error: { message: "email is already exits" } })
 
       // save user
-      var newUser = new User({ username, gender, birthday, email, password, phone, address })
-      newUser.id = (await newUser.save()).insertId
+      var newUser = new User({ username, gender, birthday, email, password, phone, avatarUrl, address })
+      newUser = await newUser.save(departmentId)
 
       //encode token
       const token = encodedToken(newUser.id)

@@ -1,34 +1,50 @@
 const connection = require("../../config/db.config");
-const { getTime } = require('../helpers/support')
+const { getTime } = require('../helpers/support');
+const Subject = require("./subject");
+const Topic = require("./topic");
+const UserSubject = require("./userSubject");
+const Document = require('./document');
+const UserDepartment = require("./userDepartment");
 
 class Department {
   constructor(department) {
-    (this.id = department.id || null),
     (this.departmentCode = department.departmentCode),
     (this.departmentName = department.departmentName),
-    (this.isDeleted = department.isDeleted || false),
-    (this.deletedAt = department.deletedAt || null)
+    (this.createdAt = department.createdAt || null),
+    (this.updatedAt = department.updatedAt || null)
   }
   
   static all() {
     return new Promise(function (resolve, reject) {
       connection.query("SELECT * FROM department", function (err, result, fields) {
-        if (err) throw err;
-        resolve(result);
+        if (err) resolve(err);
+        else resolve(result);
+      });
+    });
+  }
+
+  static findDepartmentById(id){
+    return new Promise(function (resolve, reject) {
+      connection.query("SELECT * FROM department where id = ?", id, function (err, result, fields) {
+        if (err) resolve(err);
+        else resolve(result);
       });
     });
   }
 
   save() {
-    var sql = "INSERT INTO document(department_code, department_name) VALUES ?";
+    var sql = "INSERT INTO department(department_code, department_name) VALUES ?";
     var values = [
       [this.departmentCode, this.departmentName]
     ]
     return new Promise(function (resolve, reject) {
       connection.query(sql, [values],
-        function (err, result, fields) {
-          if (err) throw err;
-          resolve(result);
+        async function (err, result, fields) {
+          if (err) throw Error(err.message);
+          else {
+            const newDepartment = await Department.findDepartmentById(result.insertId)
+            resolve(newDepartment);
+          }
         }
       );
     });
@@ -40,45 +56,28 @@ class Department {
     return new Promise(function (resolve, reject) {
       connection.query(sql, values,
         function (err, result, fields) {
-          if (err) throw err;
-          resolve(result);
-        }
-      );
-    });
-  }
-
-  static deleteOneById(id) {
-    const deletedAt = getTime()
-    var sql = "UPDATE department set is_deleted = 1, deleted_at = ? WHERE id = ?";
-    return new Promise(function (resolve, reject) {
-      connection.query(sql, [deletedAt, id],
-        function (err, result, fields) {
-          if (err) throw err;
-          resolve(result);
-        }
-      );
-    });
-  }
-
-  static restoreOneById(id){
-    const sql = "UPDATE department set is_deleted = 0, deleted_at = null WHERE " + key + " = ?";
-    return new Promise(function (resolve, reject) {
-      connection.query(sql, id,
-        function (err, result, fields) {
-          if (err) throw err;
-          resolve(result);
+          if (err) resolve(err);
+          else resolve(result);
         }
       );
     });
   }
 
   static destroyOneById(id) {
+    // delete document
+    Document.destroyDocuments("department_id", id)
+    // delete topic
+    Topic.destroyTopics("department_id", id)
+    // delete user department
+    UserDepartment.destroyUserDepartments("department_id", id)
+    // delete subject
+    Subject.destroySubjects("department_id", id)
     var sql = "DELETE FROM department WHERE id = ?";
     return new Promise(function (resolve, reject) {
       connection.query(sql, id,
         function (err, result, fields) {
-          if (err) throw err;
-          resolve(result);
+          if (err) resolve(err);
+          else resolve(result);
         }
       );
     });

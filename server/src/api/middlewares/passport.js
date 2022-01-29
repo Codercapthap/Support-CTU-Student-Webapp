@@ -12,8 +12,6 @@ passport.use(new JwtStrategy({
   try{
     var user = await User.findOne('id', payload.sub)
     if(!user) return done(null, false)
-    user = user[0]
-    user = new User(user)
     done(null, user)
   } catch(error){
     done(error, false)
@@ -25,14 +23,13 @@ passport.use(new LocalStrategy({
   passwordField: 'password'
 }, async (email, password, done) => {
   try {
-    var user = await User.findOne('email', email)
-    if (!user) return done(null, false)
-    user = user[0]
-    user = new User(user)
-    const isCorrectPassword = user.isValidPassword(password)
+    var userObject = await User.findOne('email', email)
+    if (!userObject) return done(null, false)
+    const user = new User(userObject)
+    const isCorrectPassword = await user.isValidPassword(password)
     if (!isCorrectPassword) return done(null, false)
   
-    return done(null, user)
+    return done(null, userObject)
   } catch(error) {
     done(error, false)
   }

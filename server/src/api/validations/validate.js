@@ -25,11 +25,13 @@ const validateParam = (schema, name) => {
 const schemas = {
   authRegisterSchema: Joi.object().keys({
     username: Joi.string().min(2).required(),
+    departmentId: Joi.array().min(1).required(),
     email: Joi.string().email().required(),
     gender: Joi.required(),
     birthday: Joi.string().min(10).max(10).required(),
     password: Joi.string().min(6).required(),
     phone: Joi.string().min(10).max(10).required(),
+    avatarUrl: Joi.any().allow(null),
     address: Joi.string().min(10).required(),
   }),
 
@@ -44,27 +46,49 @@ const schemas = {
 
   userSchema: Joi.object().keys({
     username: Joi.string().min(2).required(),
+    departmentId: Joi.array().min(1).required(),
     email: Joi.string().email().required(),
     gender: Joi.boolean().required(),
     birthday: Joi.string().min(10).max(10).required(),
     role: Joi.any().valid("user", "moderator", "admin"),
+    avatarUrl: Joi.string().allow(null),
     password: Joi.string().min(6).required(),
     phone: Joi.string().min(10).max(10).required(),
     address: Joi.string().min(10).required(),
   }),
 
-  commentSchema: Joi.alternatives().try(
-    Joi.object().keys({
-      postId: Joi.number().allow(null),
-      subjectId: Joi.number().required(),
-      commentContent: Joi.string().min(2).required(),
-    }),
-    Joi.object().keys({
-      postId: Joi.number().required(),
-      subjectId: Joi.number().allow(null),
-      commentContent: Joi.string().min(2).required(),
-    }),
-  ),
+  userUpdateSchema: Joi.object().keys({
+    username: Joi.string().min(2).required(),
+    departmentId: Joi.array().min(1).required(),
+    email: Joi.string().email().required(),
+    gender: Joi.boolean().required(),
+    birthday: Joi.string().min(10).max(10).required(),
+    avatarUrl: Joi.string().allow(null),
+    phone: Joi.string().min(10).max(10).required(),
+    address: Joi.string().min(10).required(),
+  }),
+
+  resetPasswordSchema: Joi.object().keys({
+    password: Joi.string().min(6).required()
+  }),
+
+  updateRoleSchema: Joi.object().keys({
+    role: Joi.any().valid("user", "moderator", "admin").required(),
+  }),
+
+  updateAvatarUrl: Joi.object().keys({
+    avatarUrl: Joi.string().required()
+  }),
+
+  postCommentSchema: Joi.object().keys({
+    postId: Joi.number().required(),
+    commentContent: Joi.string().min(2).required(),
+  }),
+
+  subjectCommentSchema: Joi.object().keys({
+    subjectId: Joi.number().required(),
+    commentContent: Joi.string().min(2).required(),
+  }),
 
   commentUpdateSchema: Joi.object().keys({
     commentContent: Joi.string().min(2).required(),
@@ -72,31 +96,55 @@ const schemas = {
 
   departmentSchema: Joi.object().keys({
     departmentCode: Joi.string().min(2).max(2).required(),
-    departmentName: Joi.string().min(2).required()
+    departmentName: Joi.string().min(2).required(),
   }),
 
   documentSchema: Joi.object().keys({
     departmentId: Joi.number().required(),
     documentName: Joi.string().min(2).required(),
-    documentUrl: Joi.string().min(10).required()
+    documentUrl: Joi.string().min(10).required(),
   }),
 
   subjectSchema: Joi.object().keys({
     departmentId: Joi.number().required(),
     subjectName: Joi.string().min(2).required(),
-    subjectCode: Joi.string().min(5).max(5).required()
+    subjectCode: Joi.string().min(5).max(5).required(),
+  }),
+
+  subjectUpdateSchema: Joi.object().keys({
+    subjectName: Joi.string().min(2).required(),
+    subjectCode: Joi.string().min(5).max(5).required(),
   }),
 
   postSchema: Joi.object().keys({
     topicId: Joi.number().required(),
     postTitle: Joi.string().min(2).required(),
-    postContent: Joi.string().min(10).required()
+    postContent: Joi.string().min(10).required(),
+  }),
+
+  postUpdateSchema: Joi.object().keys({
+    postTitle: Joi.string().min(2).required(),
+    postContent: Joi.string().min(10).required(),
   }),
 
   topicSchema: Joi.object().keys({
     departmentId: Joi.number().required(),
     topicName: Joi.string().min(2).required(),
     topicDescription: Joi.string().min(10).required(),
+  }),
+
+  topicUpdateSchema: Joi.object().keys({
+    topicName: Joi.string().min(2).required(),
+    topicDescription: Joi.string().min(10).required(),
+  }),
+
+  userSubjectSchema: Joi.object().keys({
+    subjectId: Joi.number().required(),
+    subjectScore: Joi.number()
+  }),
+
+  userSubjectUpdateSchema: Joi.object().keys({
+    subjectScore: Joi.number()
   })
 };
 

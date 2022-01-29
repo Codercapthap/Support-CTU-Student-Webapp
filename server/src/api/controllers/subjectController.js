@@ -1,16 +1,19 @@
 const Subject = require("../services/subject");
 
 class subjectController {
-  async getAllSubjectsOfDepartmentId (req, res, next) {
+  async getAllSubjectsOfDepartmentId(req, res, next) {
     try {
-      const subjects = await Subject.findSubjects("department_id", req.params.id);
+      const subjects = await Subject.findSubjects(
+        "department_id",
+        req.params.id
+      );
       return res.status(200).json({ subjects });
     } catch (error) {
       next(error);
     }
   }
 
-  async updateSubjectById (req, res, next) {
+  async updateSubjectById(req, res, next) {
     try {
       const { id } = req.params;
       const newSubject = req.body;
@@ -21,16 +24,17 @@ class subjectController {
     }
   }
 
-  async deleteSubjectById (req, res, next) {
+  async deleteSubjectById(req, res, next) {
     try {
-      const id = req.params.id
-      Subject.deleteOneById(id)
-      // delete comment + delete detail_user
-      return res.status(200).json({success: true})
-    } catch(err) { next(err) }
+      const id = req.params.id;
+      await Subject.destroyOneById(id);
+      return res.status(200).json({ success: true });
+    } catch (err) {
+      next(err);
+    }
   }
 
-  async getAllSubjects (req, res, next) {
+  async getAllSubjects(req, res, next) {
     try {
       const subjects = await Subject.all();
       return res.status(200).json({ subjects });
@@ -39,16 +43,15 @@ class subjectController {
     }
   }
 
-  async createSubject (req, res, next) {
+  async createSubject(req, res, next) {
     try {
       const { departmentId, subjectName, subjectCode } = req.body;
       //save subject
-      const newSubject = new Subject({
-        departmentId,
+      var newSubject = new Subject({
         subjectName,
         subjectCode,
       });
-      newSubject.id = (await newSubject.save()).insertId;
+      newSubject = await newSubject.save(departmentId);
 
       return res.status(200).json({ subject: newSubject });
     } catch (error) {
@@ -58,4 +61,3 @@ class subjectController {
 }
 
 module.exports = new subjectController();
-

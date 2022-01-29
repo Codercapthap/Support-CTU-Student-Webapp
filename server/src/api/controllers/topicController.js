@@ -24,8 +24,7 @@ class topicController {
   async deleteTopicById(req, res, next) {
     try {
       const id = req.params.id;
-      Topic.deleteOneById(id);
-      // delete post on topic
+      await Topic.deleteOneById(id);
       return res.status(200).json({ success: true });
     } catch (err) {
       next(err);
@@ -36,12 +35,11 @@ class topicController {
     try {
       const { departmentId, topicName, topicDescription } = req.body;
       //save topic
-      const newTopic = new Topic({
-        departmentId,
+      var newTopic = new Topic({
         topicName,
         topicDescription,
       });
-      newTopic.id = (await newTopic.save()).insertId;
+      newTopic = await newTopic.save(departmentId);
 
       return res.status(200).json({ topic: newTopic });
     } catch (error) {
@@ -52,8 +50,7 @@ class topicController {
   async destroyTopicById(req, res, next) {
     try {
       const id = req.params.id;
-      Topic.destroyOneById(id);
-      // delete post on topic
+      await Topic.destroyOneById(id);
       return res.status(200).json({ success: true });
     } catch (err) {
       next(err);
@@ -64,7 +61,6 @@ class topicController {
     try {
       const id = req.params.id;
       Topic.restoreOneById(id);
-      // restore post on topic
       return res.status(200).json({ success: true });
     } catch (err) {
       next(err);

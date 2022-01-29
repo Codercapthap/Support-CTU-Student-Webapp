@@ -1,11 +1,13 @@
 const connection = require("../../config/db.config");
+const SubjectComment = require("./subjectComment");
+const UserSubject = require("./userSubject");
 
 class Subject {
   constructor(subject) {
-    (this.id = subject.id || null),
-      (this.departmentId = subject.departmentId),
       (this.subjectName = subject.subjectName),
-      (this.subjectCode = subject.subjectCode)
+      (this.subjectCode = subject.subjectCode),
+      (this.createdAt = subject.createdAt || null),
+      (this.updatedAt = subject.updatedAt || null)
   }
 
   static findSubjects(key, value) {
@@ -14,31 +16,46 @@ class Subject {
         "SELECT * FROM subject where " + key + " = ?",
         value,
         function (err, result, fields) {
-          if (err) throw err;
-          resolve(result);
+          if (err) resolve(err);
+          else resolve(result);
         }
       );
     });
   }
 
-  static findOneAndUpdate(newSubject) {
+  static findSubjectById(id) {
+    return new Promise(function (resolve, reject) {
+      connection.query(
+        "SELECT * FROM subject where id = ?",
+        id,
+        function (err, result, fields) {
+          if (err) resolve(err);
+          else resolve(result);
+        }
+      );
+    });
+  }
+
+  static findOneAndUpdate(id, newSubject) {
     var sql =
-      "UPDATE subject set department_id = ?, subject_name = ?, subject_code = ? where id = ?";
-    var values = [newSubject.departmentId, newSubject.subjectName, newSubject.subjectCode, id];
+      "UPDATE subject set subject_name = ?, subject_code = ? where id = ?";
+    var values = [newSubject.subjectName, newSubject.subjectCode, id];
     return new Promise(function (resolve, reject) {
       connection.query(sql, values, function (err, result, fields) {
-        if (err) throw err;
-        resolve(result);
+        if (err) resolve(err);
+        else resolve(result);
       });
     });
   }
 
-  static deleteOneById(id) {
+  static async destroyOneById(id) {
+    await SubjectComment.destroyComments(id)
+    await UserSubject.destroyUserSubjects("subject_id", id)
     var sql = "DELETE FROM subject WHERE id = ?";
     return new Promise(function (resolve, reject) {
       connection.query(sql, id, function (err, result, fields) {
-        if (err) throw err;
-        resolve(result);
+        if (err) resolve(err);
+        else resolve(result);
       });
     });
   }
@@ -46,24 +63,37 @@ class Subject {
   static all() {
     return new Promise(function (resolve, reject) {
       connection.query("SELECT * FROM subject", function (err, result, fields) {
-        if (err) throw err;
-        resolve(result);
+        if (err) resolve(err);
+        else resolve(result);
       });
     });
   }
 
-  save() {
+  save(departmentId) {
     var sql = "INSERT INTO subject(department_id, subject_name, subject_code) VALUES ?";
     var values = [
-      [this.departmentId, this.subjectName, this.subjectCode]
+      [departmentId, this.subjectName, this.subjectCode]
     ]
     return new Promise(function (resolve, reject) {
       connection.query(sql, [values],
-        function (err, result, fields) {
-          if (err) throw err;
-          resolve(result);
+        async function (err, result, fields) {
+          if (err) resolve(err);
+          else {
+            const newSubject = await Subject.findSubjectById(result.insertId)
+            resolve(newSubject);
+          }
         }
       );
+    });
+  }
+
+  static async destroySubjects(key, value) {
+    const idList = (await Subject.findSubjects(key, value)).map((a) => a.id);
+    return new Promise(async function (resolve, reject) {
+      for (var i = 0; i < idList.length; ++i) {
+        await Subject.destroyOneById(idList[i]);
+      }
+      resolve()
     });
   }
 }
