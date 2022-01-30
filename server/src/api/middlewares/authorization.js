@@ -1,7 +1,7 @@
-const Comment = require('../services/comment')
-const Post = require('../services/post')
-const UserSubject = require('../services/userSubject')
+const Comment = require("../services/comment");
+const Post = require("../services/post");
 
+// phân quyền theo role
 const authRole = (permissions) => {
   return (req, res, next) => {
     if (!req.user) return next(new Error("No user found"));
@@ -14,6 +14,7 @@ const authRole = (permissions) => {
   };
 };
 
+// phân quyền theo sở hữu tài khoản và role
 const authAccount = (permissions) => {
   return (req, res, next) => {
     const id = parseInt(req.params.id);
@@ -30,6 +31,7 @@ const authAccount = (permissions) => {
   };
 };
 
+// phân quyền theo sở hữu comment và role
 const authComment = (permissions) => {
   return async (req, res, next) => {
     const commentId = parseInt(req.params.id);
@@ -37,7 +39,7 @@ const authComment = (permissions) => {
     const currentUserId = req.user.id;
     const userRole = req.user.role;
     const comment = await Comment.findCommentById(commentId);
-    if (!comment) return next(new Error ("No comment found"))
+    if (!comment) return next(new Error("No comment found"));
     if (comment.user_id == currentUserId) {
       next();
     } else if (permissions.includes(userRole)) {
@@ -48,6 +50,7 @@ const authComment = (permissions) => {
   };
 };
 
+// phân quyền theo sở hữu post và role
 const authPost = (permissions) => {
   return (req, res, next) => {
     const postId = parseInt(req.params.id);

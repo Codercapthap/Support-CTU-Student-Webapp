@@ -1,9 +1,10 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+require("dotenv").config();
+const path = require("path");
 const app = express();
-const cors = require('cors');
-const route = require('./api/routes/index.route')
-const morgan = require('morgan')
+const cors = require("cors");
+const route = require("./api/routes/index.route");
+const morgan = require("morgan");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -12,15 +13,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 //todo routes
-route(app)
+route(app);
 
 //todo config variable
-const appConfig = require('./config/app.config');
+const appConfig = require("./config/app.config");
 
 app.use(cors());
 
 //todo set public folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 //Catch Error
 app.use((req, res, next) => {
@@ -43,7 +44,7 @@ app.use((err, req, res, next) => {
 
 //todo set port
 const PORT = process.env.PORT || appConfig.PORT;
-app.listen(PORT, err => {
-   if (err) throw err;
-   console.log(`Server listening on port http://localhost:${PORT}`);
+app.listen(PORT, (err) => {
+  if (err) throw err;
+  console.log(`Server listening on port http://localhost:${PORT}`);
 });

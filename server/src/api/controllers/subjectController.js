@@ -7,7 +7,7 @@ class subjectController {
         "department_id",
         req.params.id
       );
-      return res.status(200).json({ subjects });
+      return res.status(200).json(subjects);
     } catch (error) {
       next(error);
     }
@@ -27,8 +27,8 @@ class subjectController {
   async deleteSubjectById(req, res, next) {
     try {
       const id = req.params.id;
-      await Subject.destroyOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Subject.destroyOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
@@ -37,7 +37,7 @@ class subjectController {
   async getAllSubjects(req, res, next) {
     try {
       const subjects = await Subject.all();
-      return res.status(200).json({ subjects });
+      return res.status(200).json(subjects);
     } catch (error) {
       next(error);
     }
@@ -53,7 +53,7 @@ class subjectController {
       });
       newSubject = await newSubject.save(departmentId);
 
-      return res.status(200).json({ subject: newSubject });
+      return res.status(200).json(newSubject);
     } catch (error) {
       next(error);
     }

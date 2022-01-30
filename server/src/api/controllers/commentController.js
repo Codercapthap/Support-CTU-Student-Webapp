@@ -6,7 +6,7 @@ class commentController {
   async getAllCommentsOfPostId(req, res, next) {
     try {
       const comments = await PostComment.findComments(req.params.id);
-      return res.status(200).json({ comments });
+      return res.status(200).json(comments);
     } catch (error) {
       next(error);
     }
@@ -15,7 +15,7 @@ class commentController {
   async getAllCommentsOfSubjectId(req, res, next) {
     try {
       const comments = await SubjectComment.findComments(req.params.id);
-      return res.status(200).json({ comments });
+      return res.status(200).json(comments);
     } catch (error) {
       next(error);
     }
@@ -29,9 +29,9 @@ class commentController {
       var newPostComment = new PostComment({
         commentContent,
       });
-      newPostComment= await newPostComment.save(userId, postId)
+      newPostComment = await newPostComment.save(userId, postId);
 
-      return res.status(200).json({ comment: newPostComment });
+      return res.status(200).json(newPostComment);
     } catch (error) {
       next(error);
     }
@@ -41,13 +41,12 @@ class commentController {
     try {
       const { commentContent, subjectId } = req.body;
       const userId = req.user.id;
-      //save comment
       var newSubjectComment = new SubjectComment({
         commentContent,
       });
       newSubjectComment = await newSubjectComment.save(userId, subjectId);
 
-      return res.status(200).json({ comment: newSubjectComment });
+      return res.status(200).json(newSubjectComment);
     } catch (error) {
       next(error);
     }
@@ -64,41 +63,41 @@ class commentController {
     }
   }
 
-  deleteCommentById(req, res, next) {
+  async deleteCommentById(req, res, next) {
     try {
       const id = req.params.id;
-      Comment.deleteOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Comment.deleteOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
   }
 
-  destroyPostCommentById(req, res, next) {
+  async destroyPostCommentById(req, res, next) {
     try {
       const id = req.params.id;
-      PostComment.destroyOneByCommentId(id);
-      return res.status(200).json({ success: true });
+      const result = await PostComment.destroyOneByCommentId(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
   }
 
-  destroySubjectCommentById(req, res, next) {
+  async destroySubjectCommentById(req, res, next) {
     try {
       const id = req.params.id;
-      SubjectComment.destroyOneByCommentId(id);
-      return res.status(200).json({ success: true });
+      const result = await SubjectComment.destroyOneByCommentId(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
   }
 
-  restoreCommentById(req, res, next) {
+  async restoreCommentById(req, res, next) {
     try {
       const id = req.params.id;
-      Comment.restoreOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Comment.restoreOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }

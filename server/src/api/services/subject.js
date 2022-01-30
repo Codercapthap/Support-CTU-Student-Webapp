@@ -4,10 +4,10 @@ const UserSubject = require("./userSubject");
 
 class Subject {
   constructor(subject) {
-      (this.subjectName = subject.subjectName),
+    (this.subjectName = subject.subjectName),
       (this.subjectCode = subject.subjectCode),
       (this.createdAt = subject.createdAt || null),
-      (this.updatedAt = subject.updatedAt || null)
+      (this.updatedAt = subject.updatedAt || null);
   }
 
   static findSubjects(key, value) {
@@ -16,7 +16,7 @@ class Subject {
         "SELECT * FROM subject where " + key + " = ?",
         value,
         function (err, result, fields) {
-          if (err) resolve(err);
+          if (err) reject(err);
           else resolve(result);
         }
       );
@@ -29,7 +29,7 @@ class Subject {
         "SELECT * FROM subject where id = ?",
         id,
         function (err, result, fields) {
-          if (err) resolve(err);
+          if (err) reject(err);
           else resolve(result);
         }
       );
@@ -37,24 +37,24 @@ class Subject {
   }
 
   static findOneAndUpdate(id, newSubject) {
-    var sql =
-      "UPDATE subject set subject_name = ?, subject_code = ? where id = ?";
     var values = [newSubject.subjectName, newSubject.subjectCode, id];
     return new Promise(function (resolve, reject) {
+      const sql =
+        "UPDATE subject set subject_name = ?, subject_code = ? where id = ?";
       connection.query(sql, values, function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
   }
 
   static async destroyOneById(id) {
-    await SubjectComment.destroyComments(id)
-    await UserSubject.destroyUserSubjects("subject_id", id)
-    var sql = "DELETE FROM subject WHERE id = ?";
+    await SubjectComment.destroyComments(id);
+    await UserSubject.destroyUserSubjects("subject_id", id);
     return new Promise(function (resolve, reject) {
+      const sql = "DELETE FROM subject WHERE id = ?";
       connection.query(sql, id, function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
@@ -63,27 +63,24 @@ class Subject {
   static all() {
     return new Promise(function (resolve, reject) {
       connection.query("SELECT * FROM subject", function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
   }
 
   save(departmentId) {
-    var sql = "INSERT INTO subject(department_id, subject_name, subject_code) VALUES ?";
-    var values = [
-      [departmentId, this.subjectName, this.subjectCode]
-    ]
+    var values = [[departmentId, this.subjectName, this.subjectCode]];
     return new Promise(function (resolve, reject) {
-      connection.query(sql, [values],
-        async function (err, result, fields) {
-          if (err) resolve(err);
-          else {
-            const newSubject = await Subject.findSubjectById(result.insertId)
-            resolve(newSubject);
-          }
+      const sql =
+        "INSERT INTO subject(department_id, subject_name, subject_code) VALUES ?";
+      connection.query(sql, [values], async function (err, result, fields) {
+        if (err) reject(err);
+        else {
+          const newSubject = await Subject.findSubjectById(result.insertId);
+          resolve(newSubject);
         }
-      );
+      });
     });
   }
 
@@ -93,7 +90,7 @@ class Subject {
       for (var i = 0; i < idList.length; ++i) {
         await Subject.destroyOneById(idList[i]);
       }
-      resolve()
+      resolve();
     });
   }
 }

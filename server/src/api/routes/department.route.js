@@ -13,16 +13,16 @@ const {
 router
   .route("/:id")
   .put(
-    validateParam(schemas.idSchema, 'id'),
+    validateParam(schemas.idSchema, "id"),
     validateBody(schemas.departmentSchema),
     passport.authenticate("jwt", { session: false }),
-    authRole("admin"),
+    authRole(["admin"]),
     departmentController.updateDepartment
-  ) 
+  )
   .delete(
-    validateParam(schemas.idSchema, 'id'),
+    validateParam(schemas.idSchema, "id"),
     passport.authenticate("jwt", { session: false }),
-    authRole("admin"),
+    authRole(["admin"]),
     departmentController.destroyDepartment
   );
 
@@ -32,7 +32,7 @@ router
   .post(
     validateBody(schemas.departmentSchema),
     passport.authenticate("jwt", { session: false }),
-    authRole("admin"),
+    authRole(["admin"]),
     departmentController.createDepartment
   );
 

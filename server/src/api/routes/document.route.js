@@ -10,12 +10,14 @@ const {
   validateParam,
 } = require("../validations/validate");
 
+// get danh sách document theo department id
 router.get(
   "/department/:id",
   validateParam(schemas.idSchema, "id"),
   documentController.getAllDocumentsOfDepartmentId
 );
 
+// get danh sách document theo user id
 router.get(
   "/user/:id",
   validateParam(schemas.idSchema, "id"),

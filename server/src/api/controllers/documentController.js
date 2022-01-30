@@ -7,7 +7,7 @@ class documentController {
         "department_id",
         req.params.id
       );
-      return res.status(200).json({ documents });
+      return res.status(200).json(documents);
     } catch (error) {
       next(error);
     }
@@ -15,7 +15,7 @@ class documentController {
   async getAllDocumentsOfUserId(req, res, next) {
     try {
       const documents = await Document.findDocuments("user_id", req.params.id);
-      return res.status(200).json({ documents });
+      return res.status(200).json(documents);
     } catch (error) {
       next(error);
     }
@@ -34,8 +34,8 @@ class documentController {
   async deleteDocumentById(req, res, next) {
     try {
       const id = req.params.id;
-      Document.deleteOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Document.deleteOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
@@ -44,8 +44,8 @@ class documentController {
   async destroyDocumentById(req, res, next) {
     try {
       const id = req.params.id;
-      Document.destroyOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Document.destroyOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
@@ -54,8 +54,8 @@ class documentController {
   async restoreDocumentById(req, res, next) {
     try {
       const id = req.params.id;
-      Document.restoreOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Document.restoreOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
@@ -72,7 +72,7 @@ class documentController {
       });
       newDocument = await newDocument.save(userId, departmentId);
 
-      return res.status(200).json({ document: newDocument });
+      return res.status(200).json(newDocument);
     } catch (error) {
       next(error);
     }

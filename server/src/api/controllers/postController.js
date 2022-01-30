@@ -4,7 +4,7 @@ class postController {
   async getAllPosts(req, res, next) {
     try {
       const posts = await Post.all();
-      return res.status(200).json({ posts });
+      return res.status(200).json(posts);
     } catch (error) {
       next(error);
     }
@@ -21,7 +21,7 @@ class postController {
       });
       newPost = await newPost.save(userId, topicId);
 
-      return res.status(200).json({ post: newPost });
+      return res.status(200).json(newPost);
     } catch (error) {
       next(error);
     }
@@ -30,9 +30,9 @@ class postController {
   async getPostById(req, res, next) {
     try {
       // + view for post
-      await Post.upPostViewById(req.params.id)
+      await Post.upPostViewById(req.params.id);
       const posts = await Post.findPostById(req.params.id);
-      return res.status(200).json({ posts });
+      return res.status(200).json(posts);
     } catch (error) {
       next(error);
     }
@@ -52,8 +52,8 @@ class postController {
   async deletePostById(req, res, next) {
     try {
       const id = req.params.id;
-      await Post.deleteOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Post.deleteOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
@@ -62,7 +62,7 @@ class postController {
   async getAllPostsOfUserId(req, res, next) {
     try {
       const posts = await Post.findPosts("user_id", req.params.id);
-      return res.status(200).json({ posts });
+      return res.status(200).json(posts);
     } catch (error) {
       next(error);
     }
@@ -71,7 +71,7 @@ class postController {
   async getAllPostsOfTopicId(req, res, next) {
     try {
       const posts = await Post.findPosts("topic_id", req.params.id);
-      return res.status(200).json({ posts });
+      return res.status(200).json(posts);
     } catch (error) {
       next(error);
     }
@@ -80,7 +80,7 @@ class postController {
   async getAllPostsOfDepartmentId(req, res, next) {
     try {
       const posts = await Post.findPostsByDepartmentId(req.params.id);
-      return res.status(200).json({ posts });
+      return res.status(200).json(posts);
     } catch (error) {
       next(error);
     }
@@ -89,8 +89,8 @@ class postController {
   async destroyPostById(req, res, next) {
     try {
       const id = req.params.id;
-      await Post.destroyOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Post.destroyOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
@@ -99,8 +99,8 @@ class postController {
   async restorePostById(req, res, next) {
     try {
       const id = req.params.id;
-      await Post.restoreOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Post.restoreOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
@@ -109,26 +109,26 @@ class postController {
   async acceptPostById(req, res, next) {
     try {
       const id = req.params.id;
-      await Post.acceptPostById(id);
-      return res.status(200).json({ success: true });
+      const result = await Post.acceptPostById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
   }
 
-  async getAllAcceptedPosts (req, res, next) {
+  async getAllAcceptedPosts(req, res, next) {
     try {
       const posts = await Post.getAcceptedPosts();
-      return res.status(200).json({ posts });
+      return res.status(200).json(posts);
     } catch (error) {
       next(error);
     }
   }
 
-  async getAllUnAcceptedPosts (req, res, next) {
+  async getAllUnAcceptedPosts(req, res, next) {
     try {
       const posts = await Post.getUnAcceptedPosts();
-      return res.status(200).json({ posts });
+      return res.status(200).json(posts);
     } catch (error) {
       next(error);
     }

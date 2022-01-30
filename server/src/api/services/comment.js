@@ -17,12 +17,11 @@ class Comment {
           "SELECT * FROM comment where id in ?",
           [[idList]],
           function (err, result, fields) {
-            if (err) resolve(err);
+            if (err) reject(err);
             else resolve(result);
           }
         );
-      }
-      else resolve([])
+      } else resolve([]);
     });
   }
 
@@ -32,7 +31,7 @@ class Comment {
         "SELECT * FROM comment where " + key + " = ?",
         value,
         function (err, result, fields) {
-          if (err) resolve(err);
+          if (err) reject(err);
           else resolve(result);
         }
       );
@@ -45,7 +44,7 @@ class Comment {
         "SELECT * FROM comment where id = ?",
         id,
         function (err, result, fields) {
-          if (err) resolve(err);
+          if (err) reject(err);
           else resolve(result[0]);
         }
       );
@@ -53,36 +52,37 @@ class Comment {
   }
 
   save(userId) {
-    var sql = "INSERT INTO comment (user_id, comment_content) VALUES ?";
     var values = [[userId, this.commentContent]];
     return new Promise(function (resolve, reject) {
+      var sql = "INSERT INTO comment (user_id, comment_content) VALUES ?";
       connection.query(sql, [values], async function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else {
-          const newComment = await Comment.findCommentById(result.insertId)
-          resolve(newComment)
+          const newComment = await Comment.findCommentById(result.insertId);
+          resolve(newComment);
         }
       });
     });
   }
 
   static findOneAndUpdate(id, newComment) {
-    var sql = "UPDATE comment set comment_content = ? where id = ?";
-    var values = [newComment.commentContent, id];
     return new Promise(function (resolve, reject) {
+      var sql = "UPDATE comment set comment_content = ? where id = ?";
+      var values = [newComment.commentContent, id];
       connection.query(sql, values, function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
   }
 
   static deleteOneById(id) {
-    const deletedAt = getTime();
-    var sql = "UPDATE comment set is_deleted = 1, deleted_at = ? WHERE id = ?";
     return new Promise(function (resolve, reject) {
+      const deletedAt = getTime();
+      var sql =
+        "UPDATE comment set is_deleted = 1, deleted_at = ? WHERE id = ?";
       connection.query(sql, [deletedAt, id], function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
@@ -90,23 +90,26 @@ class Comment {
 
   static deleteComments(deletedAt, idList) {
     return new Promise(function (resolve, reject) {
-      connection.query(
-        "UPDATE comment set is_deleted = 1, deleted_at = ? where id in ?",
-        [deletedAt, [idList]], 
-        function (err, result, fields) {
-          if (err) resolve(err);
-          else resolve(result);
-        }
-      );
+      if (idList.length !== 0) {
+        connection.query(
+          "UPDATE comment set is_deleted = 1, deleted_at = ? where id in ?",
+          [deletedAt, [idList]],
+          function (err, result, fields) {
+            if (err) reject(err);
+            else resolve(result);
+          }
+        );
+      }
+      resolve();
     });
   }
 
   static restoreOneById(id) {
-    const sql =
-      "UPDATE comment set is_deleted = 0, deleted_at = null WHERE id = ?";
     return new Promise(function (resolve, reject) {
+      const sql =
+        "UPDATE comment set is_deleted = 0, deleted_at = null WHERE id = ?";
       connection.query(sql, id, function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
@@ -117,22 +120,22 @@ class Comment {
       if (idList.length != 0) {
         connection.query(
           "UPDATE comment set is_deleted = 0, deleted_at = null where id in ?",
-          [[idList]], 
+          [[idList]],
           function (err, result, fields) {
-            if (err) resolve(err);
+            if (err) reject(err);
             else resolve(result);
           }
         );
       }
-      resolve([])
+      resolve();
     });
   }
 
   static destroyOneById(id) {
-    var sql = "DELETE FROM comment WHERE id = ?";
     return new Promise(function (resolve, reject) {
+      var sql = "DELETE FROM comment WHERE id = ?";
       connection.query(sql, id, function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
@@ -143,21 +146,20 @@ class Comment {
       if (idList.length != 0) {
         connection.query(
           "DELETE FROM subject_comment where comment_id in ?",
-          [[idList]], 
+          [[idList]],
           function (err, result, fields) {
-            if (err) resolve(err);
+            if (err) reject(err);
           }
         );
         connection.query(
           "DELETE FROM comment where id in ?",
-          [[idList]], 
+          [[idList]],
           function (err, result, fields) {
-            if (err) resolve(err);
+            if (err) reject(err);
             else resolve(result);
           }
         );
-      }
-      resolve([])
+      } else resolve();
     });
   }
 }

@@ -1,5 +1,5 @@
 module.exports = {
-   secret: 'ct466-secret-key'
+  secret: process.env.SECRET,
 };
 
 /**

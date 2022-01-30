@@ -4,7 +4,7 @@ class topicController {
   async getAllTopicsOfDepartmentId(req, res, next) {
     try {
       const topics = await Topic.findTopics("department_id", req.params.id);
-      return res.status(200).json({ topics });
+      return res.status(200).json(topics);
     } catch (error) {
       next(error);
     }
@@ -24,8 +24,8 @@ class topicController {
   async deleteTopicById(req, res, next) {
     try {
       const id = req.params.id;
-      await Topic.deleteOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Topic.deleteOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
@@ -41,7 +41,7 @@ class topicController {
       });
       newTopic = await newTopic.save(departmentId);
 
-      return res.status(200).json({ topic: newTopic });
+      return res.status(200).json(newTopic);
     } catch (error) {
       next(error);
     }
@@ -50,8 +50,8 @@ class topicController {
   async destroyTopicById(req, res, next) {
     try {
       const id = req.params.id;
-      await Topic.destroyOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Topic.destroyOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }
@@ -60,8 +60,8 @@ class topicController {
   async restoreTopicById(req, res, next) {
     try {
       const id = req.params.id;
-      Topic.restoreOneById(id);
-      return res.status(200).json({ success: true });
+      const result = await Topic.restoreOneById(id);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }

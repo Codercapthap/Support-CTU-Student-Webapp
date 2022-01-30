@@ -3,23 +3,20 @@ const { getTime } = require("../helpers/support");
 
 class UserDepartment {
   save(userId, departmentId) {
-    var sql = "INSERT INTO user_department (user_id, department_id) VALUES ?";
-    var values = [
-      [userId, departmentId]
-    ]
+    var values = [[userId, departmentId]];
     return new Promise(function (resolve, reject) {
-      connection.query(sql, [values],
-        async function (err, result, fields) {
-          if (err) resolve(err);
-          else resolve()
-        }
-      );
+      const sql =
+        "INSERT INTO user_department (user_id, department_id) VALUES ?";
+      connection.query(sql, [values], async function (err, result, fields) {
+        if (err) resolve(err);
+        else resolve();
+      });
     });
   }
 
-  static destroyUserDepartments (key, value) {
-    var sql = "DELETE FROM user_department WHERE " + key + " = ?";
+  static destroyUserDepartments(key, value) {
     return new Promise(function (resolve, reject) {
+      const sql = "DELETE FROM user_department WHERE " + key + " = ?";
       connection.query(sql, value, function (err, result, fields) {
         if (err) resolve(err);
         else resolve(result);

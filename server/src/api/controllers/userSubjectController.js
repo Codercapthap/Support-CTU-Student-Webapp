@@ -7,7 +7,7 @@ class userSubjectController {
         "user_id",
         req.params.id
       );
-      return res.status(200).json({ userSubjects });
+      return res.status(200).json(userSubjects);
     } catch (error) {
       next(error);
     }
@@ -19,18 +19,22 @@ class userSubjectController {
         "subject_id",
         req.params.id
       );
-      return res.status(200).json({ userSubjects });
+      return res.status(200).json(userSubjects);
     } catch (error) {
       next(error);
     }
   }
 
-  async updateUserSubjectById(req, res, next) {
+  async updateUserSubject(req, res, next) {
     try {
       const userId = req.user.id;
       const subjectScore = req.body.subjectScore;
-      const subjectId = req.params.id
-      const result = await UserSubject.findOneAndUpdate(subjectScore, userId, subjectId);
+      const subjectId = req.params.id;
+      const result = await UserSubject.findOneAndUpdate(
+        subjectScore,
+        userId,
+        subjectId
+      );
       return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
@@ -41,8 +45,8 @@ class userSubjectController {
     try {
       const userId = req.user.id;
       const subjectId = req.params.id;
-      UserSubject.destroyOne(userId, subjectId);
-      return res.status(200).json({ success: true });
+      const result = await UserSubject.destroyOne(userId, subjectId);
+      return res.status(200).json(result.affectedRows);
     } catch (err) {
       next(err);
     }

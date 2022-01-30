@@ -10,18 +10,21 @@ const {
   validateParam,
 } = require("../validations/validate");
 
+// get tất cả comment của post
 router.get(
   "/post/:id",
   validateParam(schemas.idSchema, "id"),
   commentController.getAllCommentsOfPostId
 );
 
+// get tất cả comment của subject
 router.get(
   "/subject/:id",
   validateParam(schemas.idSchema, "id"),
   commentController.getAllCommentsOfSubjectId
 );
 
+// tạo comment trong post
 router.post(
   "/post",
   validateBody(schemas.postCommentSchema),
@@ -29,6 +32,7 @@ router.post(
   commentController.createPostComment
 );
 
+// tạo comment trong subject
 router.post(
   "/subject",
   validateBody(schemas.subjectCommentSchema),
@@ -36,6 +40,7 @@ router.post(
   commentController.createSubjectComment
 );
 
+// xóa vĩnh viễn comment theo post id
 router.delete(
   "/:id/post/destroy",
   validateParam(schemas.idSchema, "id"),
@@ -44,6 +49,7 @@ router.delete(
   commentController.destroyPostCommentById
 );
 
+// xóa vĩnh viễn comment theo subject id
 router.delete(
   "/:id/subject/destroy",
   validateParam(schemas.idSchema, "id"),
@@ -52,6 +58,7 @@ router.delete(
   commentController.destroySubjectCommentById
 );
 
+// khôi phục comment theo subject id
 router.patch(
   "/:id/restore",
   validateParam(schemas.idSchema, "id"),
@@ -62,6 +69,7 @@ router.patch(
 
 router
   .route("/:id")
+  // cập nhật comment theo id comment
   .put(
     validateParam(schemas.idSchema, "id"),
     validateBody(schemas.commentUpdateSchema),
@@ -69,11 +77,12 @@ router
     authComment([]),
     commentController.updateCommentById
   )
+  // xóa mềm comment theo id comment
   .delete(
     validateParam(schemas.idSchema, "id"),
     passport.authenticate("jwt", { session: false }),
     authComment(["moderator", "admin"]),
     commentController.deleteCommentById
   );
-  
+
 module.exports = router;

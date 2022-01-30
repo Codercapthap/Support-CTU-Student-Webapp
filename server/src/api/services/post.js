@@ -17,17 +17,17 @@ class Post {
   static all() {
     return new Promise(function (resolve, reject) {
       connection.query("SELECT * FROM post", function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
   }
 
   static findPostById(id) {
-    var sql = "SELECT * FROM post where id = ?";
     return new Promise(function (resolve, reject) {
+      var sql = "SELECT * FROM post where id = ?";
       connection.query(sql, id, function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
@@ -48,7 +48,7 @@ class Post {
     ];
     return new Promise(function (resolve, reject) {
       connection.query(sql, [values], async function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else {
           const newPost = await Post.findPostById(result.insertId);
           resolve(newPost);
@@ -58,11 +58,11 @@ class Post {
   }
 
   static findOneAndUpdate(id, newPost) {
-    var sql = "UPDATE post set post_title = ?, post_content = ? where id = ?";
-    var values = [newPost.postTitle, newPost.postContent, id];
     return new Promise(function (resolve, reject) {
+      var sql = "UPDATE post set post_title = ?, post_content = ? where id = ?";
+      var values = [newPost.postTitle, newPost.postContent, id];
       connection.query(sql, values, function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
@@ -71,10 +71,10 @@ class Post {
   static async deleteOneById(id, deletedAt = getTime()) {
     // delete comment
     await PostComment.deleteComments(deletedAt, id);
-    var sql = "UPDATE post set is_deleted = 1, deleted_at = ? WHERE id = ?";
     return new Promise(function (resolve, reject) {
+      var sql = "UPDATE post set is_deleted = 1, deleted_at = ? WHERE id = ?";
       connection.query(sql, [deletedAt, id], function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
@@ -86,7 +86,7 @@ class Post {
         "SELECT * FROM post where " + key + " = ?",
         value,
         function (err, result, fields) {
-          if (err) resolve(err);
+          if (err) reject(err);
           else resolve(result);
         }
       );
@@ -99,7 +99,7 @@ class Post {
         "select * from post where topic_id in (select id from topic where department_id = ?)",
         departmentId,
         function (err, result, fields) {
-          if (err) resolve(err);
+          if (err) reject(err);
           else resolve(result);
         }
       );
@@ -111,7 +111,7 @@ class Post {
     return new Promise(function (resolve, reject) {
       var sql = "DELETE FROM post WHERE id = ?";
       connection.query(sql, id, function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
@@ -119,31 +119,32 @@ class Post {
 
   static async restoreOneById(id) {
     await PostComment.restoreComments(id);
-    var sql = "UPDATE post set is_deleted = 0, deleted_at = null WHERE id = ?";
     return new Promise(function (resolve, reject) {
+      var sql =
+        "UPDATE post set is_deleted = 0, deleted_at = null WHERE id = ?";
       connection.query(sql, id, function (err, result, fields) {
-        if (err) resolve(err);
+        if (err) reject(err);
         else resolve(result);
       });
     });
   }
 
   static acceptPostById(id) {
-    var sql = "UPDATE post set is_accepted = 1 WHERE id = ?";
     return new Promise(function (resolve, reject) {
+      var sql = "UPDATE post set is_accepted = 1 WHERE id = ?";
       connection.query(sql, id, function (err, result, fields) {
-        if (err) resolve(err);
-        else resolve(result.affectedRows);
+        if (err) reject(err);
+        else resolve(result);
       });
     });
   }
 
   static upPostViewById(id) {
-    var sql = "UPDATE post set post_view = post_view + 1 where id = ?";
     return new Promise(function (resolve, reject) {
+      var sql = "UPDATE post set post_view = post_view + 1 where id = ?";
       connection.query(sql, id, function (err, result, fields) {
-        if (err) resolve(err);
-        else resolve(result.affectedRows);
+        if (err) reject(err);
+        else resolve(result);
       });
     });
   }
@@ -153,7 +154,7 @@ class Post {
       connection.query(
         "SELECT * FROM post where is_accepted = 1",
         function (err, result, fields) {
-          if (err) resolve(err);
+          if (err) reject(err);
           else resolve(result);
         }
       );
@@ -165,7 +166,7 @@ class Post {
       connection.query(
         "SELECT * FROM post where is_accepted = 0",
         function (err, result, fields) {
-          if (err) resolve(err);
+          if (err) reject(err);
           else resolve(result);
         }
       );
@@ -178,7 +179,7 @@ class Post {
       for (var i = 0; i < idList.length; ++i) {
         await Post.deleteOneById(idList[i], deletedAt);
       }
-      resolve()
+      resolve();
     });
   }
 
@@ -188,7 +189,7 @@ class Post {
       for (var i = 0; i < idList.length; ++i) {
         await Post.destroyOneById(idList[i]);
       }
-      resolve()
+      resolve();
     });
   }
 
@@ -198,7 +199,7 @@ class Post {
       for (var i = 0; i < idList.length; ++i) {
         await Post.restoreOneById(idList[i]);
       }
-      resolve()
+      resolve();
     });
   }
 }

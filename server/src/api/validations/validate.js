@@ -69,7 +69,8 @@ const schemas = {
   }),
 
   resetPasswordSchema: Joi.object().keys({
-    password: Joi.string().min(6).required()
+    oldPassword: Joi.string().min(6).required(),
+    password: Joi.string().min(6).required(),
   }),
 
   updateRoleSchema: Joi.object().keys({
@@ -77,7 +78,7 @@ const schemas = {
   }),
 
   updateAvatarUrl: Joi.object().keys({
-    avatarUrl: Joi.string().required()
+    avatarUrl: Joi.string().required(),
   }),
 
   postCommentSchema: Joi.object().keys({
@@ -140,12 +141,12 @@ const schemas = {
 
   userSubjectSchema: Joi.object().keys({
     subjectId: Joi.number().required(),
-    subjectScore: Joi.number()
+    subjectScore: Joi.number(),
   }),
 
   userSubjectUpdateSchema: Joi.object().keys({
-    subjectScore: Joi.number()
-  })
+    subjectScore: Joi.number(),
+  }),
 };
 
 module.exports = {

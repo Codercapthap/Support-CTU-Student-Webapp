@@ -1,13 +1,10 @@
 const Department = require("../services/department");
-const Topic = require('../services/topic')
-const UserDepartment = require('../services/userDepartment')
-const Document = require('../services/document')
 
 class departmentController {
   async getAllDepartments(req, res, next) {
     try {
       const departments = await Department.all();
-      return res.status(200).json({ departments });
+      return res.status(200).json(departments);
     } catch (error) {
       next(error);
     }
@@ -23,13 +20,13 @@ class departmentController {
         departmentName,
       });
       newDepartment = await newDepartment.save();
-      res.status(200).json({department: newDepartment})
+      res.status(200).json(newDepartment);
     } catch (error) {
       next(error);
     }
   }
 
-  async updateDepartment (req, res, next) {
+  async updateDepartment(req, res, next) {
     try {
       const { id } = req.params;
       const newDepartment = req.body;
@@ -40,12 +37,14 @@ class departmentController {
     }
   }
 
-  async destroyDepartment (req, res, next) {
+  async destroyDepartment(req, res, next) {
     try {
-      const id = req.params.id
-      Department.destroyOneById(id)
-      return res.status(200).json({success: true})
-    } catch(err) { next(err) }
+      const id = req.params.id;
+      const result = await Department.destroyOneById(id);
+      return res.status(200).json(result.affectedRows);
+    } catch (err) {
+      next(err);
+    }
   }
 }
 

@@ -10,19 +10,21 @@ const {
   validateParam,
 } = require("../validations/validate");
 
-router.get('/department/:id', subjectController.getAllSubjectsOfDepartmentId)
+// get tất cả subject theo departmentId
+router.get("/department/:id", subjectController.getAllSubjectsOfDepartmentId);
 
 router
   .route("/:id")
   .put(
-    validateParam(schemas.idSchema, 'id'),
+    validateParam(schemas.idSchema, "id"),
     validateBody(schemas.subjectUpdateSchema),
     passport.authenticate("jwt", { session: false }),
     authRole(["admin"]),
     subjectController.updateSubjectById
   )
+  // xóa vĩnh viễn subject
   .delete(
-    validateParam(schemas.idSchema, 'id'),
+    validateParam(schemas.idSchema, "id"),
     passport.authenticate("jwt", { session: false }),
     authRole(["admin"]),
     subjectController.deleteSubjectById

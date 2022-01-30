@@ -10,14 +10,19 @@ const {
   validateParam,
 } = require("../validations/validate");
 
+// get danh sách post theo user id
 router.get("/user/:id", postController.getAllPostsOfUserId);
 
+// get danh sách post theo topic id
 router.get("/topic/:id", postController.getAllPostsOfTopicId);
 
+// get danh sách post theo department id
 router.get("/department/:id", postController.getAllPostsOfDepartmentId);
 
+// get danh sách post đã accept
 router.get("/accepted/", postController.getAllAcceptedPosts);
 
+// get danh sách post chưa accept
 router.get(
   "/unaccepted/",
   passport.authenticate("jwt", { session: false }),
@@ -25,6 +30,7 @@ router.get(
   postController.getAllUnAcceptedPosts
 );
 
+// xóa vĩnh viễn post
 router.delete(
   "/:id/destroy",
   validateParam(schemas.idSchema, "id"),
@@ -41,6 +47,7 @@ router.patch(
   postController.restorePostById
 );
 
+// accept post
 router.patch(
   "/:id/accept",
   validateParam(schemas.idSchema, "id"),
@@ -51,7 +58,7 @@ router.patch(
 
 router
   .route("/:id")
-  .get(postController.getPostById)
+  .get(validateParam(schemas.idSchema, "id"), postController.getPostById)
   .put(
     validateParam(schemas.idSchema, "id"),
     validateBody(schemas.postUpdateSchema),
@@ -59,6 +66,7 @@ router
     authPost(["moderator", "admin"]),
     postController.updatePostById
   )
+  // xóa mềm post
   .delete(
     validateParam(schemas.idSchema, "id"),
     passport.authenticate("jwt", { session: false }),
@@ -68,6 +76,7 @@ router
 
 router
   .route("/")
+  // get tất cả post
   .get(postController.getAllPosts)
   .post(
     validateBody(schemas.postSchema),

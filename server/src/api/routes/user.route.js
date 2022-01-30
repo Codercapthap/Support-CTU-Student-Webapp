@@ -10,12 +10,15 @@ const {
   schemas,
 } = require("../validations/validate");
 
+// get tất cả user theo department id
 router.get(
   "/department/:id",
+  validateParam(schemas.idSchema, "id"),
   passport.authenticate("jwt", { session: false }),
   userController.getAllUsersOfDepartmentId
 );
 
+// reset password
 router.patch(
   "/reset_password",
   validateBody(schemas.resetPasswordSchema),
@@ -23,6 +26,7 @@ router.patch(
   userController.resetPassword
 );
 
+// chỉnh sửa role user
 router.patch(
   "/:id/role",
   validateParam(schemas.idSchema, "id"),
@@ -40,6 +44,7 @@ router.patch(
   userController.restoreAccount
 );
 
+// xóa vĩnh viễn user
 router.delete(
   "/:id/destroy",
   validateParam(schemas.idSchema, "id"),
@@ -48,6 +53,7 @@ router.delete(
   userController.destroyAccount
 );
 
+// cập nhật avatar url user
 router.patch(
   "/:id/update_avatar",
   validateParam(schemas.idSchema, "id"),
@@ -64,13 +70,6 @@ router
     passport.authenticate("jwt", { session: false }),
     userController.getUserById
   )
-  .put(
-    validateParam(schemas.idSchema, "id"),
-    validateBody(schemas.userUpdateSchema),
-    passport.authenticate("jwt", { session: false }),
-    authAccount([]),
-    userController.updateUser
-  )
   .delete(
     validateParam(schemas.idSchema, "id"),
     passport.authenticate("jwt", { session: false }),
@@ -86,10 +85,16 @@ router.post(
   userController.createUser
 );
 
-router.get(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  userController.getAllUsers
-);
+router
+  .route("/")
+  .get(
+    passport.authenticate("jwt", { session: false }),
+    userController.getAllUsers
+  )
+  .put(
+    validateBody(schemas.userUpdateSchema),
+    passport.authenticate("jwt", { session: false }),
+    userController.updateUser
+  );
 
 module.exports = router;

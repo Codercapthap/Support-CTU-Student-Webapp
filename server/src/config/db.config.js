@@ -1,18 +1,18 @@
-var mysql      = require('mysql2');
+var mysql = require("mysql2");
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '123456789',
-  database : 'ct466'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
-connection.connect(function(err) {
+connection.connect(function (err) {
   if (err) {
-    console.error('error connecting: ' + err.stack);
+    console.error("error connecting: " + err.stack);
     return;
   }
- 
-  console.log('connected as id ' + connection.threadId);
+
+  console.log("connected as id " + connection.threadId);
 });
 
-module.exports = connection
+module.exports = connection;
