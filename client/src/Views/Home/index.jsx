@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLayoutEffect } from 'react';
 
 import './_style.scss';
 
@@ -10,7 +11,22 @@ import Departments from '../../Assets/departments.json';
 //img
 import CardImage from '../../Assets/images/card-img.jpg';
 
-function index() {
+function Home() {
+   useLayoutEffect(() => {
+      const home = document.querySelector('.home');
+      const handleScroll = () => {
+         if (window.scrollY > 0 && !home.classList.contains('margin-home')) {
+            home.classList.add('margin-home');
+         } else if (window.scrollY <= 0) {
+            home.classList.remove('margin-home');
+         }
+      };
+      window.addEventListener('scroll', handleScroll);
+
+      return () => {
+         window.removeEventListener('scroll', handleScroll);
+      };
+   }, []);
    return (
       <>
          <Header></Header>
@@ -67,4 +83,4 @@ function index() {
       </>
    );
 }
-export default index;
+export default Home;

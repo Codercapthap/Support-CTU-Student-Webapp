@@ -1,9 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-// import { memo } from 'react';
+import { useEffect } from 'react';
 
 import './_style.scss';
+
+import { varCSS } from '../../helpers/vanillaJs';
 
 // const hiddenElem = true;
 
@@ -20,7 +22,27 @@ const styleActiveLink = ({ isActive }) =>
            borderColor: 'var(--text-color)'
         };
 
-function index() {
+function Navbar() {
+   useEffect(() => {
+      const navbar = document.querySelector('.navbar');
+      const handleScroll = () => {
+         const navbarWidth = varCSS('navbar-width');
+         if (window.scrollY > 0 && !navbar.classList.contains('fixed-navbar')) {
+            if (navbarWidth === '0px') {
+               return;
+            }
+            navbar.classList.add('fixed-navbar');
+         } else if (window.scrollY <= 0 && navbar.classList.contains('fixed-navbar')) {
+            navbar.classList.remove('fixed-navbar');
+         }
+      };
+      window.addEventListener('scroll', handleScroll);
+
+      return () => {
+         window.removeEventListener('scroll', handleScroll);
+      };
+   }, []);
+
    return (
       <nav className="navbar">
          <div className="nav-box">
@@ -43,23 +65,9 @@ function index() {
             <NavLink to="/setting" className="nav-item" style={styleActiveLink}>
                <i class="fa-solid fa-gear"></i> Setting
             </NavLink>
-
-            {/* <NavLink to="signin" className="nav-item" style={styleActiveLink}>
-                  Log In
-               </NavLink>
-
-               <NavLink to="signup" className="nav-item" style={styleActiveLink}>
-                  Register
-               </NavLink>
-
-               {hiddenElem && (
-                  <NavLink to="signout" className="nav-item" style={styleActiveLink}>
-                     Log Out
-                  </NavLink>
-               )} */}
          </div>
       </nav>
    );
 }
 
-export default index;
+export default Navbar;

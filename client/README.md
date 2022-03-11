@@ -1,3 +1,11 @@
+# !. Create .env.local
+
+-  Because the server is running in port 3000, so we much change client port to 3001
+
+```
+PORT=3001
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

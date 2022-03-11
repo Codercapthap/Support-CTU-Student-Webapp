@@ -37,6 +37,11 @@ $gutter-horizontal: 2rem;
 $transTime: 0.7s;
 $transTimeCol: 0.3s;
 
+:root {
+   --navbar-width: 0px;
+   --article-width: 1000px;
+}
+
 [data-theme='light'] {
    --bg-color: lightgrey;
    --text-navbar-color: #241011;

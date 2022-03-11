@@ -1,0 +1,34 @@
+@import '../../Assets/scss/mixin';
+@import '../../Assets/scss/varriable';
+
+.header {
+   min-width: calc(100% - var(--navbar-width));
+   transition: $transTimeCol;
+   // box-shadow: 0 0 1rem var(--text-color);
+   background-color: var(--bg-color);
+   height: max-content;
+   padding: 1rem;
+   @include flexbox(row, flex-start);
+   z-index: 10;
+   .header-item {
+      padding: 0.5rem;
+      border-radius: 999rem;
+      cursor: pointer;
+   }
+   .header-item:nth-child(2) {
+      border-radius: 0rem;
+      margin-left: auto;
+      align-self: center;
+   }
+   .header-item:nth-child(3) {
+      border-radius: 0rem;
+      margin-left: auto;
+      // align-self: right;
+   }
+}
+
+.fixed-header {
+   position: fixed;
+   top: 0;
+   right: 0;
+}

@@ -1,0 +1,11 @@
+@import '../../Assets/scss/_mixin.scss';
+
+.setting {
+   padding: 0 calc((100% - var(--article-width))/2);
+   .setting-item {
+      padding: 0.5rem;
+      width: 100%;
+      margin-bottom: 1rem;
+      @include flexbox(row, space-between);
+   }
+}

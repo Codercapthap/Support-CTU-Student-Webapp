@@ -4,10 +4,12 @@ import Home from './Views/Home';
 import Blog from './Views/Blog';
 import About from './Views/About';
 import Forum from './Views/Forum';
+import Setting from './Views/Setting';
 
 import Navbar from './Components/Navbar';
 
 import './App.scss';
+// import { useState } from 'react';
 
 function App() {
    return (
@@ -22,6 +24,7 @@ function App() {
                   <Route path="/about" element={<About />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/forum" element={<Forum />} />
+                  <Route path="/setting" element={<Setting />} />
                </Routes>
             </div>
          </div>
