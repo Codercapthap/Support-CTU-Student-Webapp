@@ -1,0 +1,7 @@
+APP_PORT=Example_App_Port
+SECRET_KEY=Example_Secret_Key
+DB_PORT=Example_Database_Port
+DB_HOST=Example_Database_Localhost
+DB_USER=Example_Database_ROOT
+DB_PASSWORD=Example_Database_Password
+DB_NAME=Example_Database_Name

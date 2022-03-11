@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 module.exports = {
-  secret: process.env.SECRET,
+   secret: process.env.SECRET_KEY || 'ct466-secret-key'
 };
 
 /**

@@ -2,4 +2,3 @@ node_modules
 public/uploads
 password.md
 .env
-package-lock.json

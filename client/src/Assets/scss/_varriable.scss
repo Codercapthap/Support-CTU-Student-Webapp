@@ -1,0 +1,55 @@
+// $maxWidthApp: 700px;
+// $maxHeightApp: 900px;
+
+// $minWidthApp: 500px;
+// $minHeightApp: 700px;
+
+// $heightFooter: 100px;
+
+// $listSongHeight: 200px;
+$heightSlideShow: 400px;
+
+$primary: #0d6efd;
+$secondary: #767f86;
+$warning: #ffc107;
+$success: #198754;
+$info: #0dcaf0;
+$danger: #dc3545;
+$light: #f9fafb;
+$dark: #212529;
+
+$gutter-vertical: 2rem;
+$gutter-horizontal: 2rem;
+
+/* 
+   Add data-theme in html element
+   <!DOCTYPE html>
+   <html lang="en" data-theme="light">
+      <head>
+         <meta charset="UTF-8" />
+         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+         <title>Document</title>
+      </head>
+      <body></body>
+   </html>
+*/
+$transTime: 0.7s;
+$transTimeCol: 0.3s;
+
+[data-theme='light'] {
+   --bg-color: lightgrey;
+   --text-navbar-color: #241011;
+   --text-color: black;
+   --primary-color: #b2a08f;
+   --secondary-color: rgb(241, 234, 169);
+   --heading-color: #00c9ff;
+}
+
+[data-theme='dark'] {
+   --bg-color: #1f2028;
+   --text-color: #fffff8;
+   --primary-color: #34495e;
+   --secondary-color: #596275;
+   --heading-color: #58b19f;
+}

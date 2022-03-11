@@ -1,0 +1,457 @@
+@import './varriable';
+
+//https://github.com/namnguyen2k1
+// other atomic class
+
+:root {
+   --min_width_moble: 480px;
+   --min_width_tablet: 961px;
+   --min_width_desktop: 1281px;
+}
+
+// reset css basic
+@mixin reset_css() {
+   * {
+      margin: 0rem;
+      padding: 0rem;
+      box-sizing: border-box;
+   }
+   html {
+      scroll-behavior: smooth;
+   }
+   body {
+      font-size: 16px;
+      height: 100vh;
+      width: 100%;
+   }
+
+   a {
+      color: black;
+      text-decoration: none;
+   }
+
+   ul,
+   li {
+      padding: 0;
+      margin: 0;
+   }
+
+   li {
+      list-style-type: none;
+   }
+
+   table,
+   tr,
+   td {
+      border-collapse: collapse;
+   }
+
+   input {
+      border: none;
+      outline: none;
+   }
+}
+
+//Handle layout with flexbox
+@mixin flexbox($direction: row, $content: center, $items: center, $wrap: nowrap) {
+   display: flex;
+   flex-direction: $direction;
+   justify-content: $content;
+   align-items: $items;
+   flex-wrap: $wrap;
+}
+
+// Cắt text với số còn đúng $line dòng, thay phần còn lại bằng '...'
+@mixin truncate_line($line-height: '20px', $lines-clamp: 2) {
+   display: -webkit-box;
+   line-height: #{$line-height};
+   -webkit-line-clamp: $lines-clamp;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+/*Set size element*/
+@mixin size($width, $height: $width) {
+   width: $width;
+   height: $height;
+}
+
+/*custom select text*/
+@mixin select_text($color: black, $bg_color: white) {
+   &::selection {
+      background: $bg_color;
+      color: $color;
+   }
+}
+
+//  Other aspect ratios to try:
+//  * 56.25% = 16:9
+//  * 75% = 4:3
+//  * 66.66% = 3:2
+//  * 62.5% = 8:5
+
+// responsive with each machine
+@mixin responsive($size: 'mobile') {
+   // syntax thiet lap kich thuoc cho bien
+   $desktop: '(min-width: 1024px)';
+   $tablet: '(min-width: 768px) and (max-width: 1023px)';
+   $mobile: '(min-width: 321px) and (max-width: 767px)';
+   $mini: '(max-width: 320px)';
+   @if $size == desktop {
+      @media only screen and #{$desktop} {
+         @content;
+      }
+   } @else if $size == tablet {
+      @media only screen and #{$tablet} {
+         @content;
+      }
+   } @else if $size == mobile {
+      @media only screen and #{$mobile} {
+         @content;
+      }
+   } @else if $size == mini {
+      @media only screen and #{$mini} {
+         @content;
+      }
+   } @else {
+      @media only screen and #{$size} {
+         @content;
+      }
+   }
+}
+// Use Example:
+// .wrapper {
+//    @include responsive('tablet') {
+//       width: 90%;
+//    }
+// }
+
+// Handle clearfix
+@mixin clearfix-content() {
+   content: '.';
+   display: block;
+   visibility: hidden;
+   clear: both;
+}
+
+// Custom scrollbar
+@mixin scrollbar($width: 0.5rem, $track: var(--bg-color), $thumb: var(--text-color), $oy: true) {
+   &::-webkit-scrollbar {
+      @if $oy == true {
+         width: $width;
+         height: auto;
+      } @else {
+         width: auto;
+         height: $width;
+      }
+   }
+   &::-webkit-scrollbar-track {
+      background-color: $track;
+   }
+   &::-webkit-scrollbar-thumb {
+      background-color: $thumb;
+      border-radius: 999rem;
+   }
+}
+
+// &::webkit-scrollbar: trỏ đến toàn bộ element của scrollbar.
+// &::webkit-scrollbar-track : trỏ đến phần trắng của scrollbar.
+// &::webkit-scrollbar-thumb : trỏ đến phần thanh cuộn của scrollbar.
+
+// Create Knockout text
+// Warning: set background-color after use mixin!
+@mixin knockout_text() {
+   -webkit-background-clip: text;
+   background-clip: text;
+   -webkit-text-fill-color: transparent;
+}
+
+/*
+   Example: .item{
+      background-color: linearGradient(...);
+      @include knockout_text();
+   }
+*/
+
+// Warning: set .parent element: position: relative; width: max-content;
+@mixin border_bottom($height_border: 5px, $color_border: black, $cycle: 0.5s, $start: left) {
+   cursor: pointer;
+   &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      @if $start == left {
+         left: 0;
+      } @else {
+         right: 0;
+      }
+      height: $height_border;
+      width: 0%;
+      border-radius: 999px;
+      background-color: $color_border;
+      transition: $cycle all ease;
+   }
+   &:hover:after {
+      width: 100%;
+   }
+}
+
+// Warning: set .parent element: position: relative; width: max-content;
+@mixin border_bottom_center($height_border: 5px, $color_border: black, $time_cycle: 0.5s) {
+   cursor: pointer;
+   &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: $height_border;
+      width: 0;
+      background: $color_border;
+      transition: $time_cycle all ease;
+   }
+   &:hover {
+      &:after {
+         width: 100%;
+      }
+   }
+}
+
+// Warning: sử dụng thêm thuộc tính position: relative; ở phần tử cha
+@mixin border_area($height_border: 5px, $color_border: black, $cycle: 0.5s) {
+   &:before,
+   &:after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: $height_border;
+      background: $color_border;
+      transition: $cycle all ease;
+   }
+   &:before {
+      top: -5px;
+      left: 0;
+   }
+   &:after {
+      bottom: -5px;
+      right: 0;
+   }
+   &:hover:before,
+   &:hover:after {
+      width: 100%;
+      transition: $cycle all ease;
+   }
+   & > * {
+      position: relative;
+      padding: 5px 10px;
+      &:before,
+      &:after {
+         content: '';
+         position: absolute;
+         width: $height_border;
+         height: 0;
+         background: $color_border;
+         transition: $cycle all ease;
+      }
+      &:before {
+         top: 0;
+         left: -5px;
+      }
+      &:after {
+         bottom: 0;
+         right: -5px;
+      }
+      &:hover {
+         color: $color_border;
+         transition: $cycle all ease;
+      }
+      &:hover:before,
+      &:hover:after {
+         height: 100%;
+         transition: $cycle all ease;
+      }
+   }
+}
+
+/*
+   Example: áp dụng cho lớp cha có duy nhất 1 phần tử con.
+   .parent{
+      position: relative;
+      @include border_area(...);
+      .child{}
+   }
+*/
+
+// Warning: set .parent element: position: relative;
+@mixin draw_triangle($top: top, $color: white, $size: 10px, $left: 25%) {
+   &:before {
+      content: '';
+      position: absolute;
+      @if $top == top {
+         top: -$size;
+         border-bottom: $size solid $color;
+      } @else if $top == bottom {
+         bottom: -$size;
+         border-top: $size solid $color;
+      }
+      left: $left;
+      border-right: $size solid transparent;
+      border-left: $size solid transparent;
+   }
+}
+
+// Warning: set .parent element: position: relative; width: max-content;
+@mixin background_animation($bg_color: black, $color: white, $time: 0.5s, $size_border: 5px) {
+   &:before {
+      content: '';
+      position: absolute;
+      top: 0%;
+      left: auto;
+      right: 0;
+      width: 0;
+      height: 100%;
+      background-color: $bg_color;
+      border-right: $size_border solid $color;
+      border-top: $size_border/3 solid $color;
+      border-bottom: $size_border/3 solid $color;
+      border-top-right-radius: 999px;
+      border-bottom-right-radius: 999px;
+      transition: $time ease;
+      z-index: -1;
+      opacity: 0%;
+   }
+   &:hover {
+      cursor: pointer;
+      color: $color;
+      transition: 2 * $time ease;
+      &:before {
+         width: 100%;
+         left: 0;
+         right: auto;
+         transition: $time ease;
+         opacity: 100%;
+      }
+   }
+}
+
+.area-base > * {
+   border: 1px solid black;
+   border-radius: 5px;
+   overflow: hidden;
+}
+
+.button-base {
+   border: 1px solid black;
+   border-radius: 0.2rem;
+   padding: 0.2rem 0.5rem;
+   overflow: hidden;
+   @include truncate_line(1rem, 1);
+   background-color: var(--bg-color);
+   color: var(--text-color);
+   cursor: pointer;
+}
+
+.text-base {
+   font-size: 1rem;
+   font-weight: bold;
+}
+
+.n-row {
+   --spacing: 30px;
+   --columns: 5;
+   --radius: 5px;
+   display: flex;
+   flex-wrap: wrap;
+   margin: var(--spacing) 0 var(--spacing) calc(1 * var(--spacing));
+   .n-col {
+      width: calc(calc(100% / var(--columns)) - var(--spacing));
+      margin: 0 var(--spacing) var(--spacing) 0;
+      border-radius: var(--radius);
+      overflow-x: hidden;
+      word-wrap: break-word;
+      transition: $transTimeCol;
+   }
+}
+
+.row {
+   max-width: 100%;
+   display: flex;
+   &:not(:last-child) {
+      margin-bottom: $gutter-vertical;
+   }
+
+   [class^='col-'] {
+      border-radius: 5px;
+      &:not(:last-child) {
+         margin-right: $gutter-horizontal;
+      }
+   }
+
+   // 2 col
+
+   .col-1-of-2 {
+      width: calc((100% - #{$gutter-horizontal}) / 2);
+   }
+
+   // 3 col
+
+   .col-1-of-3 {
+      width: calc((100% - 2 * #{$gutter-horizontal}) / 3);
+   }
+
+   .col-2-of-3 {
+      width: calc(2 * ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal});
+   }
+
+   // 4 col
+   .col-1-of-4 {
+      width: calc((100% - 3 * #{$gutter-horizontal}) / 4);
+   }
+
+   .col-2-of-4 {
+      width: calc(2 * ((100% - 3 * #{$gutter-horizontal}) / 4) + #{$gutter-horizontal});
+   }
+
+   .col-3-of-4 {
+      width: calc(3 * ((100% - 3 * #{$gutter-horizontal}) / 4) + 2 * #{$gutter-horizontal});
+   }
+
+   // 5 col
+   .col-1-of-5 {
+      width: calc((100% - 4 * #{$gutter-horizontal}) / 5);
+   }
+
+   .col-2-of-5 {
+      width: calc(2 * ((100% - 4 * #{$gutter-horizontal}) / 5) + #{$gutter-horizontal});
+   }
+
+   .col-3-of-5 {
+      width: calc(3 * ((100% - 4 * #{$gutter-horizontal}) / 5) + 2 * #{$gutter-horizontal});
+   }
+
+   .col-4-of-5 {
+      width: calc(4 * ((100% - 4 * #{$gutter-horizontal}) / 5) + 3 * #{$gutter-horizontal});
+   }
+
+   // 6 col
+   .col-1-of-6 {
+      width: calc((100% - 5 * #{$gutter-horizontal}) / 6);
+   }
+
+   .col-2-of-6 {
+      width: calc(2 * ((100% - 5 * #{$gutter-horizontal}) / 6) + #{$gutter-horizontal});
+   }
+
+   .col-3-of-6 {
+      width: calc(3 * ((100% - 5 * #{$gutter-horizontal}) / 6) + 2 * #{$gutter-horizontal});
+   }
+
+   .col-4-of-6 {
+      width: calc(4 * ((100% - 5 * #{$gutter-horizontal}) / 6) + 3 * #{$gutter-horizontal});
+   }
+
+   .col-5-of-6 {
+      width: calc(5 * ((100% - 4 * #{$gutter-horizontal}) / 5) + 4 * #{$gutter-horizontal});
+   }
+}

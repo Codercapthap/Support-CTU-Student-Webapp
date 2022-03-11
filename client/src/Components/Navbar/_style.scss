@@ -1,0 +1,21 @@
+@import '../../Assets/scss/mixin';
+@import '../../Assets/scss/varriable';
+
+.navbar {
+   padding: 1rem 0rem;
+   .nav-box {
+      width: 100%;
+      padding: 0rem 0.5rem;
+      @include flexbox(column);
+      .nav-item {
+         width: 100%;
+         text-align: left;
+         padding: 0.5rem;
+         border-top-right-radius: 999rem;
+         border-bottom-right-radius: 999rem;
+         i {
+            margin-right: 0.5rem;
+         }
+      }
+   }
+}

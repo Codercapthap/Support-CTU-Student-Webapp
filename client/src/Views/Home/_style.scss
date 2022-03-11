@@ -1,0 +1,69 @@
+@import '../../Assets/scss/_mixin.scss';
+
+.home {
+   .n-row {
+      @include responsive('desktop') {
+         --columns: 4;
+         --spacing: 30px;
+         // --radius: 20px;
+      }
+      @include responsive('tablet') {
+         --columns: 3;
+         --spacing: 20px;
+         // --radius: 10px;
+      }
+      @include responsive('mobile') {
+         --columns: 2;
+         --spacing: 10px;
+         // --radius: 5px;
+      }
+
+      @include responsive('mini') {
+         --columns: 1;
+         --spacing: 5px;
+         // --radius: 5px;
+      }
+   }
+}
+
+.card-box {
+   .card-item {
+      overflow: hidden;
+      .card-img-box {
+         position: relative;
+         .card-code {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 2;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: var(--bg-color);
+         }
+         .card-img {
+            width: 100%;
+            height: auto;
+         }
+      }
+
+      .card-name {
+         padding-left: 1rem;
+         @include truncate_line('20px', 1);
+      }
+      .card-description {
+         padding: 1rem;
+         .description {
+            font-style: italic;
+            @include truncate_line(calc(20px), 3);
+         }
+      }
+      .card-button {
+         padding: 1rem;
+         margin-bottom: -1rem;
+         @include flexbox(row, flex-start, center, wrap);
+         .button {
+            margin: 0rem 1rem 1rem 0rem;
+         }
+      }
+   }
+}

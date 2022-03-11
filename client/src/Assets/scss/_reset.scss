@@ -1,0 +1,33 @@
+@import './varriable';
+@import './mixin';
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   box-shadow: 0 0 2px var(--text-color); // debug layout
+}
+
+a {
+   color: var(--text-color);
+   text-decoration: none;
+}
+
+li {
+   display: inline-block;
+   list-style-type: none;
+}
+
+input,
+textarea {
+   outline: none;
+   border: none;
+}
+
+body {
+   width: 100%;
+   min-height: 100vh;
+   overflow-y: auto;
+   // overflow-x: hidden;
+   @include scrollbar();
+}

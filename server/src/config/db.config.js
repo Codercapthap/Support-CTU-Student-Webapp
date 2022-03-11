@@ -1,18 +1,41 @@
-var mysql = require("mysql2");
-var connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+const mysql = require('mysql2');
+require('dotenv').config();
+
+const connection = mysql.createConnection({
+   host: process.env.DB_HOST || 'localhost',
+   user: process.env.DB_USER || 'root',
+   port: process.env.DB_PORT || 3306,
+   password: process.env.DB_PASSWORD || '',
+   database: process.env.DB_NAME || 'ct446'
 });
 
-connection.connect(function (err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
+connection.connect(err => {
+   if (err) {
+      console.log(`Can't connect to Database ${process.env.DB_NAME}`, err);
+      process.exit();
+   }
 
-  console.log("connected as id " + connection.threadId);
+   console.log(
+      `Database ${process.env.DB_NAME} has been connected. ThreadId = ${connection.threadId}`
+   );
 });
+
+/**
+ * const mySQLConnection = mysql.createConnection({
+   host: process.env.DB_HOST || 'localhost',
+   user: process.env.DB_USERNAME || 'admin',
+   password: process.env.DB_PASSWORD || '',
+   database: process.env.DB_NAME || 'ct466'
+});
+
+mySQLConnection.connect((err: Error) => {
+   if (err) {
+      console.log(`Can't connect to Database ${process.env.DB_NAME}`, err);
+      process.exit();
+   }
+   console.log(`Database ${process.env.DB_NAME} has connected!`);
+});
+
+ */
 
 module.exports = connection;
