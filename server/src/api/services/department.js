@@ -1,5 +1,5 @@
 const connection = require('../../config/db.config');
-const { getTime } = require('../helpers/support');
+const { getTimestamp } = require('../helpers/support');
 const Subject = require('./subject');
 const Topic = require('./topic');
 const UserSubject = require('./userSubject');

@@ -1,5 +1,5 @@
 const connection = require('../../config/db.config');
-const { getTime } = require('../helpers/support');
+const { getTimestamp } = require('../helpers/support');
 const PostComment = require('./postComment');
 
 class Post {
@@ -61,7 +61,7 @@ class Post {
       });
    }
 
-   static async deleteOneById(id, deletedAt = getTime()) {
+   static async deleteOneById(id, deletedAt = getTimestamp()) {
       // delete comment
       await PostComment.deleteComments(deletedAt, id);
       return new Promise(function (resolve, reject) {

@@ -82,6 +82,7 @@ class userController {
    async updateUser(req, res, next) {
       try {
          const id = req.user.id;
+         console.log(id);
          const { username, gender, birthday, email, phone, address } = req.body;
          // check email xem có ai khác đã sử dụng chưa
          const foundUser = await User.findOne('email', email);

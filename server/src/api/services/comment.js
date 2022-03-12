@@ -1,5 +1,5 @@
 const connection = require('../../config/db.config');
-const { getTime } = require('../helpers/support');
+const { getTimestamp } = require('../helpers/support');
 
 class Comment {
    constructor(comment) {
@@ -74,7 +74,7 @@ class Comment {
 
    static deleteOneById(id) {
       return new Promise(function (resolve, reject) {
-         const deletedAt = getTime();
+         const deletedAt = getTimestamp();
          var sql = 'UPDATE comment set is_deleted = 1, deleted_at = ? WHERE id = ?';
          connection.query(sql, [deletedAt, id], function (err, result, fields) {
             if (err) reject(err);
@@ -145,6 +145,13 @@ class Comment {
                   if (err) reject(err);
                }
             );
+            connection.query(
+              'DELETE FROM post_comment where comment_id in ?',
+              [[idList]],
+              function (err, result, fields) {
+                 if (err) reject(err);
+              }
+           );
             connection.query(
                'DELETE FROM comment where id in ?',
                [[idList]],
