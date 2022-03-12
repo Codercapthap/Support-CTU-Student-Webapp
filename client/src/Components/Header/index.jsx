@@ -1,12 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
+
+import { NavLink } from 'react-router-dom';
 
 import './_style.scss';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 
 import { varCSS } from '../../helpers/vanillaJs.js';
+const styleActiveLink = ({ isActive }) =>
+   isActive
+      ? {
+           color: 'var(--heading-color)',
+           background: 'var(--text-color)'
+        }
+      : {
+           color: 'var(--text-color)',
+           background: 'var(--bg-color)'
+        };
 
 function Navbar() {
    const [showNavbar, setShowNavbar] = useState(false);
+   const [isLogin, setIsLogin] = useState(false);
+
+   useLayoutEffect(() => {
+      const navbarWidth = varCSS('navbar-width');
+      if (navbarWidth === '200px') {
+         setShowNavbar(true);
+      }
+   }, []);
 
    useEffect(() => {
       const header = document.querySelector('.header');
@@ -26,39 +46,52 @@ function Navbar() {
 
    const handleShowNavbar = () => {
       setShowNavbar(!showNavbar);
-      // const bars = document.querySelector('.bars');
-      // console.log(bars.innerHTML);
       if (showNavbar) {
          varCSS('navbar-width', '0px');
       } else if (!showNavbar) {
          varCSS('navbar-width', '200px');
       }
-      // const navbarWidth = varCSS('navbar-width');
-      // console.log(navbarWidth);
    };
 
    return (
-      <div className="header">
-         <div className="header-item bars" onClick={handleShowNavbar}>
-            {/* <i class="fa-solid fa-arrow-left-long-to-line"></i> */}
+      <ul className="header">
+         <li className="header-item bars" onClick={handleShowNavbar}>
             {showNavbar && <i class="fa-solid fa-arrow-left-long"></i>}
             {!showNavbar && <i class="fa-solid fa-arrow-right-long"></i>}
-         </div>
-         <div className="header-item">
+         </li>
+         <li className="header-item">
             <input type="text" name="search" />
             <i class="fa-solid fa-magnifying-glass"></i>
-         </div>
-         <div className="header-item">
+         </li>
+         <li className="header-item">
             <i class="fa-solid fa-bell"></i>
             <span className="count-box">
                <span className="count">1</span>
             </span>
-         </div>
-         <div className="header-item">
+         </li>
+         <li className="header-item">
             <i class="fa-solid fa-circle-user"></i>
-         </div>
-      </div>
+            <div className="auth-box">
+               {!isLogin && (
+                  <NavLink to="/auth/login" className="auth-item" style={styleActiveLink}>
+                     <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+                  </NavLink>
+               )}
+               {!isLogin && (
+                  <NavLink to="/auth/register" className="auth-item" style={styleActiveLink}>
+                     <i class="fa-solid fa-registered"></i> Register
+                  </NavLink>
+               )}
+
+               {isLogin && (
+                  <NavLink to="/auth/logout" className="auth-item" style={styleActiveLink}>
+                     <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                  </NavLink>
+               )}
+            </div>
+         </li>
+      </ul>
    );
 }
 
-export default Navbar;
+export default memo(Navbar);

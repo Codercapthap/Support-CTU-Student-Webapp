@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useEffect } from 'react';
@@ -13,28 +13,26 @@ const styleActiveLink = ({ isActive }) =>
    isActive
       ? {
            color: 'var(--heading-color)',
-           background: 'var(--bg-color)',
-           borderColor: 'var(--heading-color)'
+           background: 'var(--text-color)'
         }
       : {
            color: 'var(--text-color)',
-           background: 'var(--bg-color)',
-           borderColor: 'var(--text-color)'
+           background: 'var(--bg-color)'
         };
 
 function Navbar() {
+   // const [navbarW, setNavbarW] = useState('0px');
+
    useEffect(() => {
-      const navbar = document.querySelector('.navbar');
       const handleScroll = () => {
-         const navbarWidth = varCSS('navbar-width');
-         if (window.scrollY > 0 && !navbar.classList.contains('fixed-navbar')) {
-            if (navbarWidth === '0px') {
-               return;
-            }
+         const navbar = document.querySelector('.navbar');
+         // const navW = varCSS('navbar-width');
+         if (window.scrollY > 0) {
             navbar.classList.add('fixed-navbar');
-         } else if (window.scrollY <= 0 && navbar.classList.contains('fixed-navbar')) {
+         } else if (window.scrollY <= 0) {
             navbar.classList.remove('fixed-navbar');
          }
+         // th navbar-width == 0px thì còn bug
       };
       window.addEventListener('scroll', handleScroll);
 

@@ -1,0 +1,100 @@
+@import '../../Assets/scss/mixin';
+@import '../../Assets/scss/varriable';
+
+.auth-wrapper {
+   --maxWithForm: 500px;
+   padding: 0 calc((100% - var(--maxWithForm)) / 2);
+   width: 100%;
+   height: max-content;
+   @include flexbox(column);
+   text-align: left;
+   .auth-container {
+      width: 100%;
+      background-color: var(--bg-color);
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 0.1rem solid var(--text-color);
+   }
+}
+
+.auth-title {
+   text-align: center;
+   font-weight: bolder;
+   font-size: 2em;
+   color: var(--text-color);
+}
+
+.form-group {
+   margin-bottom: 0.5rem;
+   &:last-child {
+      text-align: center;
+   }
+}
+
+.group-name {
+   width: 100%;
+   text-align: left;
+   font-style: italic;
+   // font-size: 1rem;
+   padding-left: 10%;
+   color: var(--text-color);
+}
+
+.input-check-box {
+   width: 100%;
+   text-align: left;
+   border-radius: 1rem;
+   .input {
+      width: 70%;
+      height: 100%;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin-top: 0.2rem;
+      font-weight: bold;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      border-bottom: 0.1rem solid var(--heading-color);
+      &:focus {
+         background-color: var(--secondary-color);
+      }
+   }
+   i {
+      width: 10%;
+      line-height: 3rem;
+      font-size: 1.5rem;
+      text-align: center;
+      color: var(--text-color);
+   }
+}
+
+.min-alert {
+   text-align: center;
+   $fontSize: 1rem;
+   .input-error {
+      font-size: $fontSize;
+      color: $danger;
+   }
+   .input-success {
+      font-size: $fontSize;
+      color: $success;
+   }
+}
+
+.form-group:last-child {
+   text-align: center;
+   width: 100%;
+   margin-top: 1rem;
+   .form-submit-item {
+      width: max-content;
+      line-height: 1.5rem;
+      padding: 0.2rem 1rem;
+      border-radius: 1rem;
+      margin: 0rem 0.2rem;
+      font-size: 1rem;
+      border: 0.1rem solid var(--text-color);
+      font-weight: bold;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      cursor: pointer;
+   }
+}

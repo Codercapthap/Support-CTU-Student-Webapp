@@ -4,26 +4,94 @@
 .header {
    min-width: calc(100% - var(--navbar-width));
    transition: $transTimeCol;
-   // box-shadow: 0 0 1rem var(--text-color);
    background-color: var(--bg-color);
    height: max-content;
    padding: 1rem;
-   @include flexbox(row, flex-start);
-   z-index: 10;
+   @include flexbox(row, flex-start, center, wrap);
+   z-index: 100;
    .header-item {
-      padding: 0.5rem;
+      $sizeIcon: 1.5rem;
+      @include setCenter();
+      @include flexbox();
       border-radius: 999rem;
-      cursor: pointer;
+      i {
+         font-size: $sizeIcon;
+      }
    }
+
    .header-item:nth-child(2) {
+      width: max-content;
       border-radius: 0rem;
       margin-left: auto;
       align-self: center;
+
+      @include responsive('mobile') {
+         width: 0rem;
+      }
+      @include responsive('mini') {
+         width: 0rem;
+      }
+      input {
+         width: 80%;
+         padding: calc((var(--sizeBase) - 1.5rem) / 2) 0.5rem;
+         color: var(--text-color);
+
+         border-bottom: 0.4rem solid var(--heading-color);
+         background-color: var(--bg-color);
+         font-size: 1.5rem;
+      }
+      i {
+         height: var(--sizeBase);
+         line-height: var(--sizeBase);
+         flex-grow: 1;
+      }
    }
    .header-item:nth-child(3) {
       border-radius: 0rem;
       margin-left: auto;
-      // align-self: right;
+      margin-right: 0.5rem;
+      position: relative;
+      .count-box {
+         @include setCenter(1rem);
+         position: absolute;
+         top: 0.1rem;
+         right: 0.1rem;
+         border-radius: 999rem;
+         font-size: 0.8rem;
+         font-weight: bold;
+         // border: 0.1rem solid var(--heading-color);
+         background-color: var(--heading-color);
+         color: var(--text-color);
+         z-index: 2;
+      }
+   }
+}
+
+.header-item:last-child {
+   position: relative;
+   overflow: initial;
+   .auth-box {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      z-index: 2;
+      .auth-item {
+         width: 100%;
+         @include flexbox(row, space-between);
+         padding: 0.1rem 0.5rem;
+         text-align: left;
+         i {
+            font-size: 1rem;
+         }
+         &:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+         }
+      }
+   }
+   &:hover > .auth-box {
+      display: block;
    }
 }
 
@@ -31,4 +99,6 @@
    position: fixed;
    top: 0;
    right: 0;
+   box-shadow: 0 0 1rem var(--text-color);
+   transition: $transTimeCol;
 }

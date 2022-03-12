@@ -7,6 +7,13 @@
    --min_width_moble: 480px;
    --min_width_tablet: 961px;
    --min_width_desktop: 1281px;
+   // --zIndex: {
+   //    one: 1;
+   //    two: 2;
+   //    three: 3;
+   //    four: 4;
+   //    fine: 5;
+   // }
 }
 
 // reset css basic
@@ -69,6 +76,15 @@
    -webkit-box-orient: vertical;
    overflow: hidden;
    text-overflow: ellipsis;
+}
+
+@mixin setCenter($size: var(--sizeBase)) {
+   width: $size;
+   height: $size;
+   text-align: center;
+   line-height: $size;
+   cursor: pointer;
+   overflow: hidden;
 }
 
 /*Set size element*/

@@ -6,7 +6,7 @@
    right: 0rem;
    width: 4rem;
    height: 2rem;
-   border: 0.2rem solid var(--primary-color);
+   border: 0.2rem solid var(--text-color);
    border-radius: 999px;
    transform: rotate(0deg);
    .slider {
@@ -14,7 +14,7 @@
       left: 0;
       bottom: 0;
       background-color: var(--bg-color);
-      transition: 0.4s;
+      transition: $transTimeCol;
       cursor: pointer;
       &:before {
          position: absolute;
@@ -22,8 +22,8 @@
          height: 1.5rem;
          width: 1.5rem;
          bottom: 1px;
-         background-color: var(--heading-color);
-         transition: 0.4s;
+         background-color: var(--text-color);
+         transition: $transTimeCol;
          border-radius: 999rem;
       }
    }

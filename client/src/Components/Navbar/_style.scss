@@ -1,29 +1,32 @@
 @import '../../Assets/scss/mixin';
 @import '../../Assets/scss/varriable';
 
+// $pd: 0.5rem;
+
 .navbar {
    width: var(--navbar-width);
-
-   padding: 1rem 0rem;
    z-index: 1;
    .nav-box {
       width: 100%;
-      padding: 0rem 0.5rem;
+      // padding: 0.5rem 0rem;
       @include flexbox(column);
       .nav-item {
          width: 100%;
+         min-width: 0px;
+         overflow-x: hidden;
          text-align: left;
          padding: 0.5rem;
-         // border-top-right-radius: 999rem;
-         // border-bottom-right-radius: 999rem;
+         @include flexbox(row, flex-start);
          i {
-            margin-right: 0.5rem;
+            margin-right: 0.75rem;
          }
       }
    }
 }
 
 .fixed-navbar {
+   width: var(--navbar-width) !important;
+   overflow: hidden;
    position: fixed;
    top: 0;
    left: 0;

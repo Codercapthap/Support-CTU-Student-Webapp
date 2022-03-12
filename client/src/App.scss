@@ -4,32 +4,47 @@
 
 .app {
    font-size: 16px;
+   @include responsive('tablet') {
+      font-size: 13px;
+   }
+   @include responsive('mobile') {
+      font-size: 10px;
+   }
+   color: var(--text-color);
    background-color: var(--bg-color);
    .app-box {
       display: flex;
       .app-item:nth-child(1) {
-         width: var(--navbar-width);
+         width: var(--navbar-width) !important;
          min-height: 100vh;
          transition: $transTimeCol;
          box-shadow: 0 0 1rem var(--text-color);
          overflow-x: hidden;
+         z-index: 10;
       }
       .app-item:nth-child(2) {
          width: calc(100% - var(--navbar-width));
          min-height: 100vh;
          z-index: 2;
       }
-      @include responsive('tablet') {
-         --navbar-width: 100px;
-      }
-      @include responsive('mobile') {
-         --navbar-width: 50px;
+   }
+   .go-top {
+      display: none;
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 10;
+      @include setCenter(2rem);
+      border-radius: 1rem;
+      background-color: var(--text-color);
+      i {
+         color: var(--bg-color);
       }
    }
 }
 
-.mt {
-   margin-top: 1000px;
+.show-top-button {
+   display: block !important;
 }
 
 /*

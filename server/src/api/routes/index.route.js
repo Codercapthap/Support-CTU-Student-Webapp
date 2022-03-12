@@ -9,15 +9,15 @@ const topicRoute = require('./topic.route');
 const userSubjectRoute = require('./userSubject.route');
 
 function route(app) {
-   app.use('/user', userRoute);
-   app.use('/auth', authRoute);
-   app.use('/comment', commentRoute);
-   app.use('/post', postRoute);
-   app.use('/department', departmentRoute);
-   app.use('/document', documentRoute);
-   app.use('/subject', subjectRoute);
-   app.use('/topic', topicRoute);
-   app.use('/user_subject', userSubjectRoute);
+   app.use('/api/user', userRoute);
+   app.use('/api/auth', authRoute);
+   app.use('/api/comment', commentRoute);
+   app.use('/api/post', postRoute);
+   app.use('/api/department', departmentRoute);
+   app.use('/api/document', documentRoute);
+   app.use('/api/subject', subjectRoute);
+   app.use('/api/topic', topicRoute);
+   app.use('/api/user_subject', userSubjectRoute);
 }
 
 module.exports = route;
