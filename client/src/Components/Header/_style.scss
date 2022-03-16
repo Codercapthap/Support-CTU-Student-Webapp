@@ -1,5 +1,5 @@
-@import '../../Assets/scss/mixin';
-@import '../../Assets/scss/varriable';
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
 
 .header {
    min-width: calc(100% - var(--navbar-width));
@@ -8,6 +8,7 @@
    height: max-content;
    padding: 1rem;
    @include flexbox(row, flex-start, center, wrap);
+   outline: 0.01rem solid var(--heading-color);
    z-index: 100;
    .header-item {
       $sizeIcon: 1.5rem;
@@ -17,31 +18,45 @@
       i {
          font-size: $sizeIcon;
       }
+      &:hover {
+         // background-color: var(--primary-color);
+         box-shadow: 0 0 0.5rem var(--heading-color);
+      }
    }
 
    .header-item:nth-child(2) {
       width: max-content;
+      // padding: 0rem 1rem;
       border-radius: 0rem;
       margin-left: auto;
       align-self: center;
 
+      background-color: var(--bg-color);
+      border: 0.01rem solid var(--heading-color);
+      border-left: 0.5rem solid var(--heading-color);
+      border-right: 0.5rem solid var(--heading-color);
       @include responsive('mobile') {
          width: 0rem;
+         padding: 0rem;
+         border: none;
       }
       @include responsive('mini') {
          width: 0rem;
+         padding: 0rem;
+         border: none;
       }
       input {
-         width: 80%;
+         width: 85%;
          padding: calc((var(--sizeBase) - 1.5rem) / 2) 0.5rem;
          color: var(--text-color);
-
-         border-bottom: 0.4rem solid var(--heading-color);
          background-color: var(--bg-color);
-         font-size: 1.5rem;
+         font-size: 1rem;
       }
       i {
+         width: 15%;
+         text-align: center;
          height: var(--sizeBase);
+         background-color: var(--bg-color);
          line-height: var(--sizeBase);
          flex-grow: 1;
       }
@@ -50,7 +65,9 @@
       border-radius: 0rem;
       margin-left: auto;
       margin-right: 0.5rem;
+      overflow: initial;
       position: relative;
+      border-radius: 999rem;
       .count-box {
          @include setCenter(1rem);
          position: absolute;
@@ -70,35 +87,41 @@
 .header-item:last-child {
    position: relative;
    overflow: initial;
-   .auth-box {
-      display: none;
-      position: absolute;
-      right: 0;
-      top: 100%;
-      z-index: 2;
-      .auth-item {
-         width: 100%;
-         @include flexbox(row, space-between);
-         padding: 0.1rem 0.5rem;
-         text-align: left;
-         i {
-            font-size: 1rem;
-         }
-         &:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-         }
-      }
+   .auth-item {
+      @include flexbox();
    }
-   &:hover > .auth-box {
-      display: block;
-   }
+   // Bên dưới là phần css cho sub navbar
+   // .auth-box {
+   //    display: none;
+   //    position: absolute;
+   //    right: 0;
+   //    top: 100%;
+   //    z-index: 2;
+   // .auth-item {
+   // width: 100%;
+   // line-height: 100%;
+   // @include flexbox();
+   // padding: 0.1rem 0.5rem;
+   // text-align: left;
+   // i {
+   //    line-height: 100%;
+   //    font-size: 1rem;
+   // }
+   // &:hover {
+   //    background-color: var(--text-color);
+   //    color: var(--bg-color);
+   // }
+   // }
+   // }
+   // &:hover > .auth-box {
+   //    display: block;
+   // }
 }
 
 .fixed-header {
    position: fixed;
    top: 0;
    right: 0;
-   box-shadow: 0 0 1rem var(--text-color);
+   box-shadow: 0 0 0.3rem var(--text-color);
    transition: $transTimeCol;
 }

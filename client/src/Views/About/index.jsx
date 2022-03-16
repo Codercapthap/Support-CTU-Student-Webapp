@@ -9,8 +9,7 @@ function index() {
    return (
       <>
          <Header></Header>
-         <div>About</div>
-         <div className="sdad">Chứa thêm contact</div>
+         <div className="about">About</div>
          <Footer></Footer>
       </>
    );

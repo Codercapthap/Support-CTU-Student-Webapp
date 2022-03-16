@@ -1,9 +1,11 @@
-@import './Assets/scss/reset';
-@import './Assets/scss/varriable';
-@import './Assets/scss/mixin';
+@import '../Common/scss/reset';
+@import '../Common/scss/varriable';
+@import '../Common/scss/mixin';
 
 .app {
    font-size: 16px;
+
+   scroll-behavior: smooth;
    @include responsive('tablet') {
       font-size: 13px;
    }
@@ -16,9 +18,10 @@
       display: flex;
       .app-item:nth-child(1) {
          width: var(--navbar-width) !important;
+         background-color: var(--primary-color);
          min-height: 100vh;
          transition: $transTimeCol;
-         box-shadow: 0 0 1rem var(--text-color);
+         // box-shadow: 0 0 1rem var(--text-color);
          overflow-x: hidden;
          z-index: 10;
       }
@@ -46,10 +49,3 @@
 .show-top-button {
    display: block !important;
 }
-
-/*
-  pointer-events: none;
-  @media (prefers-reduced-motion: no-preference) {
-  }
-  font-size: calc(10px + 2vmin);
- */

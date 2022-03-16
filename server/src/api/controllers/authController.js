@@ -30,6 +30,7 @@ class userController {
       try {
          const { username, gender, birthday, email, password, phone, avatarUrl, address } =
             req.body;
+         console.log(req.body);
          const departmentIdList = req.body.departmentId;
          // check email
          const foundUser = await User.findOne('email', email);

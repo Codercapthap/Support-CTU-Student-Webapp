@@ -22,26 +22,46 @@ function Setting() {
          <Header></Header>
          <div className="setting">
             <div className="setting-item">
-               <div className="setting-name">Chọn Ngôn Ngữ</div>
-               <select name="languages" onClick={showValueOption}>
-                  <option value="english">Tiếng Anh</option>
-                  <option value="vietnamese">Tiếng Việt</option>
+               <div className="setting-name">
+                  <i class="fa-solid fa-wrench"></i> Chọn Ngôn Ngữ
+               </div>
+               <select className="select-group" name="languages" onClick={showValueOption}>
+                  <option className="select-item" value="english">
+                     Tiếng Anh
+                  </option>
+                  <option className="select-item" value="vietnamese">
+                     Tiếng Việt
+                  </option>
                </select>
             </div>
             <div className="setting-item">
-               <div className="setting-name">Chọn Múi Giờ</div>
-               <select name="hour">
-                  <option value="...">Đông Dương</option>
-                  <option value="...">Đông Âu</option>
-                  <option value="...">Đông Mỹ</option>
-                  <option value="...">Đông Phi</option>
+               <div className="setting-name">
+                  <i class="fa-solid fa-wrench"></i> Chọn Múi Giờ
+               </div>
+               <select className="select-group">
+                  <option className="select-item" value="...">
+                     Đông Dương
+                  </option>
+                  <option className="select-item" value="...">
+                     Đông Âu
+                  </option>
+                  <option className="select-item" value="...">
+                     Đông Mỹ
+                  </option>
+                  <option className="select-item" value="...">
+                     Đông Phi
+                  </option>
                </select>
             </div>
             <div className="setting-item">
-               <div className="setting-name">Chọn Giao Diện</div>
+               <div className="setting-name">
+                  <i class="fa-solid fa-wrench"></i> Chọn Giao Diện
+               </div>
                <ToggeTheme />
             </div>
          </div>
+
+         <Footer></Footer>
       </>
    );
 }

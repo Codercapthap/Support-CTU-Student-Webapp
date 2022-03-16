@@ -1,0 +1,25 @@
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
+
+.error {
+   // position: relative;
+   width: 100%;
+   min-height: 100%;
+   text-align: center;
+   padding: 0rem calc((100% - var(--article-width)) / 2);
+   margin: 1rem auto;
+   .error-img {
+      // position: absolute;
+      // top: 0;
+      // left: 0;
+      width: 100%;
+      height: auto;
+      z-index: -1;
+   }
+   .button-base {
+      text-align: center;
+      .link {
+         color: $success;
+      }
+   }
+}

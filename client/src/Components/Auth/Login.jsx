@@ -12,7 +12,7 @@ function Login() {
       <>
          <Header />
          <div class="auth-wrapper">
-            <div class="auth-title">Login</div>
+            <div class="auth-title">+++ Login +++</div>
             <form class="auth-container">
                <div class="form-group">
                   <label class="group-name" for="email">
@@ -23,10 +23,10 @@ function Login() {
                      <i class="fas fa-envelope"></i>
                      <input class="input" type="email" placeholder="Email input" />
                      <i class="fas fa-check"></i> <br />
-                     <p class="min-alert">
+                     {/* <p class="min-alert">
                         <i class="input-error">invalid email</i>
                         <i class="input-success">valid email</i>
-                     </p>
+                     </p> */}
                   </div>
                </div>
                <div class="form-group">
@@ -38,19 +38,22 @@ function Login() {
                      <i class="fas fa-key"></i>
                      <input class="input" type="password" placeholder="[a...z][1--9]" />
                      <i class="fas fa-check"></i> <br />
-                     <p class="min-alert">
+                     {/* <p class="min-alert">
                         <i class="input-error">invalid password</i>
                         <i class="input-success">valid password</i>
-                     </p>
+                     </p> */}
                   </div>
                </div>
                <div class="form-group">
                   <button type="submit" className="form-submit-item" onClick={handleLogin}>
                      Submit
                   </button>
-                  <NavLink className="form-submit-item" to="/auth/register">
-                     Register
-                  </NavLink>
+                  <div className="alert-box">
+                     If you haven't account, please
+                     <NavLink className="link" to="/auth/register">
+                        Register
+                     </NavLink>
+                  </div>
                </div>
             </form>
          </div>

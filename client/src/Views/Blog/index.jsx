@@ -9,7 +9,7 @@ function index() {
    return (
       <>
          <Header></Header>
-         <div>Blog</div>
+         <div className="blog">Blog</div>
          <Footer></Footer>
       </>
    );

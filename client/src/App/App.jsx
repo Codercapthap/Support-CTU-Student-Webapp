@@ -1,21 +1,23 @@
 import { Routes, Route } from 'react-router-dom';
-
-import Home from './Views/Home';
-import Blog from './Views/Blog';
-import About from './Views/About';
-import Forum from './Views/Forum';
-import Setting from './Views/Setting';
-
-// sub route
-import Login from './Components/Auth/Login.jsx';
-import Register from './Components/Auth/Register.jsx';
-
-import Navbar from './Components/Navbar';
-
-import { varCSS } from './helpers/vanillaJs';
-
-import './App.scss';
 import { useEffect } from 'react';
+
+// View
+import Home from '../Views/Home';
+import Blog from '../Views/Blog';
+import About from '../Views/About';
+import Forum from '../Views/Forum';
+import Setting from '../Views/Setting';
+import Error from '../Views/Error';
+
+// Components
+import Navbar from '../Components/Navbar';
+import Login from '../Components/Auth/Login.jsx';
+import Register from '../Components/Auth/Register.jsx';
+
+// Support
+import { varCSS } from '../Common/js/vanillaJs';
+
+import './_style.scss';
 
 // import { useState } from 'react';
 
@@ -65,6 +67,7 @@ function App() {
                   <Route path="/setting" element={<Setting />} />
                   <Route path="/auth/login" element={<Login />} />
                   <Route path="/auth/register" element={<Register />} />
+                  <Route path="*" element={<Error />} />
                </Routes>
             </div>
          </div>

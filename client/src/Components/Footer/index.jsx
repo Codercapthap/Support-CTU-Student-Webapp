@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import './_style.scss';
 
@@ -6,13 +6,12 @@ function Footer() {
    return (
       <footer className="footer-wraper">
          <div class="footer">
-            <ul class="footer-contact p2">
-               <li class="infor pl2">Support CTU version 1.0</li>
-               <li class="infor pl2">Last update: 12/03/2022</li>
+            <ul class="footer-contact">
+               <li class="infor pl2">Support CTU</li>
+               {/* <li class="infor pl2">Topics Main</li> */}
                <li class="infor pl2 classic-4">Updating...</li>
             </ul>
-            <span class="footer-shortlink p2">
-               Contact me with
+            <span class="footer-shortlink">
                <a href="#" class="link-item button-base">
                   <i class="fab fa-facebook-square"></i>
                   facebook
@@ -27,7 +26,7 @@ function Footer() {
                </a>
             </span>
 
-            <div class="footer-copyright py1">
+            <div class="footer-copyright">
                <i class="fas fa-copyright"></i> Copyright 2022 by Nguyen Nam
             </div>
          </div>
@@ -35,4 +34,4 @@ function Footer() {
    );
 }
 
-export default Footer;
+export default memo(Footer);

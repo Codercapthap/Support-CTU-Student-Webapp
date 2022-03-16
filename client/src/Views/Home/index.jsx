@@ -40,6 +40,7 @@ function Home() {
                            // src="https://i.pinimg.com/564x/d7/cd/c3/d7cdc3046dd58852b94f63ec6315ed7c.jpg"
                            src={CardImage}
                            alt=""
+                           loading="lazy"
                            className="card-img"
                         />
                      </div>

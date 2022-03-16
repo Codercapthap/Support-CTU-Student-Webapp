@@ -1,11 +1,29 @@
-@import '../../Assets/scss/_mixin.scss';
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
 
 .setting {
-   padding: 0 calc((100% - var(--article-width))/2);
+   padding: 1rem calc((100% - var(--article-width)) / 2);
    .setting-item {
-      padding: 0.5rem;
+      padding: 0.5rem 1rem;
       width: 100%;
       margin-bottom: 1rem;
       @include flexbox(row, space-between);
+      border-left: 0.5rem solid var(--primary-color);
+      border-right: 0.5rem solid var(--primary-color);
+      border-top: 0.1rem solid var(--primary-color);
+      border-bottom: 0.1rem solid var(--primary-color);
+   }
+}
+
+.select-group {
+   width: 10rem;
+   padding: 0.5rem 1rem;
+   border-radius: 0.5rem;
+   border: 0.1rem solid var(--heading-color);
+   background-color: var(--bg-color);
+   color: var(--text-color);
+   cursor: pointer;
+   .select-item {
+      padding: 0.5rem 1rem !important;
    }
 }

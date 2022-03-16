@@ -1,21 +1,20 @@
 import React, { useEffect, useLayoutEffect } from 'react';
-
 import { NavLink } from 'react-router-dom';
-
-import './_style.scss';
 import { useState, memo } from 'react';
 
-import { varCSS } from '../../helpers/vanillaJs.js';
-const styleActiveLink = ({ isActive }) =>
-   isActive
-      ? {
-           color: 'var(--heading-color)',
-           background: 'var(--text-color)'
-        }
-      : {
-           color: 'var(--text-color)',
-           background: 'var(--bg-color)'
-        };
+import { varCSS } from '../../Common/js/vanillaJs';
+import './_style.scss';
+
+// const styleActiveLink = ({ isActive }) =>
+//    isActive
+//       ? {
+//            color: 'var(--heading-color)',
+//            background: 'var(--text-color)'
+//         }
+//       : {
+//            color: 'var(--text-color)',
+//            background: 'var(--bg-color)'
+//         };
 
 function Navbar() {
    const [showNavbar, setShowNavbar] = useState(false);
@@ -60,7 +59,7 @@ function Navbar() {
             {!showNavbar && <i class="fa-solid fa-arrow-right-long"></i>}
          </li>
          <li className="header-item">
-            <input type="text" name="search" />
+            <input type="text" name="search" placeholder="search..." />
             <i class="fa-solid fa-magnifying-glass"></i>
          </li>
          <li className="header-item">
@@ -70,8 +69,11 @@ function Navbar() {
             </span>
          </li>
          <li className="header-item">
-            <i class="fa-solid fa-circle-user"></i>
-            <div className="auth-box">
+            <NavLink to="/auth/login" className="auth-item">
+               <i class="fa-solid fa-circle-user"></i>
+            </NavLink>
+
+            {/* <div className="auth-box">
                {!isLogin && (
                   <NavLink to="/auth/login" className="auth-item" style={styleActiveLink}>
                      <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
@@ -88,7 +90,7 @@ function Navbar() {
                      <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
                   </NavLink>
                )}
-            </div>
+            </div> */}
          </li>
       </ul>
    );

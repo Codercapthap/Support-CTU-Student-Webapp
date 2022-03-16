@@ -1,24 +1,50 @@
-@import '../../Assets/scss/mixin';
-@import '../../Assets/scss/varriable';
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
 
-// $pd: 0.5rem;
+$borderNavbar: 999rem;
 
 .navbar {
    width: var(--navbar-width);
    z-index: 1;
+   // padding-left: 1rem;
    .nav-box {
-      width: 100%;
-      // padding: 0.5rem 0rem;
-      @include flexbox(column);
+      padding: 3rem 0rem 0.5rem 0rem;
+      @include flexbox(column, flex-end, flex-end);
+      .nav-item-wrapper {
+         background-color: var(--primary-color);
+         border-top-left-radius: $borderNavbar;
+         border-bottom-left-radius: $borderNavbar;
+         border-top-right-radius: 0rem;
+         border-bottom-right-radius: 0rem;
+      }
       .nav-item {
-         width: 100%;
+         width: calc(var(--navbar-width) - 1rem) !important;
          min-width: 0px;
+         height: max-content;
          overflow-x: hidden;
-         text-align: left;
-         padding: 0.5rem;
+         text-align: right;
+         font-size: 1.25rem;
+         border-top-left-radius: $borderNavbar;
+         border-bottom-left-radius: $borderNavbar;
+         border-top-right-radius: 0rem;
+         border-bottom-right-radius: 0rem;
+         transition: $transTime;
+         padding: 1rem;
+         background-color: var(--primary-color);
+         color: var(--bg-color);
          @include flexbox(row, flex-start);
          i {
             margin-right: 0.75rem;
+            transition: $transTimeCol;
+         }
+         &:focus {
+            transform: translateX(5%);
+         }
+         &:hover {
+            color: var(--text-color) !important;
+            i {
+               margin-left: 0.5rem;
+            }
          }
       }
    }
@@ -30,4 +56,18 @@
    position: fixed;
    top: 0;
    left: 0;
+}
+
+.border-radius-top {
+   border-bottom-right-radius: $borderNavbar !important;
+   border-top-right-radius: 0 !important;
+}
+
+.border-radius-bottom {
+   border-top-right-radius: $borderNavbar !important;
+   border-bottom-right-radius: 0 !important;
+}
+
+.active-bg-wrapper {
+   background-color: var(--bg-color) !important;
 }

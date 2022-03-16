@@ -1,1 +1,3 @@
-# Thư mục chứa view tương ứng với các route
+# View
+
+-  Nơi import các Component để tạo nên các view trong từng trang
