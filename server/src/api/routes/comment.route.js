@@ -36,7 +36,7 @@ router.post(
    commentController.createSubjectComment
 );
 
-// xóa vĩnh viễn comment theo post id
+// xóa vĩnh viễn comment theo post
 router.delete(
    '/:id/post/destroy',
    validateParam(schemas.idSchema, 'id'),
@@ -45,7 +45,7 @@ router.delete(
    commentController.destroyPostCommentById
 );
 
-// xóa vĩnh viễn comment theo subject id
+// xóa vĩnh viễn comment theo subject
 router.delete(
    '/:id/subject/destroy',
    validateParam(schemas.idSchema, 'id'),
@@ -54,7 +54,7 @@ router.delete(
    commentController.destroySubjectCommentById
 );
 
-// khôi phục comment theo subject id
+// khôi phục comment
 router.patch(
    '/:id/restore',
    validateParam(schemas.idSchema, 'id'),

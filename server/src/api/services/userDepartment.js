@@ -1,5 +1,5 @@
 const connection = require('../../config/db.config');
-const { getTime } = require('../helpers/support');
+const { getTimestamp } = require('../helpers/support');
 
 class UserDepartment {
    save(userId, departmentId) {

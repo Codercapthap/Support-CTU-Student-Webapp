@@ -1,6 +1,6 @@
 const connection = require('../../config/db.config');
 const bcrypt = require('bcryptjs');
-const { getTime } = require('../helpers/support');
+const { getTimestamp } = require('../helpers/support');
 const Post = require('./post');
 const Comment = require('./comment');
 const Document = require('./document');
@@ -57,34 +57,34 @@ class User {
       });
    }
 
-   save(departmentIdList) {
+   async save(departmentIdList) {
+      try {
+          // generate a salt
+          const salt = await bcrypt.genSalt(10);
+          // generate a password hash
+          const passwordHashed = await bcrypt.hash(this.password, salt);
+          // re-asign password hash
+          this.password = passwordHashed;
+      } catch (error) {
+          reject(error);
+      }
+     var values = [
+        [
+          this.username,
+          this.gender,
+          this.birthday,
+          this.email,
+          this.password,
+          this.phone,
+          this.role,
+          this.avatarUrl,
+          this.address
+        ]
+    ];
       return new Promise(async function (resolve, reject) {
          // setup data
-         try {
-            // generate a salt
-            const salt = await bcrypt.genSalt(10);
-            // generate a password hash
-            const passwordHashed = await bcrypt.hash(this.password, salt);
-            // re-asign password hash
-            this.password = passwordHashed;
-         } catch (error) {
-            reject(error);
-         }
          const sql =
             'INSERT INTO user (username, gender, birthday, email, password, phone, role, avatar_url, address) VALUES ?';
-         var values = [
-            [
-               this.username,
-               this.gender,
-               this.birthday,
-               this.email,
-               this.password,
-               this.phone,
-               this.role,
-               this.avatarUrl,
-               this.address
-            ]
-         ];
 
          connection.query(sql, [values], async function (err, result, fields) {
             if (err) reject(err);
@@ -104,7 +104,7 @@ class User {
    }
 
    static async deleteOneById(id) {
-      const deletedAt = getTime();
+      const deletedAt = getTimestamp();
       // delete posts
       await Post.deletePosts(deletedAt, 'user_id', id);
       // delete comments

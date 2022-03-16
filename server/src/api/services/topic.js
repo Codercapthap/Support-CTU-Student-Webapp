@@ -1,5 +1,5 @@
 const connection = require('../../config/db.config');
-const { getTime } = require('../helpers/support');
+const { getTimestamp } = require('../helpers/support');
 const Post = require('./post');
 
 class Topic {
@@ -46,7 +46,7 @@ class Topic {
    }
 
    static async deleteOneById(id) {
-      const deletedAt = getTime();
+      const deletedAt = getTimestamp();
       await Post.deletePosts(deletedAt, 'topic_id', id);
       return new Promise(function (resolve, reject) {
          const sql = 'UPDATE topic set is_deleted = 1, deleted_at = ? WHERE id = ?';
