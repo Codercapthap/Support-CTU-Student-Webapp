@@ -9,6 +9,7 @@ import Footer from '../../Components/Footer';
 import errorImage from '../../Assets/images/error.jpg';
 
 function Error() {
+   console.log('render Error');
    return (
       <>
          <Header></Header>

@@ -25,7 +25,8 @@ class Post {
 
    static findPostById(id) {
       return new Promise(function (resolve, reject) {
-         var sql = 'SELECT * FROM post where id = ?';
+         var sql =
+            'select post.id, post.user_id, post.post_title, post.post_content, post.is_accepted, post.post_view, post.created_at, post.updated_at, user.username, user.email, user.avatar_url from post join user where post.user_id = user.id and post.id = ?';
          connection.query(sql, id, function (err, result, fields) {
             if (err) reject(err);
             else resolve(result);
@@ -156,7 +157,7 @@ class Post {
    static getUnAcceptedPosts() {
       return new Promise(function (resolve, reject) {
          connection.query(
-            'SELECT * FROM post where is_accepted = 0',
+            'select post.id, post.user_id, post.post_title, post.post_content, post.post_view, post.created_at, post.is_accepted, post.updated_at, user.username, user.email, user.avatar_url from post join user where post.user_id = user.id and post.is_accepted = 0',
             function (err, result, fields) {
                if (err) reject(err);
                else resolve(result);

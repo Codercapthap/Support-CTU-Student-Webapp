@@ -111,8 +111,10 @@
 @mixin responsive($size: 'mobile') {
    // syntax thiet lap kich thuoc cho bien
    $desktop: '(min-width: 1024px)';
-   $tablet: '(min-width: 768px) and (max-width: 1023px)';
-   $mobile: '(min-width: 321px) and (max-width: 767px)';
+   $tablet: '(max-width: 1023px)';
+   $mobile: '(max-width: 767px)';
+   // $tablet: '(min-width: 768px) and (max-width: 1023px)';
+   // $mobile: '(min-width: 321px) and (max-width: 767px)';
    $mini: '(max-width: 320px)';
    @if $size == desktop {
       @media only screen and #{$desktop} {
@@ -152,7 +154,12 @@
 }
 
 // Custom scrollbar
-@mixin scrollbar($width: 0.5rem, $track: var(--bg-color), $thumb: var(--text-color), $oy: true) {
+@mixin scrollbar(
+   $width: 0.5rem,
+   $track: var(--primary-color),
+   $thumb: var(--text-color),
+   $oy: true
+) {
    &::-webkit-scrollbar {
       @if $oy == true {
          width: $width;
@@ -168,6 +175,11 @@
    &::-webkit-scrollbar-thumb {
       background-color: $thumb;
       border-radius: 999rem;
+      border: 0.05rem solid var(--bg-color);
+      cursor: pointer;
+      &:active {
+         background-color: var(--heading-color);
+      }
    }
 }
 
@@ -359,14 +371,16 @@
 
 .button-base {
    width: max-content;
-   border: 1px solid black;
+   display: inline-block;
+   border: 1px solid var(--text-color);
    border-radius: 0.2rem;
    padding: 0.2rem 0.5rem;
    overflow: hidden;
    @include truncate_line(1rem, 1);
-   background-color: var(--bg-color);
+   background-color: var(--secondary-color);
    color: var(--text-color);
    cursor: pointer;
+   user-select: none;
 }
 
 .text-base {
@@ -471,4 +485,15 @@
    .col-5-of-6 {
       width: calc(5 * ((100% - 4 * #{$gutter-horizontal}) / 5) + 4 * #{$gutter-horizontal});
    }
+}
+
+.button-base-success {
+   background-color: var(--heading-color);
+   color: var(--bg-color);
+}
+
+.text-overflow {
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
 }

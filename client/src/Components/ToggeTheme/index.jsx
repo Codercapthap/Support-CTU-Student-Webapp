@@ -1,43 +1,40 @@
-import { useEffect, useLayoutEffect, useState, memo } from 'react';
+import { useEffect, useLayoutEffect, memo } from 'react';
 
 import './_style.scss';
 
-// add props data-theme on file index.html in public folder
+import { useSelector } from 'react-redux';
 
-function ToggleTheme() {
-   const [currentTheme, setCurrentTheme] = useState(localStorage.getItem('theme') ?? 'light');
+/**
+ * Add the data-theme attribute at the beginning of the html tag
+ * in the index.html file of the public folder
+ */
+
+function ToggleTheme(props) {
+   console.log('render ToggleTheme');
+   const { changeCurrentTheme } = props;
+
+   const theme = useSelector(state => state.config.theme);
 
    useLayoutEffect(() => {
-      console.log('render useLayoutEffect');
-
-      const theme = localStorage.getItem('theme') ?? 'light';
-      document.documentElement.setAttribute('data-theme', theme);
-
+      // update theme state
       const toggleButton = document.querySelector('.check-input');
       if (theme === 'dark') {
          toggleButton.checked = true;
       } else if (theme === 'light') {
          toggleButton.checked = false;
       }
-   }, []);
+   }, [theme]);
 
    useEffect(() => {
-      console.log('render useEffect');
-
+      // add window event
       const setTheme = theme => {
-         console.log('call setTheme in useEffect');
          document.documentElement.setAttribute('data-theme', theme);
-         localStorage.setItem('theme', `${theme}`);
-
-         setCurrentTheme(`${theme}`);
+         changeCurrentTheme(`${theme}`);
       };
       const handleKeyDown = e => {
          const toggleButton = document.querySelector('.check-input');
-         // console.log(e.keyCode);
-         const theme = localStorage.getItem('theme');
-
          if (e.keyCode === 32) {
-            // break "space"
+            // listent to Press Space event
             if (theme === 'dark') {
                setTheme('light');
                toggleButton.checked = false;
@@ -50,25 +47,16 @@ function ToggleTheme() {
       window.addEventListener('keydown', handleKeyDown);
 
       return () => {
-         console.log('remove event key down');
          window.removeEventListener('keydown', handleKeyDown);
-         // window.onclick = function(event) { // do stuff; };
-         // window.onclick = null;
       };
    }, []);
 
-   const setTheme = theme => {
-      console.log('call setTheme !== useEffect');
-      console.log('render setTheme');
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', `${theme}`);
-
-      setCurrentTheme(`${theme}`);
-   };
-
-   console.log('re-render ToggleTheme');
-
    const switchTheme = e => {
+      const setTheme = theme => {
+         document.documentElement.setAttribute('data-theme', theme);
+         changeCurrentTheme(`${theme}`);
+      };
+
       if (e.target.checked) {
          setTheme('dark');
       } else {
@@ -78,12 +66,7 @@ function ToggleTheme() {
 
    return (
       <label className="switch">
-         <input
-            type="checkbox"
-            onChange={switchTheme}
-            className="check-input"
-            value={currentTheme === 'light'}
-         />
+         <input type="checkbox" onChange={switchTheme} className="check-input" value={theme} />
          <span className="slider"></span>
       </label>
    );

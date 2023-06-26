@@ -10,6 +10,16 @@ class departmentController {
       }
    }
 
+   async getDepartmentById(req, res, next) {
+      try {
+         const { id } = req.params;
+         const department = await Department.findDepartmentById(id);
+         return res.status(200).json(department);
+      } catch (error) {
+         next(error);
+      }
+   }
+
    async createDepartment(req, res, next) {
       try {
          const { departmentCode, departmentName } = req.body;

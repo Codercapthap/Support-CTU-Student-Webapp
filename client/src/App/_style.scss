@@ -4,7 +4,7 @@
 
 .app {
    font-size: 16px;
-
+   scroll-behavior: smooth;
    scroll-behavior: smooth;
    @include responsive('tablet') {
       font-size: 13px;
@@ -31,21 +31,23 @@
          z-index: 2;
       }
    }
-   .go-top {
-      display: none;
-      position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      z-index: 10;
-      @include setCenter(2rem);
-      border-radius: 1rem;
-      background-color: var(--text-color);
-      i {
-         color: var(--bg-color);
-      }
+}
+.go-top {
+   position: fixed;
+   right: 1rem;
+   bottom: -5rem;
+   z-index: 10;
+   @include setCenter(2rem);
+   border-radius: 1rem;
+   opacity: 0;
+   transition: $transTimeCol;
+   background-color: var(--text-color);
+   i {
+      color: var(--bg-color);
    }
 }
-
 .show-top-button {
-   display: block !important;
+   bottom: 1rem;
+   opacity: 1;
+   transition: $transTimeCol;
 }

@@ -1,27 +1,39 @@
 import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-
-// View
-import Home from '../Views/Home';
-import Blog from '../Views/Blog';
-import About from '../Views/About';
-import Forum from '../Views/Forum';
-import Setting from '../Views/Setting';
-import Error from '../Views/Error';
+import React, { useEffect } from 'react';
 
 // Components
 import Navbar from '../Components/Navbar';
-import Login from '../Components/Auth/Login.jsx';
-import Register from '../Components/Auth/Register.jsx';
-
-// Support
-import { varCSS } from '../Common/js/vanillaJs';
 
 import './_style.scss';
 
+// Support
+import { varCSS } from '../Common/js/vanillaJs';
+import { useSelector } from 'react-redux';
+import storageKey from '../Services/localStorageKey';
+
+import { getAlls } from '../store/reducer/departmentSlice';
+import { useDispatch } from 'react-redux';
+
 // import { useState } from 'react';
+import { useRoutes } from 'react-router-dom';
+import routes from './App.routes';
+
+// change language
+// import { useTranslation } from 'react-i18next';
+import i18n from '../Translations/i18n';
 
 function App() {
+   const dispatch = useDispatch();
+
+   const routing = useRoutes(routes);
+   let language = useSelector(state => state.config.language);
+
+   useEffect(() => {
+      (async function () {
+         dispatch(getAlls());
+      })();
+      i18n.changeLanguage(language);
+   }, [language]);
    useEffect(() => {
       const handleScroll = () => {
          const top = document.querySelector('.go-top');
@@ -51,6 +63,23 @@ function App() {
       }
    }, []);
 
+   const smoothScrollBackToTop = () => {
+      const handleScroll = () => {
+         window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+         });
+      };
+      handleScroll();
+      // https://stackoverflow.com/questions/64180685/how-to-slow-down-scroll-to-top-speed
+
+      const showScrollInfor = () => {
+         console.log(window);
+      };
+      showScrollInfor();
+   };
+
    return (
       <div className="app">
          <div id="anchor"></div>
@@ -58,24 +87,15 @@ function App() {
             <div className="app-item">
                <Navbar />
             </div>
-            <div className="app-item">
-               <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/forum" element={<Forum />} />
-                  <Route path="/setting" element={<Setting />} />
-                  <Route path="/auth/login" element={<Login />} />
-                  <Route path="/auth/register" element={<Register />} />
-                  <Route path="*" element={<Error />} />
-               </Routes>
-            </div>
+            <div className="app-item">{routing}</div>
          </div>
-         <a href="#anchor" className="go-top">
-            <i class="fa-solid fa-arrow-up"></i>
-         </a>
+         <div className="go-top" id="scrollTop" onClick={smoothScrollBackToTop}>
+            <i className="fa-solid fa-arrow-up"></i>
+         </div>
       </div>
    );
 }
 
 export default App;
+
+// get anyone from: https://madewithreactjs.com/

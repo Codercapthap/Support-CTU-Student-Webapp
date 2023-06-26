@@ -8,6 +8,7 @@ const { validateBody, schemas, validateParam } = require('../validations/validat
 
 router
    .route('/:id')
+   .get(validateParam(schemas.idSchema, 'id'), departmentController.getDepartmentById)
    .put(
       validateParam(schemas.idSchema, 'id'),
       validateBody(schemas.departmentSchema),

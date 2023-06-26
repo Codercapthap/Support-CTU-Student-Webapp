@@ -1,0 +1,57 @@
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
+
+.post-item {
+   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+   background-color: var(--primary-color);
+   color: var(--text-color);
+   position: relative;
+   margin: 1rem 2rem;
+   .post-name {
+      @include flexbox(row, flex-start, center);
+      padding: 0.5rem 0.2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-left: 1rem solid var(--bg-color);
+      box-shadow: 0 0 0.1rem var(--text-color);
+      .first {
+         margin-left: 0.5rem;
+         margin-right: 0.5rem;
+      }
+      .secondary {
+         margin-right: 1rem;
+      }
+      .post-infor-box {
+         @include flexbox(row, flex-end);
+         &-item:nth-child(2) {
+            margin-left: 0.5rem;
+         }
+         .post-infor-box-item {
+            @include flexbox();
+            text-align: right;
+            color: var(--secondary-color);
+            padding: 0.2rem;
+            margin-right: 0.5rem;
+            * {
+               font-size: 0.8rem !important;
+               margin-right: 0.2rem;
+            }
+         }
+      }
+      .button-box {
+         background-color: var(--heading-color);
+         color: var(--bg-color);
+         padding: 0.2rem;
+         border-radius: 0.2rem;
+         margin-left: auto;
+         margin-right: 1rem;
+      }
+   }
+   &:hover {
+      cursor: pointer;
+   }
+}
+
+.active-outline {
+   outline: 0.2rem solid var(--heading-color);
+}

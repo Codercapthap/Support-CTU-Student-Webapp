@@ -3,9 +3,9 @@ import http from '../Common/js/http';
 const User = {
    async getUserById(id, token) {
       try {
-         return http.get(`/user/${id}`, {
+         return await http.get(`/user/${id}`, {
             headers: {
-               Authorization: `${token}`
+               Authorization: `Bearer ${token}`
             }
          });
       } catch (error) {
@@ -16,7 +16,7 @@ const User = {
       try {
          return http.delete(`/user/${id}`, {
             headers: {
-               Authorization: `${token}` //moderator, admin
+               Authorization: `Bearer ${token}` //moderator, admin
             }
          });
       } catch (error) {
@@ -25,9 +25,9 @@ const User = {
    },
    async createUser(obj, token) {
       try {
-         return http.delete(`/user/create`, obj, {
+         return await http.post(`/user/create`, obj, {
             headers: {
-               Authorization: `${token}` // admin
+               Authorization: `Bearer ${token}` // admin
             }
          });
       } catch (error) {
@@ -35,14 +35,10 @@ const User = {
       }
    },
    async updateUser(obj, token) {
-      /**
-       * username, gender, birthday, email, phone, address,
-       * id = req.user.id
-       */
       try {
          return http.delete(`/user/create`, obj, {
             headers: {
-               Authorization: `${token}`
+               Authorization: `Bearer ${token}`
             }
          });
       } catch (error) {
@@ -51,9 +47,9 @@ const User = {
    },
    async getAllUsersOfDepartmentId(id, token) {
       try {
-         return http.post(`/user/department/${id}`, {
+         return http.get(`/user/department/${id}`, {
             headers: {
-               Authorization: `${token}`
+               Authorization: `Bearer ${token}`
             }
          });
       } catch (error) {
@@ -68,7 +64,7 @@ const User = {
       try {
          return http.post(`/user/department/reset_password`, obj, {
             headers: {
-               Authorization: `${token}`
+               Authorization: `Bearer ${token}`
             }
          });
       } catch (error) {
@@ -79,7 +75,7 @@ const User = {
       try {
          return http.post(`/user/${id}/role`, id, {
             headers: {
-               Authorization: `${token}` // admin
+               Authorization: `Bearer ${token}` // admin
             }
          });
       } catch (error) {
@@ -90,18 +86,19 @@ const User = {
       try {
          return http.post(`/user/${id}/restore`, id, {
             headers: {
-               Authorization: `${token}` // moderator, admin
+               Authorization: `Bearer ${token}` // moderator, admin
             }
          });
       } catch (error) {
          console.log(error);
       }
    },
-   async updateAvatar(id, avatarUrl, token) {
+   async updateAvatar(id, obj, token) {
       try {
-         return http.post(`/user/${id}/update_avatar`, avatarUrl, {
+         console.log('obj: ', obj, token);
+         return http.patch(`/user/${id}/update_avatar`, obj, {
             headers: {
-               Authorization: `${token}` //! admin
+               Authorization: `Bearer ${token}` //! admin
             }
          });
       } catch (error) {

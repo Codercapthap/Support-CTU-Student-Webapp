@@ -6,6 +6,7 @@ import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 
 function Profile() {
+   console.log('render Profile');
    return (
       <>
          <Header></Header>

@@ -3,4 +3,242 @@
 
 .forum {
    padding: var(--route-spacing);
+   .forum-item-box {
+      @include flexbox(row, space-between, center, wrap);
+      .select-box {
+         width: max-content;
+         border: 0.1rem solid var(--heading-color);
+         border-radius: 1rem;
+         padding: 0.2rem 0.5rem;
+         margin-right: 1rem;
+         color: var(--heading-color);
+         background-color: var(--bg-color);
+         outline: none;
+      }
+      .selected-name {
+         font-size: 1.5rem;
+         color: var(--heading-color);
+         background-color: var(--bg-color);
+      }
+      .count {
+         .count-item {
+            display: inline-block;
+            &:nth-child(2) {
+               margin-left: 0.5rem;
+            }
+         }
+      }
+      .loading {
+         margin-left: auto;
+      }
+      .count {
+         margin-left: auto;
+         @include responsive('tablet') {
+            margin-left: 0;
+            margin-right: auto;
+         }
+      }
+   }
+}
+
+.accordion-container {
+   width: 100%;
+   margin-bottom: 2rem;
+   span {
+      display: none;
+   }
+}
+.accordion-box {
+   width: 100%;
+   .accordion-item {
+      padding: 0rem var(--route-spacing);
+      .title {
+         display: block;
+         font-size: 1.5rem;
+         padding: 0.5rem 0rem;
+         user-select: none;
+         // border-right: 0.5rem solid var(--heading-color);
+         border-top: 0.05rem solid var(--bg-color);
+         border-bottom: 0.05rem solid var(--bg-color);
+         i {
+            margin-right: 0.5rem;
+         }
+         &:hover {
+            color: var(--heading-color);
+            border-top: 0.05rem solid var(--heading-color);
+            border-bottom: 0.05rem solid var(--heading-color);
+         }
+      }
+      .body {
+         height: 0;
+         position: relative;
+         overflow: hidden;
+         text-align: center;
+         padding: 0rem var(--route-spacing);
+         margin-bottom: 1rem;
+         // padding-bottom: 3rem;
+         transition: 1s;
+         box-shadow: 0rem 0rem 0.1rem var(--text-color);
+         .control-box {
+            z-index: 1;
+            @include flexbox();
+            position: absolute;
+
+            bottom: 0rem;
+            right: 1rem;
+            .control-name:nth-child(1),
+            .control-name:nth-child(2) {
+               margin-right: 0.5rem;
+            }
+         }
+         .show-comment {
+            margin: 1rem 0rem;
+            background-color: var(--bg-color);
+            color: var(--heading-color);
+            cursor: pointer;
+            i {
+               margin-right: 0.5rem;
+            }
+         }
+         .comment-box {
+            padding: 0rem 3rem;
+         }
+      }
+   }
+   .tab_1 {
+      .body {
+         .create-topic-box {
+            border: 0.05rem solid var(--heading-color);
+            border-radius: 1rem;
+            @include flexbox(row, center, flex-end, wrap);
+            width: 100%;
+            margin-bottom: 3rem;
+            .create-topic-item {
+               text-align: left;
+               input {
+                  margin-top: 0.2rem;
+                  padding: 0.5rem 1rem;
+                  &:focus {
+                     outline: 0.1rem solid var(--heading-color);
+                  }
+               }
+               padding: 1rem;
+               margin: 1rem;
+               button {
+                  padding: 0.3rem 1rem;
+                  border-radius: 0.5rem;
+               }
+            }
+         }
+      }
+   }
+   .tab_2 {
+      .body {
+         overflow: auto;
+         box-shadow: none;
+         border: none;
+      }
+   }
+}
+
+.create-post-box {
+   margin-top: 1rem;
+   margin-bottom: 2rem;
+   padding-bottom: 5rem;
+}
+
+$minHeight: 200px;
+#tab_1:target ~ .accordion-box .tab_1 .body {
+   min-height: $minHeight;
+   height: max-content;
+}
+#tab_2:target ~ .accordion-box .tab_2 .body {
+   min-height: $minHeight;
+   height: max-content;
+}
+#tab_3:target ~ .accordion-box .tab_3 .body {
+   min-height: $minHeight;
+   height: max-content;
+}
+#tab_4:target ~ .accordion-box .tab_4 .body {
+   min-height: $minHeight;
+   height: max-content;
+}
+#tab_1:target ~ .accordion-box .tab_1 a,
+#tab_2:target ~ .accordion-box .tab_2 a {
+   color: var(--heading-color);
+   font-weight: bold;
+   border-top: 0.05rem solid var(--heading-color);
+}
+
+.tab_1 .body .n-row {
+   @include responsive('desktop') {
+      --columns: 5;
+      --spacing: 30px;
+      // --radius: 20px;
+   }
+   @include responsive('tablet') {
+      --columns: 3;
+      --spacing: 20px;
+      // --radius: 10px;
+   }
+   @include responsive('mobile') {
+      --columns: 2;
+      --spacing: 10px;
+      // --radius: 5px;
+   }
+   @include responsive('mini') {
+      --columns: 1;
+      --spacing: 5px;
+      // --radius: 5px;
+   }
+}
+
+// .create-post-box {
+//    display: none;
+// }
+
+.topics-empty {
+   margin-top: 2rem;
+   font-size: 1.5rem;
+   color: var(--secondary-color);
+}
+
+.selected {
+   background-color: var(--heading-color) !important;
+   color: var(--bg-color) !important;
+}
+
+.box-hidden {
+   display: hidden !important;
+}
+
+.box-show {
+   display: block !important;
+}
+
+.margin-top {
+   margin-top: 75px;
+}
+
+.topic-item-list {
+   // background-color: var(--heading-color);
+   // border-radius: 0.5rem;
+}
+
+.topic-item-list-active {
+   outline: 0.1rem solid var(--heading-color);
+   background-color: var(--heading-color);
+   border-radius: 0.5rem;
+}
+
+.post-item-list {
+   // background-color: var(--heading-color);
+   // border-radius: 0.5rem;
+}
+
+.post-item-list-active {
+   outline: 0.1rem solid var(--heading-color);
+   background-color: var(--heading-color);
+   border-radius: 0.5rem;
 }

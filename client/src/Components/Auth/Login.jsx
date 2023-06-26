@@ -1,61 +1,134 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+// component
 import Header from '../Header';
 
-import './_style.scss';
+// store: auth
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../../store/reducer/authSlide';
+import { useTranslation } from 'react-i18next';
+
+// style scss
+import './_style_login_register.scss';
 
 function Login() {
-   const handleLogin = () => {
-      alert('login');
+   
+   console.log('render Login');
+   const { t } = useTranslation();
+   const dispatch = useDispatch();
+   const [email, setEmail] = useState('');
+   const [password, setPassword] = useState('');
+   const user = useSelector(state => state.auth.current);
+   const navigate = useNavigate();
+
+   console.log('re render');
+   const handleSubmit = () => {
+      if (!emailValid(email) || !passwordValid(password)) {
+         alert('please enter valid value!');
+         return;
+      }
+      const data = {
+         email,
+         password
+      };
+      const action = login(data);
+      dispatch(action);
+      console.log(user);
+      navigate('/auth/profile');
    };
+   const emailValid = email => {
+      let regex =
+         /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (regex.test(email)) {
+         return true;
+      } else if (email === '') {
+         return false; // or more
+      } else {
+         return false;
+      }
+   };
+
+   const passwordValid = password => {
+      return true;
+      // let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+      // if (regex.test(password)) {
+      //    return true;
+      // } else if (password === '') {
+      //    return false; // or more
+      // } else {
+      //    return false;
+      // }
+   };
+
    return (
       <>
          <Header />
-         <div class="auth-wrapper">
-            <div class="auth-title">+++ Login +++</div>
-            <form class="auth-container">
-               <div class="form-group">
-                  <label class="group-name" for="email">
-                     Email
+         <div className="auth-wrapper">
+            {/* <div className="auth-title">+++ Login +++</div> */}
+            <div className="auth-container">
+               <div className="form-group">
+                  <label className="group-name" htmlFor="email">
+                     {t('header.auth.email.name')}
                   </label>
                   <br />
-                  <div class="input-check-box">
-                     <i class="fas fa-envelope"></i>
-                     <input class="input" type="email" placeholder="Email input" />
-                     <i class="fas fa-check"></i> <br />
-                     {/* <p class="min-alert">
-                        <i class="input-error">invalid email</i>
-                        <i class="input-success">valid email</i>
-                     </p> */}
+                  <div className="input-check-box">
+                     <i className="fas fa-envelope"></i>
+                     <input
+                        className="input"
+                        type="email"
+                        placeholder={t('header.auth.email.placeholder')}
+                        value={email}
+                        onChange={e => {
+                           const tmp = e.target.value;
+                           setEmail(tmp);
+                        }}
+                     />
+                     {emailValid(email) && (
+                        <i style={{ color: 'green' }} className="fas fa-check"></i>
+                     )}
+                     {!emailValid(email) && (
+                        <i style={{ color: 'red' }} className="fas fa-check"></i>
+                     )}
                   </div>
                </div>
-               <div class="form-group">
-                  <label class="group-name" for="email">
-                     Password
+               <div className="form-group">
+                  <label className="group-name" htmlFor="email">
+                     {t('header.auth.password.name')}
                   </label>
                   <br />
-                  <div class="input-check-box">
-                     <i class="fas fa-key"></i>
-                     <input class="input" type="password" placeholder="[a...z][1--9]" />
-                     <i class="fas fa-check"></i> <br />
-                     {/* <p class="min-alert">
-                        <i class="input-error">invalid password</i>
-                        <i class="input-success">valid password</i>
-                     </p> */}
+                  <div className="input-check-box">
+                     <i className="fas fa-key"></i>
+                     <input
+                        className="input"
+                        type="password"
+                        placeholder={t('header.auth.password.placeholder')}
+                        value={password}
+                        onChange={e => {
+                           const tmp = e.target.value;
+                           setPassword(tmp);
+                        }}
+                     />
+                     {passwordValid(password) && (
+                        <i style={{ color: 'green' }} className="fas fa-check"></i>
+                     )}
+                     {!passwordValid(password) && (
+                        <i style={{ color: 'red' }} className="fas fa-check"></i>
+                     )}
                   </div>
                </div>
-               <div class="form-group">
-                  <button type="submit" className="form-submit-item" onClick={handleLogin}>
-                     Submit
+               <div className="form-group">
+                  <button className="form-submit-item" onClick={handleSubmit}>
+                     {t('header.auth.submit.name')}
                   </button>
                   <div className="alert-box">
-                     If you haven't account, please
+                     {t('header.auth.submit.login')}
                      <NavLink className="link" to="/auth/register">
-                        Register
+                        {t('header.auth.register')}
                      </NavLink>
                   </div>
                </div>
-            </form>
+            </div>
          </div>
       </>
    );
@@ -63,56 +136,16 @@ function Login() {
 
 export default Login;
 
-// export default {
-//    name: 'register',
-//    data() {
-//       return {
-//          email: '',
-//          password: '',
-//          loading: false
-//       };
-//    },
-//    methods: {
-//       async handleLogin() {
-//          this.message = '';
-//          this.successful = false;
-//          this.loading = true;
+// regex check password
+// https://helpex.vn/question/regex-cho-mat-khau-phai-chua-it-nhat-tam-ky-tu-it-nhat-mot-so-va-ca-chu-thuong-va-chu-hoa-va-ky-tu-dac-biet-5cb71aeeae03f62598de3864
 
-//          const user = {
-//             email: this.email,
-//             password: this.password
-//          };
-
-//       }
-//    },
-//    computed: {
-//       emailValid() {
-//          let regex =
-//             /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//          if (regex.test(this.email)) {
-//             return true;
-//          } else if (this.email === '') {
-//             return null;
-//          } else {
-//             return false;
-//          }
-//       },
-//       passwordValid() {
-//          let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-//          if (regex.test(this.password)) {
-//             return true;
-//          } else if (this.password === '') {
-//             return null;
-//          } else {
-//             return false;
-//          }
-//       },
-//       isLogin() {
-//          return this.emailValid;
-//       }
-//    },
-//    mounted() {
-//       this.$refs.selectInputLogin.focus();
-//    }
-// };
-// </script>
+// const showMessage = (message = 'error', color = 'red') => (
+//    <i
+//       style={{
+//          fontWeight: 'bold',
+//          color: `${color}`
+//       }}
+//    >
+//       {message}
+//    </i>
+// );

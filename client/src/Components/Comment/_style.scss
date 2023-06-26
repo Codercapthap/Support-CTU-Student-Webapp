@@ -1,0 +1,80 @@
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
+
+.comment-item-box {
+   color: var(--text-color);
+   position: relative;
+   margin-bottom: 0.5rem;
+   @include flexbox(row, flex-start, flex-start);
+   $sizeAvatar: 3rem;
+   .comment-part {
+      width: 100%;
+   }
+   .comment-part:nth-child(1) {
+      width: $sizeAvatar;
+      height: 100%;
+      @include flexbox(column, center);
+      .part {
+         width: 100%;
+         height: auto;
+         img {
+            border-radius: 999rem;
+            box-shadow: 0 0 0.1rem var(--text-color);
+         }
+      }
+   }
+   .comment-part:nth-child(2) {
+      width: calc(100% - $sizeAvatar);
+      padding: 1rem;
+      margin-left: 1rem;
+      border-radius: 1rem;
+      border: 0.02rem solid var(--text-color);
+      @include flexbox(column, flex-start, flex-start);
+      .part {
+         width: 100%;
+      }
+      .author {
+         @include flexbox(row, space-between);
+         padding: 0.5rem 0.2rem;
+         font-size: 1.2rem;
+         font-weight: bold;
+      }
+      .content-box {
+         padding: 0.5rem;
+         border-radius: 0.2rem;
+         font-style: italic;
+         text-align: left;
+      }
+      .vote {
+         padding: 0.5rem 0rem 0.5rem 1rem;
+         @include flexbox(row, flex-start);
+         .vote-item {
+            font-size: 0.8rem !important;
+            margin-right: 0.5rem;
+            @include flexbox(row, flex-start);
+            i {
+               margin-right: 0.2rem;
+            }
+            &:hover {
+               cursor: pointer;
+               color: var(--heading-color);
+            }
+         }
+      }
+      .reply {
+         padding: 0.5rem 1rem;
+      }
+   }
+}
+.comment-input-box-wrapper {
+   padding: 0rem 1rem;
+   margin-bottom: 5rem;
+}
+
+.active-button {
+   color: var(--heading-color) !important;
+}
+
+// .active-outline {
+//    outline: 0.2rem solid var(--heading-color);
+// }

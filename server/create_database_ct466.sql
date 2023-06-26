@@ -19,6 +19,9 @@
 -- Table structure for table `comment`
 --
 
+create database `ct466`;
+use `ct466`;
+
 DROP TABLE IF EXISTS `comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -64,6 +67,8 @@ CREATE TABLE `department` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+ALTER TABLE `department` MODIFY  `department_code` varchar(10);
 --
 -- Dumping data for table `department`
 --

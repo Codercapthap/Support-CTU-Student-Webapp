@@ -1,0 +1,47 @@
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
+
+.comment-input-container {
+   $buttonWidth: 4rem;
+   @include flexbox();
+   padding: 0rem 1rem;
+   border-radius: 0.5rem;
+   height: max-content;
+   margin-bottom: 2rem;
+   background-color: var(--heading-color);
+   border: 0.02rem solid var(--text-color);
+   .button-box {
+      @include flexbox();
+      width: max-content;
+      .button-item {
+         margin-right: 1rem;
+         color: var(--bg-color);
+         cursor: pointer;
+      }
+   }
+   .input-box {
+      width: 100%;
+      textarea {
+         border: 0.02rem solid var(--text-color);
+         min-width: calc(100% - $buttonWidth);
+         max-width: calc(100% - $buttonWidth);
+         min-height: 100%;
+         height: 2.5rem;
+         padding-top: 0.5rem;
+         padding-left: 1rem;
+         background-color: var(--bg-color);
+         color: var(--text-color);
+         font-size: 1rem;
+
+         &:focus {
+            // outline: 0.2rem solid var(--heading-color);
+         }
+      }
+   }
+   .submit-box {
+      .submit-item {
+         cursor: pointer;
+         color: var(--bg-color);
+      }
+   }
+}

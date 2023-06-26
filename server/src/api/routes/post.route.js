@@ -43,11 +43,9 @@ router.patch(
    postController.restorePostById
 );
 
-// accept post
-router.patch(
-   '/:id/accept',
+router.route('/:id/accept').get(
    validateParam(schemas.idSchema, 'id'),
-   passport.authenticate('jwt', { session: false }),
+   passport.authenticate('jwt', { session: false }), // Status Code: 401 Unauthorized
    authPost(['moderator', 'admin']),
    postController.acceptPostById
 );

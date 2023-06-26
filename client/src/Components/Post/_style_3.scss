@@ -1,0 +1,32 @@
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
+
+.react-quill-component {
+   text-align: left;
+   // background-color: var(--heading-color);
+   border: none !important;
+   outline: none !important;
+   // color: var(--bg-color);
+}
+.my-editing-area {
+   border-bottom-left-radius: 0.2rem;
+   border-bottom-right-radius: 0.2rem;
+   // background-color: var(--bg-color);
+   // color: var(--text-color);
+   &:hover {
+      outline: 0.05rem solid var(--heading-color) !important;
+   }
+}
+
+.create-control-box {
+   width: 100%;
+   text-align: center;
+   @include flexbox();
+   .save-post {
+      background-color: var(--heading-color);
+      color: var(--bg-color);
+      font-weight: bold;
+      margin-top: 1rem;
+      padding: 0.2rem 2rem;
+   }
+}

@@ -2,6 +2,7 @@
 @import '../../Common/scss/varriable';
 
 .home {
+   padding: var(--route-spacing);
    .n-row {
       @include responsive('desktop') {
          --columns: 4;
@@ -27,71 +28,79 @@
 }
 
 .card-box {
-   .card-item {
-      overflow: hidden;
-      cursor: pointer;
-      // border-left: 0.3rem solid var(--heading-color);
-      // box-shadow: 0rem 0rem 0.1rem var(--text-color);
+   .n-col {
       box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-      .card-img-box {
-         position: relative;
-         overflow: hidden;
-         border: 0.1rem solid var(--heading-color);
-         border-radius: 2rem;
-         border-top-left-radius: 0rem;
-         margin: 1rem;
-         .card-code {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            z-index: 2;
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-            background-color: var(--primary-color);
-         }
-         .card-img {
-            width: 100%;
-            height: auto;
-            transition: $transTime;
-            &:hover {
-               transform: scale(1.2);
-               transition: $transTime;
-            }
-         }
+      &:hover {
+         box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 30px, rgba(0, 0, 0, 0.754) 0px 6px 15px;
       }
+   }
+}
 
-      .card-name {
-         padding-left: 1rem;
-         @include truncate_line('20px', 1);
+.card-item {
+   overflow: hidden;
+   cursor: pointer;
+   border-radius: 0.5rem;
+   // border-left: 0.3rem solid var(--heading-color);
+   // box-shadow: 0rem 0rem 0.1rem var(--text-color);
+   box-shadow: rgba(50, 36, 36, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+   .card-img-box {
+      position: relative;
+      overflow: hidden;
+      border: 0.1rem solid var(--heading-color);
+      border-radius: 2rem;
+      border-top-left-radius: 0rem;
+      margin: 1rem;
+      .card-code {
+         position: absolute;
+         top: 1rem;
+         left: 1rem;
+         z-index: 2;
+         padding: 0.5rem;
+         border-radius: 0.5rem;
+         background-color: var(--primary-color);
       }
-      .card-description {
-         padding: 1rem;
-         color: var(--primary-color);
-         .description {
-            font-style: italic;
-            @include truncate_line(calc(20px), 3);
+      .card-img {
+         width: 100%;
+         height: auto;
+         transition: $transTime;
+         &:hover {
+            transform: scale(1.2);
+            transition: $transTime;
          }
       }
-      .card-button {
-         padding: 1rem;
-         margin-bottom: -1rem;
-         @include flexbox(row, flex-start, center, wrap);
-         .button {
-            border-top: 0.1rem solid var(--primary-color);
-            border-bottom: 0.1rem solid var(--primary-color);
-            margin: 0rem 1rem 1rem 0rem;
-            background-color: var(--primary-color);
+   }
+
+   .card-name {
+      padding-left: 1rem;
+      @include truncate_line('20px', 1);
+   }
+   .card-description {
+      padding: 1rem;
+      color: var(--primary-color);
+      .description {
+         font-style: italic;
+         @include truncate_line(calc(20px), 3);
+      }
+   }
+   .card-button {
+      padding: 1rem;
+      margin-bottom: -1rem;
+      @include flexbox(row, flex-start, center, wrap);
+      .button {
+         border-top: 0.1rem solid var(--primary-color);
+         border-bottom: 0.1rem solid var(--primary-color);
+         margin: 0rem 1rem 1rem 0rem;
+         background-color: var(--primary-color);
+         transition: $transTimeCol;
+         &:hover {
+            background-color: var(--heading-color);
+            color: var(--bg-color);
             transition: $transTimeCol;
-            &:hover {
-               background-color: var(--heading-color);
-               color: var(--bg-color);
-               transition: $transTimeCol;
-            }
          }
       }
    }
 }
 
-.margin-home {
-   margin-top: 90px;
+.margin-top {
+   margin-top: 95px; // get ref height of header
 }

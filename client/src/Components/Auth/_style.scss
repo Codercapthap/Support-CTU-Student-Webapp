@@ -1,111 +1,123 @@
 @import '../../Common/scss/mixin';
 @import '../../Common/scss/varriable';
 
-.auth-wrapper {
-   --maxWithForm: 500px;
-   padding: 0 calc((100% - var(--maxWithForm)) / 2);
-   width: 100%;
-   height: max-content;
-   margin-top: 1rem;
-   .auth-container {
-      width: 100%;
-      // background-color: var(--primary-color);
-      padding: 1rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 0.1rem var(--heading-color);
-   }
+.auth-profile-wrapper {
+   padding: 0 calc((100% - var(--article-width)) / 2);
+   margin: 1rem 1rem 5rem 1rem;
 }
-
-.auth-title {
-   text-align: center;
-   // font-weight: bolder;
-   font-size: 2em;
+.auth-session {
    margin-bottom: 1rem;
-   color: var(--text-color);
-}
-
-.form-group {
-   margin-bottom: 0.5rem;
-   &:last-child {
-      text-align: center;
-   }
-}
-
-.group-name {
-   width: 100%;
-   text-align: left;
-   padding-left: 10%;
-   color: var(--text-color);
-}
-
-.input-check-box {
-   width: 100%;
-   border-radius: 1rem;
+   cursor: pointer;
    @include flexbox();
-   border: 0.05rem solid var(--heading-color);
-   border-left: 0.5rem solid var(--heading-color);
-   border-right: 0.5rem solid var(--heading-color);
-   .input {
-      width: 80%;
-      padding: 0.5rem;
-      font-size: 1rem;
-      font-weight: bold;
-      background-color: var(--bg-color);
+   .auth-session-title {
+      text-align: flex;
+      // font-weight: bolder;
+      font-size: 1.5em;
+      margin-bottom: 0.5rem;
+      padding: 0.2rem 0.5rem;
       color: var(--text-color);
-      &:focus,
-      &:hover {
-         // background-color: var(--text-color);
-         // color: var(--bg-color);
-         cursor: text;
+      border-radius: 0.5rem;
+      border: 0.1rem solid var(--heading-color);
+      border-left: 0.5rem solid var(--heading-color);
+      .auth-session-title-right {
+         float: right;
+      }
+      &:focus {
+         color: var(--bg-color);
+         background-color: var(--heading-color);
+         font-weight: bold;
       }
    }
-   i {
-      width: 10%;
-      line-height: 2.5rem;
-      font-size: 1rem;
+   .select-box {
+      cursor: pointer;
+      margin: 1rem auto;
+      padding: 0.2rem 1rem;
+      border-radius: 999rem;
+      border: 0.1rem solid var(--heading-color);
+   }
+   .auth-session-body {
+      border: 0.02rem solid var(--heading-color);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      .subject-item-box {
+         @include flexbox(row, flex-start, center, wrap);
+         margin-bottom: 0.5rem;
+         .subject-item {
+            margin-right: 1rem;
+            input {
+               width: max-content;
+               background-color: var(--bg-color);
+               color: var(--text-color);
+               border-radius: 0.2rem;
+               padding: 0.1rem 0.5rem;
+
+               &::placeholder {
+                  color: var(--text-color);
+               }
+               &:focus {
+                  outline: 0.1rem solid var(--heading-color);
+               }
+            }
+         }
+         input.subject-item {
+            max-width: 50px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+
+            &::placeholder {
+               color: var(--text-color);
+            }
+            &:focus {
+               border-bottom: 0.1rem solid var(--primary-color);
+            }
+         }
+         .subject-control {
+            margin-left: auto;
+            margin-right: 0rem;
+            @include flexbox();
+            .subject-control-icon {
+               margin-right: 1rem;
+               .subject-control-input {
+                  height: 100%;
+                  border-radius: 0.2rem;
+                  padding: 0.2rem 0.5rem;
+                  &:focus {
+                     outline: 0.2rem solid var(--heading-color);
+                  }
+               }
+            }
+         }
+      }
+   }
+   .create-subject-control {
+      margin: 0.5rem;
       text-align: center;
-      color: var(--text-color);
    }
 }
 
-// .min-alert {
-//    text-align: center;
-//    $fontSize: 1rem;
-//    .input-error {
-//       font-size: $fontSize;
-//       color: $danger;
-//    }
-//    .input-success {
-//       font-size: $fontSize;
-//       color: $success;
-//    }
-// }
-
-.form-group:last-child {
-   text-align: center;
+.create-subject-box {
+   border: 0.05rem solid var(--heading-color);
+   border-radius: 1rem;
+   @include flexbox(row, center, flex-end, wrap);
    width: 100%;
-   margin-top: 1rem;
-   .form-submit-item {
-      width: max-content;
-      line-height: 1.5rem;
-      padding: 0.2rem 2rem;
-      // border-radius: 1rem;
-      margin: 0rem 0.2rem;
-      font-size: 1rem;
-      border: none;
-      border-top: 0.2rem solid var(--text-color);
-      border-bottom: 0.2rem solid var(--text-color);
-      font-weight: bold;
-      background-color: var(--heading-color);
-      color: var(--bg-color);
-      cursor: pointer;
-   }
-   .alert-box {
-      margin: 0.5rem 0rem;
-      font-style: italic;
-      .link {
-         margin-left: 0.5rem;
-         color: $success;
+   .create-subject-item {
+      text-align: left;
+      input {
+         margin-top: 0.2rem;
+         padding: 0.2rem 0.5rem;
+         &:focus {
+            outline: 0.1rem solid var(--heading-color);
+         }
+      }
+      padding: 1rem;
+      margin: 0.5rem 1rem;
+      button {
+         padding: 0.3rem 1rem;
+         border-radius: 0.5rem;
       }
    }
+}
+
+.margin-top {
+   margin-top: 90px; // get ref height of header
 }

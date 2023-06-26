@@ -89,6 +89,7 @@ class postController {
    async destroyPostById(req, res, next) {
       try {
          const id = req.params.id;
+         console.log('delete post id: ', id);
          const result = await Post.destroyOneById(id);
          return res.status(200).json(result.affectedRows);
       } catch (err) {
@@ -109,6 +110,7 @@ class postController {
    async acceptPostById(req, res, next) {
       try {
          const id = req.params.id;
+         console.log('accept post id: ', id);
          const result = await Post.acceptPostById(id);
          return res.status(200).json(result.affectedRows);
       } catch (err) {

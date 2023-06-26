@@ -1,20 +1,61 @@
-import React from 'react';
-
-import './_style.scss';
+import React, { useEffect } from 'react';
 
 import Header from '../../Components/Header';
-import Footer from '../../Components/Footer';
+// import Footer from '../../Components/Footer';
 
 import ToggeTheme from '../../Components/ToggeTheme';
+import { varCSS } from '../../Common/js/vanillaJs';
+import './_style.scss';
+
+import { useTranslation } from 'react-i18next';
+
+// change font size
+import { useDispatch, useSelector } from 'react-redux';
+import {
+   storeFontSize,
+   storeTheme,
+   storeLanguage,
+   storeArea
+} from '../../store/reducer/settingSlice';
 
 function Setting() {
-   const showValueOption = e => {
-      e.onchange = () => {
-         const value = e.value,
-            text = e.options[e.selectedIndex].text,
-            index = e.selectedIndex;
-         console.log(value, index, text);
-      };
+   console.log('render Setting');
+   const { t } = useTranslation();
+   const dispatch = useDispatch();
+
+   const language = useSelector(state => state.config.language);
+   const theme = useSelector(state => state.config.theme);
+   const fontSize = useSelector(state => state.config.font_size);
+   const area = useSelector(state => state.config.area);
+
+   useEffect(() => {
+      // update language box
+      const controlLanguage = document.querySelector('.control-language');
+      controlLanguage.value = language;
+      // update font-size range
+      const controlFontSize = document.querySelector('.control-font-size');
+      controlFontSize.value = fontSize;
+      // update area box
+      const controlArea = document.querySelector('.control-area');
+      controlArea.value = area;
+   }, [language, fontSize, area]);
+
+   const changeLanguage = e => {
+      const value = e.target.value;
+      dispatch(storeLanguage(value));
+   };
+   const changeCurrentTheme = value => {
+      dispatch(storeTheme(value));
+   };
+   const changeFontSize = e => {
+      const selectedFontSize = Number.parseInt(e.target.value);
+      dispatch(storeFontSize(selectedFontSize));
+      varCSS('font-size', `${selectedFontSize}px`);
+   };
+   const changeArea = e => {
+      const selectedArea = e.target.value;
+      console.log(selectedArea);
+      dispatch(storeArea(selectedArea));
    };
 
    return (
@@ -23,45 +64,64 @@ function Setting() {
          <div className="setting">
             <div className="setting-item">
                <div className="setting-name">
-                  <i class="fa-solid fa-wrench"></i> Chọn Ngôn Ngữ
+                  <i className="fa-solid fa-wrench"></i> {t('setting.language.name')}
                </div>
-               <select className="select-group" name="languages" onClick={showValueOption}>
-                  <option className="select-item" value="english">
-                     Tiếng Anh
+               <select
+                  className="select-group control-language"
+                  name="languages"
+                  onChange={changeLanguage}
+               >
+                  <option className="select-item" value="en">
+                     {t('setting.language.option.english')}
                   </option>
-                  <option className="select-item" value="vietnamese">
-                     Tiếng Việt
+                  <option className="select-item" value="vi">
+                     {t('setting.language.option.vietnamese')}
                   </option>
                </select>
             </div>
             <div className="setting-item">
                <div className="setting-name">
-                  <i class="fa-solid fa-wrench"></i> Chọn Múi Giờ
+                  <i className="fa-solid fa-wrench"></i> {t('setting.area.name')}
                </div>
-               <select className="select-group">
-                  <option className="select-item" value="...">
-                     Đông Dương
+               <select className="select-group control-area" onChange={changeArea}>
+                  <option className="select-item" value="Asia/Ho_Chi_Minh">
+                     {t('setting.area.option.vietnam')}
                   </option>
-                  <option className="select-item" value="...">
-                     Đông Âu
+                  <option className="select-item" value="Asia/Tokyo">
+                     {t('setting.area.option.japan')}
                   </option>
-                  <option className="select-item" value="...">
-                     Đông Mỹ
+                  <option className="select-item" value="Asia/Hong_Kong">
+                     {t('setting.area.option.china')}
                   </option>
-                  <option className="select-item" value="...">
-                     Đông Phi
+                  <option className="select-item" value="America/Los_Angeles">
+                     {t('setting.area.option.united_states')}
                   </option>
                </select>
             </div>
             <div className="setting-item">
                <div className="setting-name">
-                  <i class="fa-solid fa-wrench"></i> Chọn Giao Diện
+                  <i className="fa-solid fa-wrench"></i> {t('setting.font_size.name')}
                </div>
-               <ToggeTheme />
+               <div className="button-base theme-box">{fontSize}px</div>
+               <input
+                  type="range"
+                  className="control-font-size"
+                  min="14"
+                  max="24"
+                  onChange={changeFontSize}
+               />
+            </div>
+            <div className="setting-item">
+               <div className="setting-name">
+                  <i className="fa-solid fa-wrench"></i> {t('setting.theme.name')}
+               </div>
+               <div className="theme-tip text-overflow">{t('setting.theme.tip')}</div>
+               <div className="button-base theme-box">{theme}</div>
+               <ToggeTheme changeCurrentTheme={changeCurrentTheme} />
             </div>
          </div>
 
-         <Footer></Footer>
+         {/* <Footer></Footer> */}
       </>
    );
 }

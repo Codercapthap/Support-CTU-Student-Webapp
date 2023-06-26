@@ -1,0 +1,39 @@
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
+
+.upload-file-container {
+   margin-bottom: 1rem;
+   margin-top: 1rem;
+}
+
+.uploaded-image-box {
+   width: 100%;
+   margin-bottom: 0.5rem;
+   border: 0.1rem solid var(--secondary-color);
+   padding: 0.5rem;
+   border-radius: 0.2rem;
+   @include flexbox(row, space-between);
+   $size: 3rem;
+   .uploaded-image {
+      width: $size;
+      height: $size;
+      margin-right: 0.5rem;
+   }
+   .uploaded-image-url {
+      text-align: left;
+      max-width: calc(100% - 2 * $size - 1rem);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
+   .uploaded-image-copy {
+      min-width: calc($size + 2rem);
+      text-align: center;
+      margin-left: 0.5rem;
+   }
+}
+
+.upload-file-footer {
+   width: 100%;
+   @include flexbox(row, flex-start);
+}

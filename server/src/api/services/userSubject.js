@@ -23,7 +23,10 @@ class UserSubject {
          const sql = 'select * from user_subject where user_id = ? and subject_id = ?';
          connection.query(sql, values, function (err, result, fields) {
             if (err) reject(err);
-            else resolve(result);
+            else {
+               console.log('result: ', result);
+               resolve(result);
+            }
          });
       });
    }
@@ -52,10 +55,17 @@ class UserSubject {
 
    static findUserSubjects(key, value) {
       return new Promise(function (resolve, reject) {
-         const sql = 'SELECT * FROM user_subject WHERE ' + key + ' = ?';
+         const sql =
+            'select subject.id, subject.department_id, user_subject.user_id, subject.subject_code, subject.subject_name, user_subject.subject_score from subject join user_subject where subject.id = user_subject.subject_id and user_subject.' +
+            key +
+            ' = ?';
+         // const sql = 'SELECT * FROM user_subject WHERE ' + key + ' = ?';
          connection.query(sql, value, function (err, result, fields) {
             if (err) reject(err);
-            else resolve(result);
+            else {
+               console.log('result: ', result);
+               resolve(result);
+            }
          });
       });
    }

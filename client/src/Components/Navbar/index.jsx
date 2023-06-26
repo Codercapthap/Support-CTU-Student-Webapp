@@ -2,6 +2,8 @@ import React, { useLayoutEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 // import { varCSS } from '../../Common/js/vanillaJs';
 import './_style.scss';
 
@@ -17,7 +19,8 @@ const styleActiveLink = ({ isActive }) =>
         };
 
 function Navbar() {
-   // const [navbarW, setNavbarW] = useState('0px');
+   console.log('render Navbar');
+   const { t } = useTranslation();
 
    useEffect(() => {
       const handleScroll = () => {
@@ -95,29 +98,7 @@ function Navbar() {
                   style={styleActiveLink}
                   onClick={e => handleSelectNavbar(1)}
                >
-                  <i class="fa-solid fa-school"></i> Home
-               </NavLink>
-            </div>
-
-            <div className="nav-item-wrapper">
-               <NavLink
-                  to="/blog"
-                  className="nav-item"
-                  style={styleActiveLink}
-                  onClick={e => handleSelectNavbar(2)}
-               >
-                  <i class="fa-brands fa-blogger-b"></i> Blog
-               </NavLink>
-            </div>
-
-            <div className="nav-item-wrapper">
-               <NavLink
-                  to="/about"
-                  className="nav-item"
-                  style={styleActiveLink}
-                  onClick={e => handleSelectNavbar(3)}
-               >
-                  <i class="fa-solid fa-layer-group"></i> About
+                  <i className="fa-solid fa-school"></i> {t('navbar.home')}
                </NavLink>
             </div>
 
@@ -126,9 +107,20 @@ function Navbar() {
                   to="/forum"
                   className="nav-item"
                   style={styleActiveLink}
-                  onClick={e => handleSelectNavbar(4)}
+                  onClick={e => handleSelectNavbar(2)}
                >
-                  <i class="fa-solid fa-layer-group"></i> Forum
+                  <i className="fa-solid fa-layer-group"></i> {t('navbar.forum')}
+               </NavLink>
+            </div>
+
+            <div className="nav-item-wrapper">
+               <NavLink
+                  to="/schedule"
+                  className="nav-item"
+                  style={styleActiveLink}
+                  onClick={e => handleSelectNavbar(3)}
+               >
+                  <i class="fa-solid fa-calendar-days"></i> Schedule
                </NavLink>
             </div>
 
@@ -137,9 +129,20 @@ function Navbar() {
                   to="/setting"
                   className="nav-item"
                   style={styleActiveLink}
+                  onClick={e => handleSelectNavbar(4)}
+               >
+                  <i className="fa-solid fa-gear"></i> {t('navbar.setting')}
+               </NavLink>
+            </div>
+
+            <div className="nav-item-wrapper">
+               <NavLink
+                  to="/contact"
+                  className="nav-item"
+                  style={styleActiveLink}
                   onClick={e => handleSelectNavbar(5)}
                >
-                  <i class="fa-solid fa-gear"></i> Setting
+                  <i className="fa-solid fa-paperclip"></i> {t('navbar.contact')}
                </NavLink>
             </div>
 

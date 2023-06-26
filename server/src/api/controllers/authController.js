@@ -20,6 +20,7 @@ class userController {
       try {
          const token = encodedToken(req.user.id);
          res.setHeader('Authorization', token);
+         console.log('login: ', req.user);
          return res.status(200).json(req.user);
       } catch (error) {
          next(error);

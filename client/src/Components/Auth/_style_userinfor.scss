@@ -1,0 +1,100 @@
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
+
+.auth-infor-container {
+   $avatarWidth: 20%;
+   $size: calc(1rem + 3vw);
+   @include flexbox(row, flex-start);
+   height: max-content;
+   width: 100%;
+   .auth-image {
+      position: relative;
+      width: $avatarWidth;
+      margin-bottom: 1rem;
+      img {
+         width: 100%;
+         width: 100%;
+         object-fit: cover;
+         border-radius: 999rem;
+      }
+      .upload-image-box {
+         position: absolute;
+         right: 0%;
+         bottom: 0%;
+         width: $size;
+         height: $size;
+         cursor: pointer;
+         border-radius: 999rem;
+         background-color: var(--bg-color);
+         border: 1px solid var(--text-color);
+         &:hover {
+            border: 1px solid var(--text-color);
+            color: var(--bg-color);
+            background-color: var(--text-color);
+         }
+         #label-upload {
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: $size;
+            height: $size;
+            z-index: 1;
+            cursor: pointer;
+            @include flexbox();
+            i {
+               font-size: calc($size * 0.5);
+            }
+         }
+         #uploader {
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: $size;
+            height: $size;
+            background-color: transparent;
+            z-index: 2;
+            opacity: 0; // !
+            cursor: pointer;
+         }
+      }
+      .upload-save-image-box {
+         width: 100%;
+         height: 100%;
+         border-radius: 999rem;
+         background-color: var(--bg-color);
+         @include flexbox();
+         opacity: 0.9;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         .accept-save {
+            opacity: 1;
+            z-index: 10;
+         }
+      }
+   }
+   .auth-infor-container {
+      width: calc((100% - $avatarWidth));
+      height: 100%;
+      @include flexbox(row, space-between, center, wrap);
+   }
+   .auth-infor-box {
+      flex-grow: 1;
+      padding: 1rem;
+      margin: 0rem 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 0.1rem var(--heading-color);
+      .auth-infor-item {
+         font-size: calc($size / 2);
+         margin-bottom: 0.5rem;
+         @include flexbox(row, flex-start, center, wrap);
+         i {
+            margin-right: 1rem;
+         }
+      }
+      &:last-child {
+         margin: 0rem;
+      }
+   }
+}

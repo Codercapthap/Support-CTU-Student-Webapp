@@ -1,0 +1,113 @@
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
+
+.auth-wrapper {
+   --article-width: 500px;
+   padding: 0 calc((100% - var(--article-width)) / 2);
+   width: 100%;
+   height: max-content;
+   margin-top: 1rem;
+   .auth-container {
+      width: 100%;
+   }
+}
+
+.auth-title {
+   text-align: center;
+   font-size: 2em;
+   margin-bottom: 0.5rem;
+   color: var(--text-color);
+}
+
+.form-group {
+   margin-bottom: 0.5rem;
+   &:last-child {
+      text-align: center;
+   }
+}
+
+.group-name {
+   width: 100%;
+   text-align: left;
+   padding-left: 10%;
+   color: var(--text-color);
+}
+
+.input-check-box {
+   width: 100%;
+   border-radius: 0.2rem;
+   @include flexbox();
+   border: 0.05rem solid var(--heading-color);
+   border-left: 0.5rem solid var(--heading-color);
+   border-right: 0.5rem solid var(--heading-color);
+   .input {
+      width: 80%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      &:focus,
+      &:hover {
+         cursor: text;
+      }
+   }
+   i {
+      width: 10%;
+      line-height: 2rem;
+      font-size: 1rem;
+      text-align: center;
+      color: var(--text-color);
+   }
+}
+
+.form-group:last-child {
+   text-align: center;
+   width: 100%;
+   margin-top: 1rem;
+   .form-submit-item {
+      width: max-content;
+      line-height: 1.5rem;
+      padding: 0rem 2rem;
+      margin: 0rem 0.2rem;
+      font-size: 1rem;
+      border: none;
+      border-top: 0.2rem solid var(--text-color);
+      border-bottom: 0.2rem solid var(--text-color);
+      font-weight: bold;
+      background-color: var(--heading-color);
+      color: var(--bg-color);
+      cursor: pointer;
+   }
+   .alert-box {
+      margin: 0.5rem 0rem;
+      font-style: italic;
+      .link {
+         margin-left: 0.5rem;
+         color: $success;
+      }
+   }
+}
+
+select {
+   $marginX: 1rem;
+   height: 100% !important;
+   width: calc(100% - 2 * $marginX);
+   font-size: 1rem;
+   margin: 0rem $marginX;
+   border: 0.1rem solid var(--bg-color);
+   option {
+      max-width: 100%;
+   }
+}
+
+.input-radio-box {
+   width: 100%;
+   @include flexbox(row, space-around, center, wrap);
+   .input-radio-item {
+      @include flexbox(row, center, center, wrap);
+      label {
+         margin-left: 0.5rem;
+      }
+   }
+}

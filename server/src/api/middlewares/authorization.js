@@ -57,12 +57,16 @@ const authPost = permissions => {
       if (!req.user) throw new Error('No user found');
       const currentUserId = req.user.id;
       const userRole = req.user.role;
+      console.log('auth Post: ', userRole);
       const post = Post.findPostById(postId);
       if (post.userId == currentUserId) {
+         console.log('user author => next');
          next();
       } else if (permissions.includes(userRole)) {
+         console.log('permissions Post');
          next();
       } else {
+         console.log('bug in 401');
          return res.status(401).json("You don't have permission");
       }
    };

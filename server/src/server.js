@@ -13,7 +13,12 @@ const appConfig = require('./config/app.config');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
+const corsOptions = {
+   // origin: 'http://localhost:3001',
+   exposedHeaders: 'Authorization'
+   // accept client get value in header
+};
+app.use(cors(corsOptions));
 app.use(morgan('dev'));
 
 //? Export API

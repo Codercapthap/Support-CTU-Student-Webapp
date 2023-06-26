@@ -1,0 +1,110 @@
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
+
+.post_success-item {
+   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+   // background-color: var(--primary-color);
+   color: var(--text-color);
+   margin-top: 2rem;
+   min-height: 500px;
+   padding: 0.5rem;
+   border-top: 0.3rem solid var(--text-color);
+   border-left: 0.05rem solid var(--text-color);
+   border-right: 0.05rem solid var(--text-color);
+   border-radius: 1rem;
+   .post_success-infor {
+      @include flexbox(row, flex-start);
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: auto;
+      user-select: none;
+      background-color: var(--bg-color);
+      .author-avatar {
+         $size: 2rem;
+         width: $size;
+         height: $size;
+         border-radius: 99rem;
+      }
+      .author-username {
+         margin: 0rem 1rem;
+         font-weight: bold;
+      }
+      .post_success-infor-box {
+         @include flexbox(row, flex-end);
+         &-item:nth-child(2) {
+            margin-left: 0.5rem;
+         }
+         .post_success-infor-box-item {
+            @include flexbox();
+            text-align: right;
+            color: var(--secondary-color);
+            padding: 0.2rem;
+            margin-right: 0.5rem;
+            * {
+               font-size: 0.8rem !important;
+               margin-right: 0.2rem;
+            }
+         }
+      }
+      .save-local {
+         margin-left: auto;
+         color: var(--text-color);
+         cursor: pointer;
+      }
+      .post_success-infor-admin-box {
+         margin-left: auto;
+         display: flex;
+         .post_success-infor-admin-item {
+            padding: 0.2rem 1.5rem;
+            &:hover {
+               background-color: var(--heading-color);
+               color: var(--bg-color);
+            }
+         }
+         .post_success-infor-admin-item:last-child {
+            margin-left: 1rem;
+         }
+      }
+   }
+   .post_success-body {
+      border-radius: 0.5rem;
+      // background-color: var(--primary-color);
+      .post_success-title {
+         padding: 1rem 0rem;
+         font-size: 2rem;
+         font-weight: bold;
+         text-shadow: 0 0 0.5rem var(--bg-color);
+      }
+      .post_success-description {
+         padding: 0.5rem;
+         text-align: left;
+         font-style: italic;
+
+         & > * {
+            display: block;
+            margin-bottom: 0.5rem;
+         }
+         h1 {
+            margin-bottom: 2rem;
+         }
+         h2 {
+            margin-bottom: 1.5rem;
+         }
+         img {
+            text-align: center !important;
+            max-width: 100% !important;
+            height: auto;
+            border-radius: 0.5rem;
+         }
+         pre {
+            padding: 1rem;
+            background-color: var(--primary-color) !important;
+         }
+      }
+   }
+}
+
+.active-save {
+   color: var(--heading-color) !important;
+}

@@ -59,28 +59,28 @@ class User {
 
    async save(departmentIdList) {
       try {
-          // generate a salt
-          const salt = await bcrypt.genSalt(10);
-          // generate a password hash
-          const passwordHashed = await bcrypt.hash(this.password, salt);
-          // re-asign password hash
-          this.password = passwordHashed;
+         // generate a salt
+         const salt = await bcrypt.genSalt(10);
+         // generate a password hash
+         const passwordHashed = await bcrypt.hash(this.password, salt);
+         // re-asign password hash
+         this.password = passwordHashed;
       } catch (error) {
-          reject(error);
+         reject(error);
       }
-     var values = [
-        [
-          this.username,
-          this.gender,
-          this.birthday,
-          this.email,
-          this.password,
-          this.phone,
-          this.role,
-          this.avatarUrl,
-          this.address
-        ]
-    ];
+      var values = [
+         [
+            this.username,
+            this.gender,
+            this.birthday,
+            this.email,
+            this.password,
+            this.phone,
+            this.role,
+            this.avatarUrl,
+            this.address
+         ]
+      ];
       return new Promise(async function (resolve, reject) {
          // setup data
          const sql =

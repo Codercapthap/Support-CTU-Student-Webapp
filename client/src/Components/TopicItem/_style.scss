@@ -1,0 +1,36 @@
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
+
+.topic-item {
+   box-shadow: var(--primary-color) 0px 10px 20px, var(--primary-color) 0px 6px 6px;
+   background-color: var(--primary-color);
+   color: var(--text-color);
+   position: relative;
+   .topic-name {
+      @include flexbox(row, space-between);
+      padding: 0.5rem 0.2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: 1rem solid var(--bg-color);
+      border-bottom: 0.1rem solid var(--bg-color);
+      box-shadow: 0 0 0.1rem var(--text-color);
+   }
+   .topic-description {
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      font-style: italic;
+   }
+   .topic-create-time {
+      text-align: right;
+      font-size: 0.7rem;
+      padding: 0.2rem;
+   }
+   &:hover {
+      cursor: pointer;
+      outline: 0.2rem solid var(--heading-color);
+   }
+}
+
+.active-outline {
+   outline: 0.2rem solid var(--heading-color);
+}

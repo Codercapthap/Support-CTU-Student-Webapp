@@ -42,15 +42,16 @@ $transTimeCol: 0.3s;
    --article-width: 1000px;
    --sizeBase: 2.5rem;
    --route-spacing: 2rem;
+   --font-size: 16px;
 }
 
+
 [data-theme='light'] {
-   --bg-color: lightgrey;
-   --text-navbar-color: #241011;
-   --text-color: black;
-   --primary-color: #b2a08f;
-   --secondary-color: rgb(241, 234, 169);
-   --heading-color: #00c9ff;
+   --bg-color: #c6d8e4;
+   --text-color: #2a6877;
+   --primary-color: #07211b;
+   --secondary-color: #f0f1f3;
+   --heading-color: #50ac97;
 }
 
 [data-theme='dark'] {

@@ -11,7 +11,7 @@ router.get(
    '/user/:id',
    validateParam(schemas.idSchema, 'id'),
    passport.authenticate('jwt', { session: false }),
-   authAccount(['admin']),
+   // authAccount(['admin']),
    userSubjectController.getAllUserSubjectsOfUserId
 );
 

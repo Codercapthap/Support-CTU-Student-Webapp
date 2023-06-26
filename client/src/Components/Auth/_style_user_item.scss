@@ -1,0 +1,27 @@
+@import '../../Common/scss/mixin';
+@import '../../Common/scss/varriable';
+
+.user-item-box {
+   margin-bottom: 1rem;
+   width: 100%;
+   .user-item {
+      $size: 3rem;
+      border-bottom: 0.1rem solid var(--text-color);
+      padding: 0.2rem 0.5rem;
+      width: max-content;
+      .control-box {
+         @include flexbox(row, flex-end);
+         i {
+            margin: 0rem 0.5rem;
+         }
+      }
+      img {
+         max-width: $size;
+         max-width: $size;
+         border-radius: 999rem;
+      }
+   }
+}
+.deleted-user {
+   color: var(--primary-color) !important;
+}
