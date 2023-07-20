@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 const http = axios.create({
-   baseURL: 'http://localhost:3000/api/',
-   headers: { 'Content-Type': 'application/json', Accept: 'application/json' }
+  baseURL: process.env.BASE_URL,
+  headers: { "Content-Type": "application/json", Accept: "application/json" },
 });
 
 // // Add a response interceptor
