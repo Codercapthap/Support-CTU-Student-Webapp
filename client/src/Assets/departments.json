@@ -1,122 +1,122 @@
 [
-   {
-      "code": "cit",
-      "name": "Khoa Công Nghệ Thông Tin và Truyền Thông",
-      "description": "Khoa Công nghệ thông tin và truyền thông (CNTT&TT) được thành lập năm 1994 trên cơ sở nâng cấp từ Trung tâm Điện tử & Tin học (được thành lập năm 1990). Kể từ khi thành lập, Khoa đã trở thành một trong bảy khoa trọng điểm về lĩnh vực CNTT&TT của Việt Nam. Khoa có nhiệm vụ đào tạo nguồn nhân lực lượng cao, góp phần tích cực vào sự phát triển của nền công nghiệp công nghệ thông tin Việt Nam; đồng thời thực hiện nghiên cứu khoa học và chuyển giao công nghệ tiên tiến, góp phần đẩy mạnh nghiệp công nghiệp hóa, hiện đại hóa đất nước. ",
-      "homepage": "http://www.cit.ctu.edu.vn",
-      "logo": "./images/logo-cit.png",
-      "forum": "#"
-   },
-   {
-      "code": "cet",
-      "name": "Khoa Công Nghệ",
-      "description": "Là một trong những khoa lớn của trường Đại học Cần Thơ, Khoa Công nghệ chịu trách nhiệm đào tạo các ngành kỹ thuật công nghệ, hợp tác quốc tế, nghiên cứu và chuyển giao công nghệ cho vùng Đồng bằng sông Cửu Long và cả nước",
-      "homepage": "https://cet.ctu.edu.vn/",
-      "logo": "./images/logo-cet.png",
-      "forum": "#"
-   },
-   {
-      "code": "spu",
-      "name": "Khoa Dự Bị Dân Tộc",
-      "description": "Khoa có nhiệm vụ tiếp nhận, tổ chức giảng dạy, giảng dạy và quản lý học sinh dự bị đại học ,học sinh được xét tuyển thẳng vào đại học. Mục đích của việc giảng dạy  là  giúp cho học sinh củng cố lại một cách có hệ thống những kiến thức cơ bản của chương trình Trung học phổ thông và rèn luyện phương pháp tư duy, giúp cho học sinh có đủ năng lực để học tốt các môn học ở trình độ đại học.",
-      "homepage": "https://spu.ctu.edu.vn",
-      "logo": "./images/logo-spu.png",
-      "forum": "#"
-   },
-   {
-      "code": "sps",
-      "name": "Khoa Chính Trị",
-      "description": "Đào tạo cử nhân Chính trị học, cử nhân Triết học và cử nhân Giáo dục Công dân hệ chính quy tập trung. Giảng dạy môn các môn Lý luận chính trị cho tất cả các chuyên ngành sinh viên toàn trường.Giảng dạy môn Triết học cho học viên cao học các chuyên ngành trong toàn trường. Nghiên cứu khoa học về các vấn đề lý luận và thực tiễn nhằm đáp ứng cho công tác đào tạo và giải quyết các vấn đề thực tiễn đặt ra hiện nay;",
-      "homepage": "https://sps.ctu.edu.vn",
-      "logo": "./images/logo-sps.PNG",
-      "forum": "#"
-   },
-   {
-      "code": "cns",
-      "name": "Khoa Khoa Học Tự Nhiên",
-      "description": "Khoa Khoa học Tự nhiên  (CNS) là đơn vị đào tạo và nghiên cứu khoa học thuộc Trường Đại Học Cần Thơ (CTU), một trường đại học trọng điểm, đa ngành, đa lĩnh vực của Việt Nam, tọa lạc tại thành phố Cần Thơ, trung tâm của vùng đồng bằng sông Cửu Long. Khoa có nhiệm vụ đào tạo đại học, sau đại học, nghiên cứu khoa học và ứng dụng khoa học công nghệ vào thực tiễn trong các lĩnh vực khoa học tự nhiên. Cụ thể là:",
-      "homepage": "https://cns.ctu.edu.vn",
-      "logo": "./images/logo-cns.PNG",
-      "forum": "#"
-   },
-   {
-      "code": "sss",
-      "name": "Khoa Khoa Học Xã Hội và Nhân Văn",
-      "description": "Khoa có nhiệm vụ đào tạo và nghiên cứu về lĩnh vực khoa học xã hội và nhân văn phục vụ cho sự phát triển vùng Đồng bằng sông Cửu Long và cả nước.",
-      "homepage": "https://sss.ctu.edu.vn",
-      "logo": "./images/logo-sss.PNG",
-      "forum": "#"
-   },
-   {
-      "code": "ce",
-      "name": "Khoa Kinh Tế",
-      "description": "Đào tạo các lĩnh vực: Kế toán, Kiểm toán, Tài chính, Ngân hàng, Quản trị doanh nghiệp, Marketing thương mại dịch vụ, Xây dựng quảng bá thương hiệu, Quản trị bán hàng, Quản trị nhà hàng khách sạn, Kinh doanh chứng khoán, Kinh doanh quốc tế, Quản lý dự án …",
-      "homepage": "https://ce.ctu.edu.vn",
-      "logo": "./images/logo-ce.PNG",
-      "forum": "#"
-   },
-   {
-      "code": "sl",
-      "name": "Khoa Luật",
-      "description": "Khoa Luật trường Đại học Cần Thơ được thành lập vào tháng 2 năm 2000 trên cơ sở là Bộ môn Luật được thành lập vào tháng 9 năm 1998.",
-      "homepage": "https://sl.ctu.edu.vn",
-      "logo": "./images/logo-sl.PNG",
-      "forum": "#"
-   },
-   {
-      "code": "cenres",
-      "name": "Khoa Môi Trường và Tài Nguyên Thiên Nhiên",
-      "description": "Khoa Môi trường và Tài nguyên thiên nhiên (MT&TNTN) có sứ mệnh đào tạo, nghiên cứu khoa học và chuyển giao công nghệ trong lĩnh vực môi trường và tài nguyên, tạo ra sản phẩm bảo vệ môi trường, phục vụ phát triển kinh tế - xã hội bền vững cho vùng Đồng bằng Sông Cửu Long và cả nước.",
-      "homepage": "https://cenres.ctu.edu.vn",
-      "logo": "./images/logo-cenres.PNG",
-      "forum": "#"
-   },
-   {
-      "code": "sfl",
-      "name": "Khoa Ngoại Ngữ",
-      "description": "“Đào tạo nhân lực có kiến thức chuyên môn vững, có kỹ năng thích ứng cao trong những môi trường làm việc, học tập khác nhau, có phẩm chất của công dân toàn cầu.”",
-      "homepage": "https://sfl.ctu.edu.vn",
-      "logo": "./images/logo-sfl.PNG",
-      "forum": "#"
-   },
-   {
-      "code": "coa",
-      "name": "Khoa Nông Nghiệp",
-      "description": "Lịch sử hình thành và phát triển của Khoa Nông nghiệp gắn liền với những thay đổi của Trường Đại học Cần Thơ qua các thời kỳ. Vào năm 1968, cơ sở tiền thân của Khoa Nông nghiệp ngày nay là Trường Cao đẳng Nông nghiệp thuộc Viện Đại học Cần Thơ được thành lập. Tính tới năm 1975, Trường đã chiêu sinh 7 khóa, đào tạo được hơn 200 kỹ sư nông nghiệp.",
-      "homepage": "https://coa.ctu.edu.vn",
-      "logo": "./images/logo-coa.PNG",
-      "forum": "#"
-   },
-   {
-      "code": "crd",
-      "name": "Khoa Nông Nghiệp Và Phát Triển Nông Thôn",
-      "description": "Mục tiêu chính của Khoa PTNT là đào tạo nguồn nhân lực, nâng cao trình độ, kiến thức của cộng đồng, năng lực của cán bộ địa phương cũng như nghiên cứu các vấn đề về nông nghiệp, nông thôn đáp ứng cho quá trình “Công nghiệp hóa, hiện đại hóa nông nghiệp nông thôn” vùng ĐBSCL.",
-      "homepage": "https://crd.ctu.edu.vn",
-      "logo": "./images/logo-crd.PNG",
-      "forum": "#"
-   },
-   {
-      "code": "gs",
-      "name": "Khoa Sau Đại Học",
-      "description": "Khoa SĐH phối hợp với các Khoa, Viện và các Phòng, Ban chức năng trong Trường tổ chức giảng dạy bậc SĐH và các hoạt động đào tạo SĐH để thực hiện chiến lược về phát triển quy mô và đảm bảo chất lượng đào tạo SĐH của Trường.",
-      "homepage": "https://gs.ctu.edu.vn",
-      "logo": "./images/logo-gs.PNG",
-      "forum": "#"
-   },
-   {
-      "code": "se",
-      "name": "Khoa Sưu Phạm",
-      "description": "Đào tạo nguồn nhân lực chất lượng cao trong giảng dạy, quản lý và nghiên cứu khoa học phục vụ nhu cầu phát triển kinh tế - xã hội, bảo đảm quốc phòng, an ninh, hội nhập quốc tế. Đào tạo đội ngũ giáo viên phát triển toàn diện về đức, trí, thể, mỹ; có năng lực tự học, sáng tạo, thích nghi với môi trường làm việc; có trách nhiệm nghề nghiệp và ý thức phục vụ Nhân dân.",
-      "homepage": "https://se.ctu.edu.vn",
-      "logo": "./images/logo-se.PNG",
-      "forum": "#"
-   },
-   {
-      "code": "caf",
-      "name": "Khoa Thủy Sản",
-      "description": "Khoa Thủy sản đã được tái thành lập với nhiệm vụ phát triển qui mô và nâng cao chất lượng đào tạo, phát triển nghiên cứu khoa học và chuyển giao công nghệ đáp ứng nhu cầu phát triển mạnh mẽ của ngành thủy sản Việt Nam, đặc biệt là Đồng Bằng Sông Cửu Long.",
-      "homepage": "https://caf.ctu.edu.vn",
-      "logo": "./images/logo-caf.PNG",
-      "forum": "#"
-   }
+  {
+    "code": "cit",
+    "name": "Khoa Công Nghệ Thông Tin và Truyền Thông",
+    "description": "Khoa Công nghệ thông tin và truyền thông (CNTT&TT) được thành lập năm 1994 trên cơ sở nâng cấp từ Trung tâm Điện tử & Tin học (được thành lập năm 1990). Kể từ khi thành lập, Khoa đã trở thành một trong bảy khoa trọng điểm về lĩnh vực CNTT&TT của Việt Nam. Khoa có nhiệm vụ đào tạo nguồn nhân lực lượng cao, góp phần tích cực vào sự phát triển của nền công nghiệp công nghệ thông tin Việt Nam; đồng thời thực hiện nghiên cứu khoa học và chuyển giao công nghệ tiên tiến, góp phần đẩy mạnh nghiệp công nghiệp hóa, hiện đại hóa đất nước. ",
+    "homepage": "http://www.cit.ctu.edu.vn",
+    "logo": "/images/logo-cit.png",
+    "forum": "#"
+  },
+  {
+    "code": "cet",
+    "name": "Khoa Công Nghệ",
+    "description": "Là một trong những khoa lớn của trường Đại học Cần Thơ, Khoa Công nghệ chịu trách nhiệm đào tạo các ngành kỹ thuật công nghệ, hợp tác quốc tế, nghiên cứu và chuyển giao công nghệ cho vùng Đồng bằng sông Cửu Long và cả nước",
+    "homepage": "https://cet.ctu.edu.vn/",
+    "logo": "/images/logo-cet.png",
+    "forum": "#"
+  },
+  {
+    "code": "spu",
+    "name": "Khoa Dự Bị Dân Tộc",
+    "description": "Khoa có nhiệm vụ tiếp nhận, tổ chức giảng dạy, giảng dạy và quản lý học sinh dự bị đại học ,học sinh được xét tuyển thẳng vào đại học. Mục đích của việc giảng dạy  là  giúp cho học sinh củng cố lại một cách có hệ thống những kiến thức cơ bản của chương trình Trung học phổ thông và rèn luyện phương pháp tư duy, giúp cho học sinh có đủ năng lực để học tốt các môn học ở trình độ đại học.",
+    "homepage": "https://spu.ctu.edu.vn",
+    "logo": "/images/logo-spu.png",
+    "forum": "#"
+  },
+  {
+    "code": "sps",
+    "name": "Khoa Chính Trị",
+    "description": "Đào tạo cử nhân Chính trị học, cử nhân Triết học và cử nhân Giáo dục Công dân hệ chính quy tập trung. Giảng dạy môn các môn Lý luận chính trị cho tất cả các chuyên ngành sinh viên toàn trường.Giảng dạy môn Triết học cho học viên cao học các chuyên ngành trong toàn trường. Nghiên cứu khoa học về các vấn đề lý luận và thực tiễn nhằm đáp ứng cho công tác đào tạo và giải quyết các vấn đề thực tiễn đặt ra hiện nay;",
+    "homepage": "https://sps.ctu.edu.vn",
+    "logo": "/images/logo-sps.PNG",
+    "forum": "#"
+  },
+  {
+    "code": "cns",
+    "name": "Khoa Khoa Học Tự Nhiên",
+    "description": "Khoa Khoa học Tự nhiên  (CNS) là đơn vị đào tạo và nghiên cứu khoa học thuộc Trường Đại Học Cần Thơ (CTU), một trường đại học trọng điểm, đa ngành, đa lĩnh vực của Việt Nam, tọa lạc tại thành phố Cần Thơ, trung tâm của vùng đồng bằng sông Cửu Long. Khoa có nhiệm vụ đào tạo đại học, sau đại học, nghiên cứu khoa học và ứng dụng khoa học công nghệ vào thực tiễn trong các lĩnh vực khoa học tự nhiên. Cụ thể là:",
+    "homepage": "https://cns.ctu.edu.vn",
+    "logo": "/images/logo-cns.PNG",
+    "forum": "#"
+  },
+  {
+    "code": "sss",
+    "name": "Khoa Khoa Học Xã Hội và Nhân Văn",
+    "description": "Khoa có nhiệm vụ đào tạo và nghiên cứu về lĩnh vực khoa học xã hội và nhân văn phục vụ cho sự phát triển vùng Đồng bằng sông Cửu Long và cả nước.",
+    "homepage": "https://sss.ctu.edu.vn",
+    "logo": "/images/logo-sss.PNG",
+    "forum": "#"
+  },
+  {
+    "code": "ce",
+    "name": "Khoa Kinh Tế",
+    "description": "Đào tạo các lĩnh vực: Kế toán, Kiểm toán, Tài chính, Ngân hàng, Quản trị doanh nghiệp, Marketing thương mại dịch vụ, Xây dựng quảng bá thương hiệu, Quản trị bán hàng, Quản trị nhà hàng khách sạn, Kinh doanh chứng khoán, Kinh doanh quốc tế, Quản lý dự án …",
+    "homepage": "https://ce.ctu.edu.vn",
+    "logo": "/images/logo-ce.PNG",
+    "forum": "#"
+  },
+  {
+    "code": "sl",
+    "name": "Khoa Luật",
+    "description": "Khoa Luật trường Đại học Cần Thơ được thành lập vào tháng 2 năm 2000 trên cơ sở là Bộ môn Luật được thành lập vào tháng 9 năm 1998.",
+    "homepage": "https://sl.ctu.edu.vn",
+    "logo": "/images/logo-sl.PNG",
+    "forum": "#"
+  },
+  {
+    "code": "cenres",
+    "name": "Khoa Môi Trường và Tài Nguyên Thiên Nhiên",
+    "description": "Khoa Môi trường và Tài nguyên thiên nhiên (MT&TNTN) có sứ mệnh đào tạo, nghiên cứu khoa học và chuyển giao công nghệ trong lĩnh vực môi trường và tài nguyên, tạo ra sản phẩm bảo vệ môi trường, phục vụ phát triển kinh tế - xã hội bền vững cho vùng Đồng bằng Sông Cửu Long và cả nước.",
+    "homepage": "https://cenres.ctu.edu.vn",
+    "logo": "/images/logo-cenres.PNG",
+    "forum": "#"
+  },
+  {
+    "code": "sfl",
+    "name": "Khoa Ngoại Ngữ",
+    "description": "“Đào tạo nhân lực có kiến thức chuyên môn vững, có kỹ năng thích ứng cao trong những môi trường làm việc, học tập khác nhau, có phẩm chất của công dân toàn cầu.”",
+    "homepage": "https://sfl.ctu.edu.vn",
+    "logo": "/images/logo-sfl.PNG",
+    "forum": "#"
+  },
+  {
+    "code": "coa",
+    "name": "Khoa Nông Nghiệp",
+    "description": "Lịch sử hình thành và phát triển của Khoa Nông nghiệp gắn liền với những thay đổi của Trường Đại học Cần Thơ qua các thời kỳ. Vào năm 1968, cơ sở tiền thân của Khoa Nông nghiệp ngày nay là Trường Cao đẳng Nông nghiệp thuộc Viện Đại học Cần Thơ được thành lập. Tính tới năm 1975, Trường đã chiêu sinh 7 khóa, đào tạo được hơn 200 kỹ sư nông nghiệp.",
+    "homepage": "https://coa.ctu.edu.vn",
+    "logo": "/images/logo-coa.PNG",
+    "forum": "#"
+  },
+  {
+    "code": "crd",
+    "name": "Khoa Nông Nghiệp Và Phát Triển Nông Thôn",
+    "description": "Mục tiêu chính của Khoa PTNT là đào tạo nguồn nhân lực, nâng cao trình độ, kiến thức của cộng đồng, năng lực của cán bộ địa phương cũng như nghiên cứu các vấn đề về nông nghiệp, nông thôn đáp ứng cho quá trình “Công nghiệp hóa, hiện đại hóa nông nghiệp nông thôn” vùng ĐBSCL.",
+    "homepage": "https://crd.ctu.edu.vn",
+    "logo": "/images/logo-crd.PNG",
+    "forum": "#"
+  },
+  {
+    "code": "gs",
+    "name": "Khoa Sau Đại Học",
+    "description": "Khoa SĐH phối hợp với các Khoa, Viện và các Phòng, Ban chức năng trong Trường tổ chức giảng dạy bậc SĐH và các hoạt động đào tạo SĐH để thực hiện chiến lược về phát triển quy mô và đảm bảo chất lượng đào tạo SĐH của Trường.",
+    "homepage": "https://gs.ctu.edu.vn",
+    "logo": "/images/logo-gs.PNG",
+    "forum": "#"
+  },
+  {
+    "code": "se",
+    "name": "Khoa Sưu Phạm",
+    "description": "Đào tạo nguồn nhân lực chất lượng cao trong giảng dạy, quản lý và nghiên cứu khoa học phục vụ nhu cầu phát triển kinh tế - xã hội, bảo đảm quốc phòng, an ninh, hội nhập quốc tế. Đào tạo đội ngũ giáo viên phát triển toàn diện về đức, trí, thể, mỹ; có năng lực tự học, sáng tạo, thích nghi với môi trường làm việc; có trách nhiệm nghề nghiệp và ý thức phục vụ Nhân dân.",
+    "homepage": "https://se.ctu.edu.vn",
+    "logo": "/images/logo-se.PNG",
+    "forum": "#"
+  },
+  {
+    "code": "caf",
+    "name": "Khoa Thủy Sản",
+    "description": "Khoa Thủy sản đã được tái thành lập với nhiệm vụ phát triển qui mô và nâng cao chất lượng đào tạo, phát triển nghiên cứu khoa học và chuyển giao công nghệ đáp ứng nhu cầu phát triển mạnh mẽ của ngành thủy sản Việt Nam, đặc biệt là Đồng Bằng Sông Cửu Long.",
+    "homepage": "https://caf.ctu.edu.vn",
+    "logo": "/images/logo-caf.PNG",
+    "forum": "#"
+  }
 ]
