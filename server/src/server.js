@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 const corsOptions = {
-  // origin: 'http://localhost:3001',
+  // origin: "http://localhost:3001",
   exposedHeaders: "Authorization",
   // accept client get value in header
 };

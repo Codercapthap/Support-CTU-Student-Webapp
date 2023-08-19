@@ -477,11 +477,17 @@ function Forum() {
                       </div>
                     )}
                     {comments.length !== 0 &&
-                      comments?.map((comment) => (
-                        <div className="" key={comment.id}>
-                          <CommentItem comment={comment} />
-                        </div>
-                      ))}
+                      comments?.map((comment) => {
+                        {
+                          return (
+                            comment.is_deleted === 0 && (
+                              <div className="" key={comment.id}>
+                                <CommentItem comment={comment} />
+                              </div>
+                            )
+                          );
+                        }
+                      })}
                   </div>
                   <CommentInput post={post} selected={selected} />
                 </div>

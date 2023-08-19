@@ -1,16 +1,24 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-import { getStorage } from 'firebase/storage';
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const firebaseConfig = {
-   apiKey: 'AIzaSyBQO8aQmVXx13ky9N8VqVezLvGbvhQ1Whw',
-   authDomain: 'react-ct466.firebaseapp.com',
-   projectId: 'react-ct466',
-   storageBucket: 'react-ct466.appspot.com',
-   messagingSenderId: '787566180735',
-   appId: '1:787566180735:web:6028d13c2431cc8c8d424a'
+  //  apiKey: 'AIzaSyBQO8aQmVXx13ky9N8VqVezLvGbvhQ1Whw',
+  //  authDomain: 'react-ct466.firebaseapp.com',
+  //  projectId: 'react-ct466',
+  //  storageBucket: 'react-ct466.appspot.com',
+  //  messagingSenderId: '787566180735',
+  //  appId: '1:787566180735:web:6028d13c2431cc8c8d424a'
+
+  apiKey: "AIzaSyDqA-G5j4CmkBM8O1sDxGBPezveKTpsETw",
+  authDomain: "react-ct466-87c42.firebaseapp.com",
+  projectId: "react-ct466-87c42",
+  storageBucket: "react-ct466-87c42.appspot.com",
+  messagingSenderId: "313382601095",
+  appId: "1:313382601095:web:2e2fb90f2cd7792bbb9322",
+  measurementId: "G-1FL61M4C0Q",
 };
 
 // Initialize Firebase
