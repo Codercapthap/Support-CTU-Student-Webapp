@@ -19,7 +19,7 @@ const corsOptions = {
   // accept client get value in header
 };
 app.use(cors(corsOptions));
-app.use(morgan("dev"));
+app.use(morgan(process.env.NODE_ENV !== "production" ? "dev" : "combined"));
 
 //? Export API
 app.get("/", (req, res, next) => {

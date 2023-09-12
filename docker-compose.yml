@@ -1,0 +1,53 @@
+version: "3.4"
+
+services:
+  client:
+    image: client
+    build:
+      context: client
+      dockerfile: ./Dockerfile
+    networks:
+      - frontend
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8080:8080
+  server:
+    image: server
+    build:
+      context: server
+      dockerfile: ./Dockerfile
+    networks:
+      - backend
+      - frontend
+    environment:
+      DB_HOST: db
+    env_file:
+      - server/.env
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - 3000:3000
+  db:
+    image: mysql:8.0.34-debian
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - "./server/create_database_ct466.sql:/docker-entrypoint-initdb.d/create_database_ct466.sql"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+networks:
+  backend:
+  frontend:
+volumes:
+  mysql_data:
